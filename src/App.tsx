@@ -119,7 +119,19 @@ function App() {
 		<>
 			{/* Fixed content remains unchanged when the React route changes. */}
       <div className="menu">
-			  <h1>Wee Gig</h1>
+        <div>
+          <img src="/src/assets/img/logo_long.png" alt=""/>
+        </div>
+        <div>
+            <ul>
+                <li><a href="">Buscar Ofertas</a></li>
+                <li><a href="">Valoraciones</a></li>
+                <li><a href="">Trabajos Realizados</a></li>
+            </ul>
+        </div>
+        <ul className="rightmenu">
+            <li><a href="">Crear Cuenta</a></li>
+        </ul>
       </div>
 			<Routes>
 				{/* Dynamic content that will appear/show on the page when the 
