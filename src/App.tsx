@@ -93,11 +93,10 @@ function Tech(): JSX.Element {
 	);
 }
 
-function Contact(): JSX.Element {
+function Ofertas(): JSX.Element {
 	return (
 		<>
-			<HomeAnchor />
-			<h1>Contact Component</h1>
+			<h1>Ofertas Component</h1>
 		</>
 	);
 }
@@ -114,33 +113,35 @@ function Index(): JSX.Element {
 	);
 }
 
-function App() {
+function Menu(): JSX.Element {
 	return (
-		<>
-			{/* Fixed content remains unchanged when the React route changes. */}
-      <div className="menu">
+		<div className="menu">
         <div>
           <img src="/src/assets/img/logo_long.png" alt=""/>
         </div>
         <div>
             <ul>
-                <li><a href="">Buscar Ofertas</a></li>
-                <li><a href="">Valoraciones</a></li>
-                <li><a href="">Trabajos Realizados</a></li>
+				<li><a href="/">Inicio</a></li>
+                <li><a href="/ofertas">Buscar Ofertas</a></li>
             </ul>
         </div>
         <ul className="rightmenu">
             <li><a href="">Crear Cuenta</a></li>
         </ul>
       </div>
+	);
+}
+
+function App() {
+	return (
+		<>
+			{/* Fixed content remains unchanged when the React route changes. */}
+			<Menu />
 			<Routes>
-				{/* Dynamic content that will appear/show on the page when the 
-				path/route is changed to the specified one. */}
 				<Route path="/" element={<Index />} />
-				{/* <Route path="/contact" element={<Contact />} />
+				<Route path="/ofertas" element={<Ofertas />} />
 				<Route path="/techs" element={<Techs />} />
-				<Route path="/techs/:tecnology" element={<Tech />} /> */}
-				{/* Default route for all other requests */}
+				<Route path="/techs/:tecnology" element={<Tech />} />
 				<Route path="*" element={<h1>❌Error! Not Found❌</h1>} />
 			</Routes>
       <Footer />
