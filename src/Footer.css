@@ -1,0 +1,15 @@
+.footer{
+    background-color: #7FB800;
+    color: #FFFFFF;
+    padding: 50px 20px;
+}
+
+.big-box{
+    display: flex;
+    justify-content: center;
+}
+
+.box-1{
+    width: 200px;
+    background-color: #7FB800;
+}

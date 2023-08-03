@@ -31,6 +31,7 @@
 
 import "./App.css";
 import { Routes, Route, Link, useParams } from "react-router-dom";
+import Footer from './Footer'
 
 const technologies = [
 	"Git",
@@ -130,6 +131,7 @@ function App() {
 				{/* Default route for all other requests */}
 				<Route path="*" element={<h1>❌Error! Not Found❌</h1>} />
 			</Routes>
+      <Footer />
 		</>
 	);
 }
