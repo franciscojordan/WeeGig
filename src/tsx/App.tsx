@@ -1,6 +1,7 @@
 import "../css/App.css";
 import { Routes, Route, Link, useParams } from "react-router-dom";
 import Footer from './Footer'
+import Home from './Home'; 
 import Index2 from './Index2'
 
 const technologies = [
@@ -71,18 +72,6 @@ function Ofertas(): JSX.Element {
 	);
 }
 
-function Index(): JSX.Element {
-	return (
-		<>
-    <div className="box">
-			<h1>Index Component</h1>
-    </div>
-			{/* <ContactAnchor />
-			<TechAnchor /> */}
-		</>
-	);
-}
-
 function Menu(): JSX.Element {
 	return (
 		<div className="menu">
@@ -108,8 +97,8 @@ function App() {
 			{/* Fixed content remains unchanged when the React route changes. */}
 			<Menu />
 			<Routes>
-				<Route path="/" element={<Index />} />
 				<Route path="/index2" element={<Index2 />} />
+				<Route path="/" element={<Home />} />
 				<Route path="/ofertas" element={<Ofertas />} />
 				<Route path="/techs" element={<Techs />} />
 				<Route path="/techs/:tecnology" element={<Tech />} />
