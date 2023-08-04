@@ -5,7 +5,6 @@
     text-align:left;
 }
 .containers{
-    display: flex;
     padding-left: 5vw;
     padding-right: 5vw;
     text-align:left;
@@ -16,19 +15,28 @@ h1{
 font-size: 40px;
 }
 .container img{
-    width: 600px;
-    height: 600px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 800px;
+    height: 500px;
 }
 .chart img{
     width: 350px;
     height: 350px;
 }
 .chart{
-    display: flex;
-    justify-content: center; 
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 50px;
 }
 .charts{
-    margin: 10px;
+    background-color: red;
+}
+.charts img{
+    display: column;
+    align-items: center;
+    justify-content: center;
+    background-color: orange;
 }
 a {
     text-decoration: none;
@@ -36,4 +44,32 @@ color: #A6E5F2;
   }
 a :hover{
     color: #A6E5F2;
+}
+.charts a {
+        font-size: 17px;
+        font-weight: bold;
+        margin: 10px 0;
+}
+/*bOTONES*/
+.button-green{
+    width: 115px;
+    background-color: #7FB800;
+    border-radius: 10px;
+    padding: 10px 20px;
+    border: 1px solid #7FB800;
+    margin: 10px;
+}
+
+.button-green:hover{
+    background-color: #689801;
+    border: 1px solid #689801;
+}
+
+.button-green-line{
+    width: 115px;
+    background-color: #FFFFFF;
+    border-radius: 10px;
+    padding: 10px 20px;
+    border: 1px solid #7FB800;
+    margin: 10px;
 }
