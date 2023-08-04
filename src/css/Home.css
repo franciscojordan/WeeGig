@@ -1,0 +1,39 @@
+.container{
+    display: flex;
+    margin-left: 5vw;
+    margin-right: 5vw;
+    text-align:left;
+}
+.containers{
+    display: flex;
+    padding-left: 5vw;
+    padding-right: 5vw;
+    text-align:left;
+    background-color: #F2F2F2;
+}
+.b 
+h1{
+font-size: 40px;
+}
+.container img{
+    width: 600px;
+    height: 600px;
+}
+.chart img{
+    width: 350px;
+    height: 350px;
+}
+.chart{
+    display: flex;
+    justify-content: center; 
+}
+.charts{
+    margin: 10px;
+}
+a {
+    text-decoration: none;
+color: #A6E5F2;
+  }
+a :hover{
+    color: #A6E5F2;
+}
