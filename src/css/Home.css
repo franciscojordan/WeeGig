@@ -15,14 +15,15 @@ h1{
 font-size: 40px;
 }
 .container img{
-    margin-top: 10px;
     margin-bottom: 10px;
-    width: 800px;
-    height: 500px;
+    width: 700px;
+    height: 400px;
+}
+.maxw{
+    width: 500px;
 }
 .chart img{
-    width: 350px;
-    height: 350px;
+    width: 100%;
 }
 .chart{
     display: grid;
