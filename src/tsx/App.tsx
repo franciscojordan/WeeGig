@@ -1,37 +1,7 @@
-// import './App.css'
-// import { Routes, Route} from "react-router-dom";
-
-// function Index() : JSX.Element{
-//   return <h1>Index page</h1>
-// }
-
-// function Contact() : JSX.Element{
-//   return <h1>Contact page</h1>
-// }
-
-
-// function App() {
-
-//   return (
-//     <>
-//       <h1>Hola</h1>
-//       {/* <Index />
-//       <Contact /> */}
-//       <Routes>
-//         <Route path="/index" element={<Index />} />
-//         <Route path="/contacto" element={<Contact />} />
-//       </Routes>
-//     </>
-//   )
-// }
-
-// export default App
-
-// NEW CODE
-
 import "../css/App.css";
 import { Routes, Route, Link, useParams } from "react-router-dom";
 import Footer from './Footer'
+import Index2 from './Index2'
 
 const technologies = [
 	"Git",
@@ -117,7 +87,7 @@ function Menu(): JSX.Element {
 	return (
 		<div className="menu">
         <div>
-          <img src="/src/assets/img/logo_long.png" alt=""/>
+          <img src="/src/assets/img/logo.png" alt=""/>
         </div>
         <div>
             <ul>
@@ -129,18 +99,6 @@ function Menu(): JSX.Element {
             <li><a href="">Crear Cuenta</a></li>
         </ul>
       </div>
-	);
-}
-
-function Index2(): JSX.Element {
-	return (
-		<>
-    <div className="box">
-			<h1>Index Component</h1>
-    </div>
-			{/* <ContactAnchor />
-			<TechAnchor /> */}
-		</>
 	);
 }
 
