@@ -29,7 +29,7 @@
 
 // NEW CODE
 
-import "./App.css";
+import "../css/App.css";
 import { Routes, Route, Link, useParams } from "react-router-dom";
 import Footer from './Footer'
 
@@ -132,6 +132,18 @@ function Menu(): JSX.Element {
 	);
 }
 
+function Index2(): JSX.Element {
+	return (
+		<>
+    <div className="box">
+			<h1>Index Component</h1>
+    </div>
+			{/* <ContactAnchor />
+			<TechAnchor /> */}
+		</>
+	);
+}
+
 function App() {
 	return (
 		<>
@@ -139,6 +151,7 @@ function App() {
 			<Menu />
 			<Routes>
 				<Route path="/" element={<Index />} />
+				<Route path="/index2" element={<Index2 />} />
 				<Route path="/ofertas" element={<Ofertas />} />
 				<Route path="/techs" element={<Techs />} />
 				<Route path="/techs/:tecnology" element={<Tech />} />
