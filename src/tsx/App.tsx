@@ -76,7 +76,7 @@ function Menu(): JSX.Element {
 	return (
 		<div className="menu">
         <div>
-          <img src="/src/assets/img/logo.png" alt=""/>
+          <img src="/src/assets/img/logo_long.png" alt=""/>
         </div>
         <div>
             <ul>
