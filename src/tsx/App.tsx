@@ -3,6 +3,7 @@ import { Routes, Route, Link, useParams } from "react-router-dom";
 import Footer from './Footer'
 import Home from './Home'; 
 import Index2 from './Index2'
+import Login from './Login'
 
 const technologies = [
 	"Git",
@@ -82,6 +83,7 @@ function Menu(): JSX.Element {
             <ul>
 				<li><a href="/">Inicio</a></li>
                 <li><a href="/ofertas">Buscar Ofertas</a></li>
+				<li><a href="/login">Login</a></li>
             </ul>
         </div>
         <ul className="rightmenu">
@@ -99,6 +101,7 @@ function App() {
 			<Routes>
 				<Route path="/index2" element={<Index2 />} />
 				<Route path="/" element={<Home />} />
+				<Route path="/login" element={<Login />} />
 				<Route path="/ofertas" element={<Ofertas />} />
 				<Route path="/techs" element={<Techs />} />
 				<Route path="/techs/:tecnology" element={<Tech />} />
