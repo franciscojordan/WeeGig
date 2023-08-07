@@ -4,6 +4,7 @@ import Footer from './Footer'
 import Home from './Home'; 
 import Index2 from './Index2'
 import Login from './Login'
+import Ofertas from './Ofertas'
 
 const technologies = [
 	"Git",
@@ -65,13 +66,7 @@ function Tech(): JSX.Element {
 	);
 }
 
-function Ofertas(): JSX.Element {
-	return (
-		<>
-			<h1>Ofertas Component</h1>
-		</>
-	);
-}
+
 
 function Menu(): JSX.Element {
 	return (
