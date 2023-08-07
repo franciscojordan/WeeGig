@@ -1,4 +1,4 @@
-import "../css/Index2.css";
+import "../../css/pages/Index2.css";
 
 function DivBox(props): JSX.Element {
     return (

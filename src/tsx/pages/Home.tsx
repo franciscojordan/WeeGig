@@ -1,4 +1,4 @@
-import "../css/Home.css";
+import "../../css/pages/Home.css";
 
 function Button(props): JSX.Element {
     let color;

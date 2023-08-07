@@ -1,71 +1,12 @@
 import "../css/App.css";
-import { Routes, Route, Link, useParams } from "react-router-dom";
-import Footer from './Footer'
-import Home from './Home'; 
-import Index2 from './Index2'
-import Login from './Login'
-import Ofertas from './Ofertas'
-import ResponsiveAppBar from './Menu'
-const technologies = [
-	"Git",
-	"HTML",
-	"CSS",
-	"JS",
-	"React",
-	"Bootstrap",
-	"Java SE",
-	"Spring Boot",
-];
-
-function HomeAnchor(): JSX.Element {
-	return (
-		<div>
-			<a href="/">🏠Go to Home🏠</a>
-		</div>
-	);
-}
-
-function TechAnchor(): JSX.Element {
-	return (
-		<div>
-			<a href="/techs">👨🏻‍💻Go to Techs👩🏻‍💻</a>
-		</div>
-	);
-}
-
-/* function ContactAnchor(): JSX.Element {
-	return (
-		<div>
-			<a href="/contact">📩Go to Contact📩</a>
-		</div>
-	);
-} */
-
-function Techs(): JSX.Element {
-	return (
-		<div>
-			<HomeAnchor />
-			<h1>Search Tecnologies Component</h1>
-			{technologies.map((nameTechnology) => (
-				<div key={nameTechnology}>
-					<Link to={`../techs/${nameTechnology}`}>{nameTechnology} </Link>
-				</div>
-			))}
-		</div>
-	);
-}
-
-function Tech(): JSX.Element {
-	const { tecnology } = useParams();
-	return (
-		<>
-			<HomeAnchor />
-			<TechAnchor />
-			<h1>Hola {tecnology}</h1>
-		</>
-	);
-}
-
+import { Routes, Route } from "react-router-dom";
+import Footer from './components/Footer'
+import Home from './pages/Home'; 
+import Index2 from './pages/Index2'
+import Login from './pages/Login'
+import Ofertas from './components/Ofertas'
+import ResponsiveAppBar from './components/Menu'
+import Register from './pages/Register'
 
 /* function Menu(): JSX.Element {
 	return (
@@ -97,9 +38,8 @@ function App() {
 				<Route path="/Menu" element={<ResponsiveAppBar />} />
 				<Route path="/" element={<Home />} />
 				<Route path="/login" element={<Login />} />
+				<Route path="/registrar" element={<Register />} />
 				<Route path="/ofertas" element={<Ofertas />} />
-				<Route path="/techs" element={<Techs />} />
-				<Route path="/techs/:tecnology" element={<Tech />} />
 				<Route path="*" element={<h1>❌Error! Not Found❌</h1>} />
 			</Routes>
       <Footer />
