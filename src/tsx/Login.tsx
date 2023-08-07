@@ -12,6 +12,7 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import Alert from "@mui/material/Alert";
 
 function Copyright(props: any) {
   return (
@@ -35,14 +36,50 @@ const theme = createTheme({
   });
 
 export default function SignIn() {
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
-  };
+    const [showAlert, setShowAlertErrorEmail] = React.useState(false);
+    const [showSuccessAlert, setShowSuccessAlert] = React.useState(false);
+  
+    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+      event.preventDefault();
+      const data = new FormData(event.currentTarget);
+      const email = data.get("email")?.toString() || '';
+      const password = data.get("password")?.toString() || '';
+  
+      const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+  
+      if (!email || !emailPattern.test(email)) {
+          setShowAlertErrorEmail(true);
+          return;
+        }
+  
+      try {
+          const url = 'http://localhost:8080/authentication';
+          const response = await fetch(url, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              username: email,
+              password: password,
+            }),
+          });
+          console.log("POST DONE");
+          const result = await response.json();
+        
+          if (result === true) {
+            setShowAlertErrorEmail(false);
+              setShowSuccessAlert(true);
+          } else {
+              setShowAlertErrorEmail(true);
+              setShowSuccessAlert(false);
+          }
+        } catch (error) {
+          console.error("Ocurrió un error al autenticar:", error);
+          alert("Ocurrió un error. Por favor, inténtalo de nuevo.");
+        }
+  
+    };
 
   return (
     <ThemeProvider theme={theme}>
@@ -62,6 +99,8 @@ export default function SignIn() {
           <Typography component="h1" variant="h5">
             Iniciar sesión
           </Typography>
+          {showAlert && <Alert severity="error">Error, invalid credentials!</Alert>}
+          {showSuccessAlert && <Alert severity="success">This is a success alert — check it out!</Alert>}
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
             <TextField
               margin="normal"
@@ -93,7 +132,7 @@ export default function SignIn() {
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
-              Sign In
+              Ingresar
             </Button>
             <Grid container>
               <Grid item xs>
@@ -109,7 +148,7 @@ export default function SignIn() {
             </Grid>
           </Box>
         </Box>
-        <Copyright sx={{ mt: 8, mb: 4 }}S />
+        <Copyright sx={{ mt: 8, mb: 4 }} />
       </Container>
     </ThemeProvider>
   );
