@@ -5,7 +5,7 @@ import Home from './Home';
 import Index2 from './Index2'
 import Login from './Login'
 import Ofertas from './Ofertas'
-
+import ResponsiveAppBar from './Menu'
 const technologies = [
 	"Git",
 	"HTML",
@@ -33,13 +33,13 @@ function TechAnchor(): JSX.Element {
 	);
 }
 
-function ContactAnchor(): JSX.Element {
+/* function ContactAnchor(): JSX.Element {
 	return (
 		<div>
 			<a href="/contact">📩Go to Contact📩</a>
 		</div>
 	);
-}
+} */
 
 function Techs(): JSX.Element {
 	return (
@@ -67,8 +67,7 @@ function Tech(): JSX.Element {
 }
 
 
-
-function Menu(): JSX.Element {
+/* function Menu(): JSX.Element {
 	return (
 		<div className="menu">
         <div>
@@ -86,15 +85,16 @@ function Menu(): JSX.Element {
         </ul>
       </div>
 	);
-}
+} */
 
 function App() {
 	return (
 		<>
 			{/* Fixed content remains unchanged when the React route changes. */}
-			<Menu />
+			<ResponsiveAppBar />
 			<Routes>
 				<Route path="/index2" element={<Index2 />} />
+				<Route path="/Menu" element={<ResponsiveAppBar />} />
 				<Route path="/" element={<Home />} />
 				<Route path="/login" element={<Login />} />
 				<Route path="/ofertas" element={<Ofertas />} />
