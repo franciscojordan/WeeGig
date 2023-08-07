@@ -43,7 +43,7 @@ function Home() {
             </div>
             <div className="containers">
                 <div>
-                    <h1>Lorem ipsum dolor sit amet consectetur adipisicing elit.</h1>
+                    <h1 className="textmarg">Lorem ipsum dolor sit amet consectetur adipisicing elit.</h1>
                     <h2>
                         <a href="">
                             Lorem ipsum dolor sit amet consectetur adipisicing elit.

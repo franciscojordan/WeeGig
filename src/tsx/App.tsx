@@ -83,10 +83,10 @@ function Menu(): JSX.Element {
             <ul>
 				<li><a href="/">Inicio</a></li>
                 <li><a href="/ofertas">Buscar Ofertas</a></li>
-				<li><a href="/login">Login</a></li>
             </ul>
         </div>
         <ul className="rightmenu">
+		<li><a href="/login">Login</a></li>
             <li><a href="">Crear Cuenta</a></li>
         </ul>
       </div>
