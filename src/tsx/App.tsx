@@ -66,14 +66,6 @@ function Tech(): JSX.Element {
 	);
 }
 
-function Ofertas(): JSX.Element {
-	return (
-		<>
-			<h1>Ofertas Component</h1>
-		</>
-	);
-}
-
 
 /* function Menu(): JSX.Element {
 	return (
