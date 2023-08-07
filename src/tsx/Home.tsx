@@ -37,7 +37,7 @@ function Home() {
                     <Button value="Clic" type="green" />
                     <Button value="Clic"></Button>
                 </div>
-                <div>
+                <div className="leftimg">
                     <img src="./src/assets/img/initial.jpg" alt="" />
                 </div>
             </div>
@@ -52,7 +52,7 @@ function Home() {
                     <div className="chart">
                         <div className="charts">
                             <DivBox
-                                img="./src/assets/img/2.jpeg"
+                                img="./src/assets/img/2.jpg"
                                 title="Lorem ipsum dolor sit amet consectetur adipisicing elit."
                                 content="Lorem ipsum dolor sit amet consectetur adipisicing elit."
                                 subtitle="Lorem ipsum dolor sit amet consectetur adipisicing elit."
@@ -61,7 +61,7 @@ function Home() {
                         </div>
                         <div className="charts">
                             <DivBox
-                                img="./src/assets/img/3.jpeg"
+                                img="./src/assets/img/3.jpg"
                                 title="Lorem ipsum dolor sit amet consectetur adipisicing elit."
                                 content="Lorem ipsum dolor sit amet consectetur adipisicing elit."
                                 subtitle="Lorem ipsum dolor sit amet consectetur adipisicing elit."
@@ -70,7 +70,7 @@ function Home() {
                         </div>
                         <div className="charts">
                             <DivBox
-                                img="./src/assets/img/4.jpeg"
+                                img="./src/assets/img/4.jpg"
                                 title="Lorem ipsum dolor sit amet consectetur adipisicing elit."
                                 content="Lorem ipsum dolor sit amet consectetur adipisicing elit."
                                 subtitle="Lorem ipsum dolor sit amet consectetur adipisicing elit."

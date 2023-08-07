@@ -13,7 +13,6 @@
 }
 
 .containers {
-    float: inline-end;
     padding-left: 5vw;
     padding-right: 5vw;
     text-align: left;
@@ -35,6 +34,9 @@
     font-size: 40px;
 }
 
+.textmarg {
+    margin-top: 25px;
+}
 .maxw {
     width: 500px;
 }
