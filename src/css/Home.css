@@ -1,58 +1,83 @@
-.container{
+/*Container order*/
+.container {
     display: flex;
     margin-left: 5vw;
     margin-right: 5vw;
-    text-align:left;
+    text-align: left;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center
 }
-.containers{
+.leftimg {   
+    align-items: end;
+}
+
+.containers {
+    float: inline-end;
     padding-left: 5vw;
     padding-right: 5vw;
-    text-align:left;
+    text-align: left;
     background-color: #F2F2F2;
 }
-.b 
-h1{
-font-size: 40px;
-}
-.container img{
-    margin-bottom: 10px;
-    width: 700px;
-    height: 400px;
-}
-.maxw{
-    width: 500px;
-}
-.chart img{
-    width: 100%;
-}
-.chart{
+
+.chart {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-gap: 50px;
 }
-.charts{
-    background-color: red;
+
+.charts {
+    margin-bottom: 25px;
 }
-.charts img{
+
+/*Text styles*/
+.b h1 {
+    font-size: 40px;
+}
+
+.maxw {
+    width: 500px;
+}
+
+/*Images*/
+.container img {
+    margin-top: 20px;
+    width: 100%;
+}
+
+.chart img {
+    width: 100%;
+}
+
+.charts img {
     display: column;
     align-items: center;
     justify-content: center;
     background-color: orange;
 }
+
+/*Links*/
 a {
     text-decoration: none;
-color: #A6E5F2;
-  }
-a :hover{
     color: #A6E5F2;
 }
-.charts a {
-        font-size: 17px;
-        font-weight: bold;
-        margin: 10px 0;
+
+a :hover {
+    color: #A6E5F2;
 }
-/*bOTONES*/
-.button-green{
+
+a:hover {
+    color: #54e3ff;
+}
+
+.charts a {
+    font-size: 17px;
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+/*buttons*/
+.button-green {
     width: 115px;
     background-color: #7FB800;
     border-radius: 10px;
@@ -61,16 +86,21 @@ a :hover{
     margin: 10px;
 }
 
-.button-green:hover{
+.button-green:hover {
     background-color: #689801;
     border: 1px solid #689801;
 }
 
-.button-green-line{
+.button-green-line {
     width: 115px;
     background-color: #FFFFFF;
     border-radius: 10px;
     padding: 10px 20px;
     border: 1px solid #7FB800;
     margin: 10px;
+}
+
+.button-green-line:hover {
+    background-color: #1FFFFF;
+    border: 1px solid #689801;
 }
