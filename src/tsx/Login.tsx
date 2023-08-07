@@ -1,13 +1,3 @@
-// function Login(): JSX.Element {
-// 	return (
-// 		<>
-// 			<h1>Login Component</h1>
-// 		</>
-// 	);
-// }
-
-// export default Login;
-
 import * as React from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
@@ -36,6 +26,14 @@ function Copyright(props: any) {
   );
 }
 
+const theme = createTheme({
+    palette: {
+      primary: {
+        main: '#7FB800',
+      },
+    },
+  });
+
 // TODO remove, this demo shouldn't need to reset the theme.
 const defaultTheme = createTheme();
 
@@ -50,7 +48,7 @@ export default function SignIn() {
   };
 
   return (
-    <ThemeProvider theme={defaultTheme}>
+    <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box
