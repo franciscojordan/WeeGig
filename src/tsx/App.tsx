@@ -4,8 +4,8 @@ import Footer from './Footer'
 import Home from './Home'; 
 import Index2 from './Index2'
 import Login from './Login'
+import Ofertas from './Ofertas'
 import ResponsiveAppBar from './Menu'
-
 const technologies = [
 	"Git",
 	"HTML",
@@ -33,13 +33,13 @@ function TechAnchor(): JSX.Element {
 	);
 }
 
-function ContactAnchor(): JSX.Element {
+/* function ContactAnchor(): JSX.Element {
 	return (
 		<div>
 			<a href="/contact">📩Go to Contact📩</a>
 		</div>
 	);
-}
+} */
 
 function Techs(): JSX.Element {
 	return (
@@ -73,6 +73,7 @@ function Ofertas(): JSX.Element {
 		</>
 	);
 }
+
 
 /* function Menu(): JSX.Element {
 	return (
