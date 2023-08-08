@@ -11,12 +11,13 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import AdbIcon from '@mui/icons-material/Adb';
+/* import AdbIcon from '@mui/icons-material/Adb'; */
 import "../../css/components/Menu.css";
+import { green } from '@mui/material/colors';
 
 
-const pages = ['Products', 'Pricing', 'Blog'];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+const pages = ['Ofertas', 'Foro', 'Contáctanos'];
+const settings = ['Perfil', 'Cuenta', 'Trabajos', 'Cerrar Sesión'];
 
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
@@ -98,8 +99,8 @@ function ResponsiveAppBar() {
               ))}
             </Menu>
           </Box>
-          <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
-          <Typography
+{/*           <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
+ */}          <Typography
             variant="h5"
             noWrap
             component="a"
@@ -115,7 +116,7 @@ function ResponsiveAppBar() {
               textDecoration: 'none',
             }}
           >
-            LOGO
+            WEE GIG
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
@@ -158,6 +159,7 @@ function ResponsiveAppBar() {
               ))}
             </Menu>
           </Box>
+          <Button color="inherit">Login</Button>
         </Toolbar>
       </Container>
     </AppBar>
