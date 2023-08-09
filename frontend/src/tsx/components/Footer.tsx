@@ -1,5 +1,16 @@
 import "../../css/components/Footer.css";
 
+import {
+  Phone,
+  Home,
+  Email,
+  Print,
+  Instagram,
+  LinkedIn,
+  Twitter,
+  YouTube,
+} from "@mui/icons-material";
+
 function Footer() {
   return (
     <div className="footer">
@@ -7,10 +18,26 @@ function Footer() {
         <div>Get connected with us on social networks:</div>
         <div className="list">
           <ul>
-            <li><a href=""><img src="" alt="Item1" /></a></li>
-            <li><a href=""><img src="" alt="Item2" /></a></li>
-            <li><a href=""><img src="" alt="Item3" /></a></li>
-            <li><a href=""><img src="" alt="Item4" /></a></li>
+            <li>
+              <a href="">
+                <Instagram />
+              </a>
+            </li>
+            <li>
+              <a href="">
+                <LinkedIn />
+              </a>
+            </li>
+            <li>
+              <a href="">
+                <Twitter />
+              </a>
+            </li>
+            <li>
+              <a href="">
+                <YouTube />
+              </a>
+            </li>
           </ul>
         </div>
       </div>
@@ -38,19 +65,19 @@ function Footer() {
         </div>
         <div className="cont cont4">
           <h5>CONTACT</h5>
-          <p>
-            <img src="" alt="city" />
+          
+            <Home fontSize="16px" />
             New York, NY 10012, US
-          </p>
+          
           <p>
-            <img src="" alt="mail" />
+            <Email fontSize="16px" />
             info@example.com
           </p>
           <p>
-            <img src="" alt="num" />+ 01 234 567 88
+            <Phone fontSize="16px"  />+ 01 234 567 88
           </p>
           <p>
-            <img src="" alt="print" />+ 01 234 567 89
+            <Print fontSize="16px" />+ 01 234 567 89
           </p>
         </div>
       </div>
