@@ -1,15 +1,31 @@
-.footer{
-    background-color: #7FB800;
-    color: #FFFFFF;
+/* Estilos CSS para el Footer */
+.footer {
+    display: flex;
+    background-color: #7fb800;
+    color: #ffffff;
     padding: 50px 20px;
 }
 
-.big-box{
+.box_1 {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center; /* Alinea verticalmente */
 }
 
-.box-1{
-    width: 200px;
-    background-color: #7FB800;
+.list {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center; /* Alinea verticalmente la lista */
+}
+
+.list ul {
+    padding: 0;
+    list-style: none;
+    display: flex;
+    gap: 10px;
+}
+
+.list li {
+    padding: 10px 20px;
 }

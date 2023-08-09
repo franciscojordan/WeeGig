@@ -1,21 +1,24 @@
 import "../../css/components/Footer.css";
 
-function Footer(){
+function Footer() {
     return (
         <div className="footer">
-            <div className="big-box">
-                <div className="box-1">Seccion 1</div>
-                <div className="box-1">Seccion 2</div>
-                <div className="box-1">Seccion 3</div>
-                <div className="box-1">Seccion 4</div>
-                <div className="box-1">Seccion 4</div>
-                <div className="box-1">Seccion 4</div>
+         <div className="box_1">
+            <div>Get connected with us on social networks:</div>
+            <div className="list">
+                <ul >
+                    <li>Item 1</li>
+                    <li>Item 2</li>
+                    <li>Item 3</li>
+                    <li>Item 4</li>
+                </ul>
             </div>
-            <hr />
-            {/* <Divider /> */}
-            Wee Gig 2023
+         
+         </div>
+         <div className="box_2"></div>
+         <div className="box_3"></div>
         </div>
-    )
+    );
 }
 
 export default Footer;

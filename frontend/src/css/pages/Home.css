@@ -81,7 +81,7 @@ a:hover {
 
 /*buttons*/
 .button-green {
-    width: 115px;
+    width: 150px;
     background-color: #7FB800;
     border-radius: 10px;
     padding: 10px 20px;
@@ -95,7 +95,7 @@ a:hover {
 }
 
 .button-green-line {
-    width: 115px;
+    width: 150px;
     background-color: #FFFFFF;
     border-radius: 10px;
     padding: 10px 20px;
@@ -104,6 +104,17 @@ a:hover {
 }
 
 .button-green-line:hover {
-    background-color: #1FFFFF;
+    background-color: #fff9f9;
     border: 1px solid #689801;
 }
+@media (max-width: 899.20px) {
+    .container img {
+        display: none;
+    }
+    .chart {
+        max-width: 60vw;
+    display: grid;
+    grid-template-columns: 1fr;
+    }
+  }
+  

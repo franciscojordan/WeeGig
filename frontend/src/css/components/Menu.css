@@ -1,4 +1,15 @@
-.menuimg {
+.menuimg { 
     width: 80px;
     height: 80px;
 }
+.inv {
+    display: none;
+}
+.green{
+    background-color: #7FB800;
+}
+@media (max-width: 899.20px) {
+    .menuimg {
+        display: none;
+    }
+  }
