@@ -33,7 +33,6 @@ const settingsLinks = {
 };
 
 function ResponsiveAppBar() {
-  // const username = Cookies.get('username');
   const [isAuthenticated, setIsAuthenticated] = React.useState(!!Cookies.get('username'));
 
   React.useEffect(() => {

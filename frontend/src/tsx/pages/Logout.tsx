@@ -6,11 +6,7 @@ const Logout = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Eliminar la cookie de username
     Cookies.remove('username');
-
-    // Redirigir al usuario a la página principal
-    // navigate('/');
     window.location.href = '/'; // Navega a la página y recarga
   }, [navigate]); // Dependencia del efecto
 

@@ -10,30 +10,10 @@ import Register from './pages/Register'
 import Logout from "./pages/Logout";
 import Perfil from './pages/Perfil';
 
-/* function Menu(): JSX.Element {
-	return (
-		<div className="menu">
-        <div>
-          <img src="/src/assets/img/logo_long.png" alt=""/>
-        </div>
-        <div>
-            <ul>
-				<li><a href="/">Inicio</a></li>
-                <li><a href="/ofertas">Buscar Ofertas</a></li>
-            </ul>
-        </div>
-        <ul className="rightmenu">
-		<li><a href="/login">Login</a></li>
-            <li><a href="">Crear Cuenta</a></li>
-        </ul>
-      </div>
-	);
-} */
 
 function App() {
 	return (
 		<>
-			{/* Fixed content remains unchanged when the React route changes. */}
 			<ResponsiveAppBar />
 			<Routes>
 				<Route path="/index2" element={<Index2 />} />
