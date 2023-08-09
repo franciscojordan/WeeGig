@@ -12,9 +12,7 @@ function RecipeReviewCard() {
     <Box sx={{ maxWidth: 400 }}>
       <CardHeader
         avatar={
-          <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-            H
-          </Avatar>
+          <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe"></Avatar>
         }
         title="Titulo de oferta"
         subheader="Agosto 14, 2023"
