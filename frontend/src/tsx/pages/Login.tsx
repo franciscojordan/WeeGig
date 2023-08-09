@@ -13,6 +13,9 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Alert from "@mui/material/Alert";
+import { useNavigate } from 'react-router-dom';
+import Cookies from 'js-cookie';
+
 
 function Copyright(props: any) {
   return (
@@ -39,6 +42,8 @@ export default function SignIn() {
     const [showAlert, setShowAlertErrorEmail] = React.useState(false);
     const [showSuccessAlert, setShowSuccessAlert] = React.useState(false);
   
+    const navigate = useNavigate();
+
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
       event.preventDefault();
       const data = new FormData(event.currentTarget);
@@ -68,8 +73,10 @@ export default function SignIn() {
           const result = await response.json();
         
           if (result === true) {
+            Cookies.set('username', email, { expires: 7 }); // Expira en 7 días
             setShowAlertErrorEmail(false);
-              setShowSuccessAlert(true);
+            setShowSuccessAlert(true);
+            navigate('/ofertas');
           } else {
               setShowAlertErrorEmail(true);
               setShowSuccessAlert(false);
