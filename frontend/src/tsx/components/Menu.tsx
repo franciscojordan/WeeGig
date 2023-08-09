@@ -11,20 +11,43 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
-/* import AdbIcon from '@mui/icons-material/Adb'; */
 import "../../css/components/Menu.css";
-/* import { green } from '@mui/material/colors';*/
+import { Link } from 'react-router-dom';
+import Cookies from 'js-cookie';
+
+
 
 const pages = ["Ofertas", "Foro", "Contáctanos"];
 const pageLinks = {
   Ofertas: "/ofertas",
   Foro: "/foro",
-  Contáctanos: "/contactanos",
+  Contactanos: "/contactanos",
 };
 
 const settings = ["Perfil", "Cuenta", "Trabajos", "Cerrar Sesión"];
+const settingsLinks = {
+  Perfil: "/perfil",
+  Cuenta: "/cuenta",
+  Trabajos: "/ofertas",
+  "Cerrar Sesión": "/logout",
+};
 
 function ResponsiveAppBar() {
+  const [isAuthenticated, setIsAuthenticated] = React.useState(!!Cookies.get('username'));
+
+  React.useEffect(() => {
+    const checkAuth = () => {
+      const authState = !!Cookies.get('username');
+      if (authState !== isAuthenticated) {
+        setIsAuthenticated(authState);
+      }
+    };
+
+    const intervalId = setInterval(checkAuth, 200); // Verifica cada 0,2 segundos
+
+    return () => clearInterval(intervalId); // Limpia el intervalo cuando el componente se desmonta
+  }, [isAuthenticated]);
+
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null
   );
@@ -143,19 +166,9 @@ function ResponsiveAppBar() {
                 {page}
               </Button>
             ))}
-            {/* {pages.map((page) => (
-              <Button
-                href="https://www.example.com"
-                key={page}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block' }}
-              >
-                {page}
-              xd1</Button>
-            ))} */}
           </Box>
           {/* Desplegable */}
-          <Box className="inv" sx={{ flexGrow: 0 }}>
+          {isAuthenticated && <Box className="inv" sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
@@ -179,12 +192,12 @@ function ResponsiveAppBar() {
             >
               {settings.map((setting) => (
                 <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
+                  <Typography textAlign="center" component={Link} to={settingsLinks[setting]}>{setting}</Typography>
                 </MenuItem>
               ))}
             </Menu>
-          </Box>
-          <Button color="inherit">Iniciar Sesion</Button>
+          </Box>}
+          {!isAuthenticated && <Button color="inherit" href="/login">Iniciar Sesion</Button>}
         </Toolbar>
       </Container>
     </AppBar>

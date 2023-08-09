@@ -3,7 +3,7 @@
     height: 80px;
 }
 .inv {
-    display: none;
+    display: flex;
 }
 .green{
     background-color: #7FB800;

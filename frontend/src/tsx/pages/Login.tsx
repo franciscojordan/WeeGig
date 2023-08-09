@@ -43,13 +43,21 @@ export default function SignIn() {
     const [showSuccessAlert, setShowSuccessAlert] = React.useState(false);
   
     const navigate = useNavigate();
+    const username = Cookies.get('username');
 
+    React.useEffect(() => {
+      if (username) {
+        window.location.href = '/ofertas'; // Navega a la página y recarga
+      }
+    }, [username, navigate]); // Dependencias del efecto
+    
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
       event.preventDefault();
       const data = new FormData(event.currentTarget);
       const email = data.get("email")?.toString() || '';
       const password = data.get("password")?.toString() || '';
-  
+      const rememberMe = data.get("remember") === "on"; // Verifica si el checkbox está seleccionado
+
       const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
   
       if (!email || !emailPattern.test(email)) {
@@ -71,9 +79,8 @@ export default function SignIn() {
           });
           console.log("POST DONE");
           const result = await response.json();
-        
-          if (result === true) {
-            Cookies.set('username', email, { expires: 7 }); // Expira en 7 días
+          if (result['status'] == "success") {
+            Cookies.set('username', email, { expires: rememberMe ? 30 : undefined });
             setShowAlertErrorEmail(false);
             setShowSuccessAlert(true);
             navigate('/ofertas');

@@ -1,31 +1,55 @@
 /* Estilos CSS para el Footer */
 .footer {
+    text-align: justify;
+    /* Justificar el texto */
     display: flex;
-    background-color: #7fb800;
+    flex-direction: column;
     color: #ffffff;
-    padding: 50px 20px;
 }
 
 .box_1 {
     display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: center; /* Alinea verticalmente */
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding: 50px 20px 0px 20px;
+    background-color: #7fb800;
+}
+
+.box_2 {
+    display: flex;
+    justify-content: space-between;
+    padding: 0px 20px 0px 20px;
+    background-color: #7fb800;
+
+}
+
+.box_3 {
+    text-align: center;
+    padding: 0px 20px 20px 20px;
+    background-color: #7fb800;
+
 }
 
 .list {
     display: flex;
-    justify-content: flex-end;
-    align-items: center; /* Alinea verticalmente la lista */
+    align-items: center;
+    margin-left: auto;
 }
 
 .list ul {
     padding: 0;
     list-style: none;
     display: flex;
-    gap: 10px;
+    margin: 0;
+    justify-content: flex-end;
 }
 
 .list li {
     padding: 10px 20px;
+}
+
+.cont {
+    flex-basis: calc(25% - 20px);
+    flex-direction: column;
 }
