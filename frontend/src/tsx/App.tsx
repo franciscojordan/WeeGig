@@ -9,13 +9,14 @@ import ResponsiveAppBar from './components/Menu'
 import Register from './pages/Register'
 import Logout from "./pages/Logout";
 import Perfil from './pages/Perfil';
-
+import SignUp from './pages/SignIn';
 
 function App() {
 	return (
 		<>
 			<ResponsiveAppBar />
 			<Routes>
+				<Route path="/SignIn" element={<SignUp />} />
 				<Route path="/index2" element={<Index2 />} />
 				<Route path="/Menu" element={<ResponsiveAppBar />} />
 				<Route path="/" element={<Home />} />
