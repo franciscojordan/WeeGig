@@ -9,7 +9,7 @@ import ResponsiveAppBar from './components/Menu'
 import Register from './pages/Register'
 import Logout from "./pages/Logout";
 import Perfil from './pages/Perfil';
-
+import Error from './pages/Error';
 
 function App() {
 	return (
@@ -24,7 +24,9 @@ function App() {
 				<Route path="/logout" element={<Logout />} />
 				<Route path="/registrar" element={<Register />} />
 				<Route path="/ofertas" element={<Ofertas />} />
-				<Route path="*" element={<h1>❌Error! Not Found❌</h1>} />
+				<Route path="*"  element={<Error />} />
+				{/* <Route path="*" element={<h1>❌Error! Not Found❌</h1>} /> */}
+
 			</Routes>
       <Footer />
 		</>

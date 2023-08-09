@@ -15,12 +15,10 @@ import "../../css/components/Menu.css";
 import { Link } from 'react-router-dom';
 import Cookies from 'js-cookie';
 
-
-
-const pages = ["Ofertas", "Foro", "Contáctanos"];
+const pages = ["Ofertas", "Nosotros", "Contáctanos"];
 const pageLinks = {
   Ofertas: "/ofertas",
-  Foro: "/foro",
+  Nosotros: "/nosotros",
   Contactanos: "/contactanos",
 };
 
