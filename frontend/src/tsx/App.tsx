@@ -10,12 +10,14 @@ import Register from './pages/Register'
 import Logout from "./pages/Logout";
 import Perfil from './pages/Perfil';
 import Error from './pages/Error';
+import SignUp from './pages/SignIn';
 
 function App() {
 	return (
 		<>
 			<ResponsiveAppBar />
 			<Routes>
+				<Route path="/SignIn" element={<SignUp />} />
 				<Route path="/index2" element={<Index2 />} />
 				<Route path="/Menu" element={<ResponsiveAppBar />} />
 				<Route path="/" element={<Home />} />
