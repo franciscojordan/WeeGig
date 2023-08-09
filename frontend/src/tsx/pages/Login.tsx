@@ -43,7 +43,15 @@ export default function SignIn() {
     const [showSuccessAlert, setShowSuccessAlert] = React.useState(false);
   
     const navigate = useNavigate();
+    const username = Cookies.get('username');
 
+    React.useEffect(() => {
+      if (username) {
+        console.log("YA ESTAS LOGUEADO! " + username);
+        navigate('/ofertas');
+      }
+    }, [username, navigate]); // Dependencias del efecto
+    
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
       event.preventDefault();
       const data = new FormData(event.currentTarget);
@@ -71,8 +79,8 @@ export default function SignIn() {
           });
           console.log("POST DONE");
           const result = await response.json();
-        
-          if (result === true) {
+          // console.log(result['status'] == "success");
+          if (result['status'] == "success") {
             Cookies.set('username', email, { expires: 7 }); // Expira en 7 días
             setShowAlertErrorEmail(false);
             setShowSuccessAlert(true);
