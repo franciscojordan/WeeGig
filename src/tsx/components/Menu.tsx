@@ -13,8 +13,7 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 /* import AdbIcon from '@mui/icons-material/Adb'; */
 import "../../css/components/Menu.css";
-import { green } from '@mui/material/colors';
-
+/* import { green } from '@mui/material/colors';*/
 
 const pages = ['Ofertas', 'Foro', 'Contáctanos'];
 const settings = ['Perfil', 'Cuenta', 'Trabajos', 'Cerrar Sesión'];
@@ -39,8 +38,8 @@ function ResponsiveAppBar() {
   };
 
   return (
-    <AppBar position="static">
-      <Container maxWidth="xl">
+    <AppBar className='green' position="static">
+      <Container className='green' maxWidth="xl">
         <Toolbar disableGutters>
           <img className='menuimg' src='./src/assets/img/logo_small_full.png'/>
           
@@ -130,7 +129,7 @@ function ResponsiveAppBar() {
             ))}
           </Box>
 {/* Desplegable */}
-          <Box sx={{ flexGrow: 0 }}>
+          <Box className='inv' sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
@@ -159,7 +158,7 @@ function ResponsiveAppBar() {
               ))}
             </Menu>
           </Box>
-          <Button color="inherit">Login</Button>
+          <Button color="inherit">Iniciar Sesion</Button>
         </Toolbar>
       </Container>
     </AppBar>
