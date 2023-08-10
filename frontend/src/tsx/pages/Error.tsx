@@ -1,7 +1,5 @@
 import { Box, Typography } from '@mui/material';
-import { purple } from '@mui/material/colors';
 
-// const primary = purple[500]; // #f44336, #7FB800
 const primary = 'white';
 
 export default function Error() {
@@ -18,6 +16,7 @@ export default function Error() {
       <Typography variant="h1" style={{ color: "#7FB800" }}>
         404
       </Typography>
+      <h1>Pagina no encontrada</h1>
     </Box>
   );
 }
