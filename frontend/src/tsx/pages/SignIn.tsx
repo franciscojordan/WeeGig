@@ -13,6 +13,7 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
+
 function Copyright(props: any) {
   return (
     <Typography variant="body2" color="text.primary" align="center" {...props}>
@@ -24,16 +25,14 @@ function Copyright(props: any) {
     </Typography>
   );
 }
-
 const theme = createTheme({
-    palette: {
-      primary: {
-        main: '#7FB800',
-      },
+  palette: {
+    primary: {
+      main: '#7FB800',
     },
-  });
-  
-const defaultTheme = createTheme();
+  },
+});
+
 
 export default function SignUp() {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -46,7 +45,7 @@ export default function SignUp() {
   };
 
   return (
-    <ThemeProvider theme={defaultTheme}>
+    <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box
@@ -57,11 +56,11 @@ export default function SignUp() {
             alignItems: 'center',
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+          <Avatar sx={{ m: 1, bgcolor: 'primary.main' }}>
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign up
+            Regístrate
           </Typography>
           <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
             <Grid container spacing={2}>
@@ -120,7 +119,7 @@ export default function SignUp() {
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
-              Sign Up
+              Regístrate
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
