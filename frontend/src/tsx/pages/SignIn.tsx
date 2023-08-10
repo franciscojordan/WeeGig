@@ -104,8 +104,13 @@ export default function SignUp() {
                 />
               </Grid>
             </Grid>
-            <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
-              Regístrate
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              sx={{ mt: 3, mb: 2, color: "white" }} // Agregar color: "white"
+            >
+              Registrate
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
