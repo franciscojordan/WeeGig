@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -16,7 +16,6 @@ import Alert from "@mui/material/Alert";
 import { useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
 
-
 function Copyright(props: any) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
@@ -24,8 +23,6 @@ function Copyright(props: any) {
       <Link color="inherit" href="./Home.tsx  ">
         
       </Link>{' '}
-{/* {new Date().getFullYear()} */}      
-      {''}
     </Typography>
   );
 }
@@ -33,7 +30,7 @@ function Copyright(props: any) {
 const theme = createTheme({
     palette: {
       primary: {
-        main: '#7FB800',
+        main: '#A8A8A8',
       },
     },
   });
@@ -118,7 +115,6 @@ export default function SignIn() {
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
             <TextField
               margin="normal"
-              required
               fullWidth
               id="email"
               label="Correo Electrónico"
@@ -128,7 +124,6 @@ export default function SignIn() {
             />
             <TextField
               margin="normal"
-              required
               fullWidth
               name="password"
               label="Contraseña"
@@ -148,6 +143,7 @@ export default function SignIn() {
             >
               Ingresar
             </Button>
+
             <Grid container>
               <Grid item xs>
                 <Link href="#" variant="body2">

@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -13,26 +13,21 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
-
 function Copyright(props: any) {
   return (
     <Typography variant="body2" color="text.primary" align="center" {...props}>
-      {' '}
-      <Link color="inherit" href="https://mui.com/">
-        
-      </Link>{' '}
-      
+      <Link color="inherit" href="https://mui.com/"></Link>{' '}
     </Typography>
   );
 }
+
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#7FB800',
+      main: '#A8A8A8',
     },
   },
 });
-
 
 export default function SignUp() {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -68,7 +63,6 @@ export default function SignUp() {
                 <TextField
                   autoComplete="given-name"
                   name="firstName"
-                  required
                   fullWidth
                   id="firstName"
                   label="Nombre"
@@ -77,7 +71,6 @@ export default function SignUp() {
               </Grid>
               <Grid item xs={12} sm={6}>
                 <TextField
-                  required
                   fullWidth
                   id="lastName"
                   label="Apellidos"
@@ -87,7 +80,6 @@ export default function SignUp() {
               </Grid>
               <Grid item xs={12}>
                 <TextField
-                  required
                   fullWidth
                   id="email"
                   label="Correo Electronico"
@@ -97,7 +89,6 @@ export default function SignUp() {
               </Grid>
               <Grid item xs={12}>
                 <TextField
-                  required
                   fullWidth
                   name="password"
                   label="Contraseña"
@@ -113,12 +104,7 @@ export default function SignUp() {
                 />
               </Grid>
             </Grid>
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
-            >
+            <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
               Regístrate
             </Button>
             <Grid container justifyContent="flex-end">
