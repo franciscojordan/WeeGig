@@ -13,21 +13,22 @@
     justify-content: space-between;
     flex-wrap: wrap;
     padding: 50px 20px 0px 20px;
-    background-color: #7fb800;
+    background-color: #72B89C;
 }
 
 .box_2 {
     display: flex;
     justify-content: space-between;
     padding: 0px 20px 0px 20px;
-    background-color: #7fb800;
+    background-color: #72B89C;
+    color: white;
 
 }
 
 .box_3 {
     text-align: center;
     padding: 0px 20px 20px 20px;
-    background-color: #7fb800;
+    background-color: #72B89C;
 
 }
 

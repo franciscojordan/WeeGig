@@ -15,7 +15,7 @@ import "../../css/components/Menu.css";
 import { Link } from 'react-router-dom';
 import Cookies from 'js-cookie';
 
-const pages = ["Ofertas", "Nosotros", "Contáctanos"];
+const pages = ["Ofertas", "Nosotros", "Contactanos"];
 const pageLinks = {
   Ofertas: "/ofertas",
   Nosotros: "/nosotros",
@@ -72,7 +72,8 @@ function ResponsiveAppBar() {
     <AppBar className="green" position="static">
       <Container className="green" maxWidth="xl">
         <Toolbar disableGutters>
-          <img className="menuimg" src="./src/assets/img/logo_small_full.png" />
+          <a href="/"><img className="menuimg" src="./src/assets/img/logo_small_full.png" /></a>
+          
           {/* This is the logo */}
           <Typography
             variant="h6"
