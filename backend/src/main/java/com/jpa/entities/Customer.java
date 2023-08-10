@@ -23,7 +23,7 @@ public class Customer {
 	@Column(name = "SURNAME")
 	String surname;
 
-	@Column(name = "BIRTDATE")
+	@Column(name = "BIRTHDATE")
 	String birtdate;
 
 	@Column(name = "PHONE")
