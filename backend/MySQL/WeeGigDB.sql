@@ -8,21 +8,21 @@
 	SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
 
 	-- -----------------------------------------------------
-	-- Schema mydb
+	-- Schema WeeGigDB
 	-- -----------------------------------------------------
 
 	-- -----------------------------------------------------
-	-- Schema mydb
+	-- Schema WeeGigDB
 	-- -----------------------------------------------------
-	CREATE SCHEMA IF NOT EXISTS `mydb` DEFAULT CHARACTER SET utf8 ;
-	USE `mydb` ;
+	CREATE SCHEMA IF NOT EXISTS `WeeGigDB` DEFAULT CHARACTER SET utf8 ;
+	USE `WeeGigDB` ;
 
 	-- -----------------------------------------------------
-	-- Table `mydb`.`LOGIN`
+	-- Table `WeeGigDB`.`LOGIN`
 	-- -----------------------------------------------------
-	DROP TABLE IF EXISTS `mydb`.`LOGIN` ;
+	DROP TABLE IF EXISTS `WeeGigDB`.`LOGIN` ;
 
-	CREATE TABLE IF NOT EXISTS `mydb`.`LOGIN` (
+	CREATE TABLE IF NOT EXISTS `WeeGigDB`.`LOGIN` (
 	  `email` VARCHAR(45) NOT NULL,
 	  `password` VARCHAR(32) NOT NULL,
 	  PRIMARY KEY (`email`))
@@ -30,11 +30,11 @@
 
 
 	-- -----------------------------------------------------
-	-- Table `mydb`.`USERS`
+	-- Table `WeeGigDB`.`USERS`
 	-- -----------------------------------------------------
-	DROP TABLE IF EXISTS `mydb`.`USERS` ;
+	DROP TABLE IF EXISTS `WeeGigDB`.`USERS` ;
 
-	CREATE TABLE IF NOT EXISTS `mydb`.`USERS` (
+	CREATE TABLE IF NOT EXISTS `WeeGigDB`.`USERS` (
 	  `idUSER` INT NOT NULL AUTO_INCREMENT,
 	  `username` VARCHAR(16) NOT NULL,
 	  `email` VARCHAR(45) NOT NULL,
@@ -56,18 +56,18 @@
 	  INDEX `emailLogin` (`email` ASC) VISIBLE,
 	  CONSTRAINT `emailLogin`
 		FOREIGN KEY (`email`)
-		REFERENCES `mydb`.`LOGIN` (`email`)
+		REFERENCES `WeeGigDB`.`LOGIN` (`email`)
 		ON DELETE NO ACTION
 		ON UPDATE NO ACTION)
 	ENGINE = InnoDB;
 
 
 	-- -----------------------------------------------------
-	-- Table `mydb`.`JOB_OFFERS`
+	-- Table `WeeGigDB`.`JOB_OFFERS`
 	-- -----------------------------------------------------
-	DROP TABLE IF EXISTS `mydb`.`JOB_OFFERS` ;
+	DROP TABLE IF EXISTS `WeeGigDB`.`JOB_OFFERS` ;
 
-	CREATE TABLE IF NOT EXISTS `mydb`.`JOB_OFFERS` (
+	CREATE TABLE IF NOT EXISTS `WeeGigDB`.`JOB_OFFERS` (
 	  `idJOB_OFFERS` INT NOT NULL AUTO_INCREMENT,
 	  `title` VARCHAR(45) NULL,
 	  `description` VARCHAR(45) NULL,
@@ -83,18 +83,18 @@
 	  INDEX `idEmployer` (`idEmployer` ASC) VISIBLE,
 	  CONSTRAINT `offerCreator`
 		FOREIGN KEY (`idEmployer`)
-		REFERENCES `mydb`.`USERS` (`idUSER`)
+		REFERENCES `WeeGigDB`.`USERS` (`idUSER`)
 		ON DELETE NO ACTION
 		ON UPDATE NO ACTION)
 	ENGINE = InnoDB;
 
 
 	-- -----------------------------------------------------
-	-- Table `mydb`.`JOB_APPLICATION`
+	-- Table `WeeGigDB`.`JOB_APPLICATION`
 	-- -----------------------------------------------------
-	DROP TABLE IF EXISTS `mydb`.`JOB_APPLICATION` ;
+	DROP TABLE IF EXISTS `WeeGigDB`.`JOB_APPLICATION` ;
 
-	CREATE TABLE IF NOT EXISTS `mydb`.`JOB_APPLICATION` (
+	CREATE TABLE IF NOT EXISTS `WeeGigDB`.`JOB_APPLICATION` (
 	  `idUSER` INT NOT NULL,
 	  `idJOB_OFFERS` INT NOT NULL,
 	  `applicationDate` VARCHAR(45) NULL,
@@ -103,23 +103,23 @@
 	  INDEX `employer_idx` (`idJOB_OFFERS` ASC) VISIBLE,
 	  CONSTRAINT `employer`
 		FOREIGN KEY (`idJOB_OFFERS`)
-		REFERENCES `mydb`.`JOB_OFFERS` (`idJOB_OFFERS`)
+		REFERENCES `WeeGigDB`.`JOB_OFFERS` (`idJOB_OFFERS`)
 		ON DELETE NO ACTION
 		ON UPDATE NO ACTION,
 	  CONSTRAINT `username`
 		FOREIGN KEY (`idUSER`)
-		REFERENCES `mydb`.`USERS` (`idUSER`)
+		REFERENCES `WeeGigDB`.`USERS` (`idUSER`)
 		ON DELETE NO ACTION
 		ON UPDATE NO ACTION)
 	ENGINE = InnoDB;
 
 
 	-- -----------------------------------------------------
-	-- Table `mydb`.`REVIEWS`
+	-- Table `WeeGigDB`.`REVIEWS`
 	-- -----------------------------------------------------
-	DROP TABLE IF EXISTS `mydb`.`REVIEWS` ;
+	DROP TABLE IF EXISTS `WeeGigDB`.`REVIEWS` ;
 
-	CREATE TABLE IF NOT EXISTS `mydb`.`REVIEWS` (
+	CREATE TABLE IF NOT EXISTS `WeeGigDB`.`REVIEWS` (
 	  `idREVIEWS` INT NOT NULL AUTO_INCREMENT,
 	  `reviewTitle` VARCHAR(45) NULL,
 	  `reviewContent` VARCHAR(256) NULL,
@@ -131,23 +131,23 @@
 	  INDEX `idReviewed_idx` (`idReviewed` ASC) VISIBLE,
 	  CONSTRAINT `idReviewer1`
 		FOREIGN KEY (`idReviewer`)
-		REFERENCES `mydb`.`USERS` (`idUSER`)
+		REFERENCES `WeeGigDB`.`USERS` (`idUSER`)
 		ON DELETE NO ACTION
 		ON UPDATE NO ACTION,
 	  CONSTRAINT `idReviewed`
 		FOREIGN KEY (`idReviewed`)
-		REFERENCES `mydb`.`USERS` (`idUSER`)
+		REFERENCES `WeeGigDB`.`USERS` (`idUSER`)
 		ON DELETE NO ACTION
 		ON UPDATE NO ACTION)
 	ENGINE = InnoDB;
 
 
 	-- -----------------------------------------------------
-	-- Table `mydb`.`REVIEW_DATE`
+	-- Table `WeeGigDB`.`REVIEW_DATE`
 	-- -----------------------------------------------------
-	DROP TABLE IF EXISTS `mydb`.`REVIEW_DATE` ;
+	DROP TABLE IF EXISTS `WeeGigDB`.`REVIEW_DATE` ;
 
-	CREATE TABLE IF NOT EXISTS `mydb`.`REVIEW_DATE` (
+	CREATE TABLE IF NOT EXISTS `WeeGigDB`.`REVIEW_DATE` (
 	  `idReview` INT NOT NULL,
 	  `idReviewer` INT NOT NULL,
 	  `idJob` INT NOT NULL,
@@ -158,17 +158,17 @@
 	  INDEX `idJob_idx` (`idJob` ASC) VISIBLE,
 	  CONSTRAINT `idReview`
 		FOREIGN KEY (`idReview`)
-		REFERENCES `mydb`.`REVIEWS` (`idREVIEWS`)
+		REFERENCES `WeeGigDB`.`REVIEWS` (`idREVIEWS`)
 		ON DELETE NO ACTION
 		ON UPDATE NO ACTION,
 	  CONSTRAINT `idReviewer`
 		FOREIGN KEY (`idReviewer`)
-		REFERENCES `mydb`.`USERS` (`idUSER`)
+		REFERENCES `WeeGigDB`.`USERS` (`idUSER`)
 		ON DELETE NO ACTION
 		ON UPDATE NO ACTION,
 	  CONSTRAINT `idJob`
 		FOREIGN KEY (`idJob`)
-		REFERENCES `mydb`.`JOB_OFFERS` (`idJOB_OFFERS`)
+		REFERENCES `WeeGigDB`.`JOB_OFFERS` (`idJOB_OFFERS`)
 		ON DELETE NO ACTION
 		ON UPDATE NO ACTION)
 	ENGINE = InnoDB;
