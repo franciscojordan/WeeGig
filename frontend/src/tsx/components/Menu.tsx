@@ -12,10 +12,10 @@ import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import "../../css/components/Menu.css";
-import { Link } from 'react-router-dom';
-import Cookies from 'js-cookie';
+import { Link } from "react-router-dom";
+import Cookies from "js-cookie";
 
-const pages = ["Ofertas", "Nosotros", "Contáctanos"];
+const pages = ["Ofertas", "Nosotros", "Contactanos"];
 const pageLinks = {
   Ofertas: "/ofertas",
   Nosotros: "/nosotros",
@@ -31,11 +31,13 @@ const settingsLinks = {
 };
 
 function ResponsiveAppBar() {
-  const [isAuthenticated, setIsAuthenticated] = React.useState(!!Cookies.get('username'));
+  const [isAuthenticated, setIsAuthenticated] = React.useState(
+    !!Cookies.get("username")
+  );
 
   React.useEffect(() => {
     const checkAuth = () => {
-      const authState = !!Cookies.get('username');
+      const authState = !!Cookies.get("username");
       if (authState !== isAuthenticated) {
         setIsAuthenticated(authState);
       }
@@ -72,7 +74,12 @@ function ResponsiveAppBar() {
     <AppBar className="green" position="static">
       <Container className="green" maxWidth="xl">
         <Toolbar disableGutters>
-          <img className="menuimg" src="./src/assets/img/logo_small_full.png" />
+          <a href="/">
+            <img
+              className="menuimg"
+              src="./src/assets/img/logo_small_full.png"
+            />
+          </a>
           {/* This is the logo */}
           <Typography
             variant="h6"
@@ -149,6 +156,9 @@ function ResponsiveAppBar() {
               letterSpacing: ".3rem",
               color: "inherit",
               textDecoration: "none",
+              "&:hover": {
+                color: "#FFFFFF",
+              },
             }}
           >
             WEE GIG
@@ -159,43 +169,87 @@ function ResponsiveAppBar() {
                 href={pageLinks[page]}
                 key={page}
                 onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: "white", display: "block" }}
+                sx={{
+                  my: 2,
+                  color: "white",
+                  display: "block",
+                  "&:hover": {
+                    color: "#FFFFFF ",
+                    backgroundColor: "#9CC3A8",
+                  },
+                }}
               >
                 {page}
               </Button>
             ))}
           </Box>
           {/* Desplegable */}
-          {isAuthenticated && <Box className="inv" sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-              </IconButton>
-            </Tooltip>
-            <Menu
-              sx={{ mt: "45px" }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: "top",
-                horizontal: "right",
+          {isAuthenticated && (
+            <Box sx={{ flexGrow: 0 }}>
+              <Tooltip title="Open settings">
+                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                  <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                </IconButton>
+              </Tooltip>
+              <Menu
+                sx={{ mt: "45px" }}
+                id="menu-appbar"
+                anchorEl={anchorElUser}
+                anchorOrigin={{
+                  vertical: "top",
+                  horizontal: "right",
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: "top",
+                  horizontal: "right",
+                }}
+                open={Boolean(anchorElUser)}
+                onClose={handleCloseUserMenu}
+              >
+                {settings.map((setting) => (
+                  <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                    <Typography
+                      textAlign="center"
+                      component={Link}
+                      to={settingsLinks[setting]}
+                    >
+                      {setting}
+                    </Typography>
+                  </MenuItem>
+                ))}
+              </Menu>
+            </Box>
+          )}
+          {!isAuthenticated && (
+            <Button
+              color="inherit"
+              href="/login"
+              sx={{
+                "&:hover": {
+                  color: "white",
+                  backgroundColor: "#9CC3A8",
+                },
               }}
-              keepMounted
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
             >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center" component={Link} to={settingsLinks[setting]}>{setting}</Typography>
-                </MenuItem>
-              ))}
-            </Menu>
-          </Box>}
-          {!isAuthenticated && <Button color="inherit" href="/login">Iniciar Sesion</Button>}
+              Iniciar Sesion
+            </Button>
+          )}
+          {!isAuthenticated && (
+            <Button
+            color="inherit"
+            href="/SignIn"
+            sx={{
+              "&:hover": {
+                color: "white",
+                backgroundColor: "#9CC3A8",
+              },
+            }}
+          >
+            Registrarse
+          </Button>
+            )}
+          
         </Toolbar>
       </Container>
     </AppBar>
