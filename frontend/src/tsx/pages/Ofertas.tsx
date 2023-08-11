@@ -1,3 +1,4 @@
+import React, { useEffect, useState } from "react";
 import CardHeader from "@mui/material/CardHeader";
 import CardContent from "@mui/material/CardContent";
 import Avatar from "@mui/material/Avatar";
@@ -6,7 +7,8 @@ import { red } from "@mui/material/colors";
 import Box from "@mui/material/Box";
 import "../../css/components/Ofertas.css";
 
-function RecipeReviewCard() {
+
+function RecipeReviewCard({title, schedule, description}) {
 
   return (
     <Box sx={{ maxWidth: 400 }}>
@@ -14,15 +16,12 @@ function RecipeReviewCard() {
         avatar={
           <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe"></Avatar>
         }
-        title="Titulo de oferta"
-        subheader="Agosto 14, 2023"
+        title={title}
+        subheader={schedule}
       />
       <CardContent>
         <Typography variant="body2" color="text.secondary">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque
-          minus est voluptatem quo odit nostrum iure error! Iure officia
-          quaerat, placeat facere necessitatibus assumenda dolore quae,
-          adipisci, ab totam sequi!
+          {description}
         </Typography>
       </CardContent>
     </Box>
@@ -43,13 +42,44 @@ function BoxSx() {
 }
 
 function Ofertas(): JSX.Element {
+  const [jobs, setJobs] = useState([]);
+  useEffect(() => {
+    async function fetchOfertas() {
+      try {
+        const url = "http://localhost:8080/jobs";
+        const response = await fetch(url, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        console.log("GET DONE");
+        const result = await response.json();
+        console.log(result);
+        if (Array.isArray(result)) {
+          console.log("pasa");
+          setJobs(result);
+        } else {
+          console.log("API response is not an array");
+        }
+      } catch (error) {
+        console.error("Ocurrió un error al obtener los datos de las ofertas:", error);
+        alert("Ocurrió un error. Por favor, inténtalo de nuevo.");
+      }
+    }
+    fetchOfertas()
+  }, []);
   return (
     <>
       <h1>Ofertas Component</h1>
       <div className="box-flex">
-        <RecipeReviewCard />
-        <RecipeReviewCard />
-        <RecipeReviewCard />
+        {jobs.map((job) => (
+            <RecipeReviewCard
+              title={job.title}
+              schedule={job.schedule}
+              description={job.description}
+            />
+          ))}
       </div>
     </>
   );
