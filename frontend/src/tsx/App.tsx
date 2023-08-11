@@ -9,7 +9,8 @@ import Logout from "./pages/Logout";
 import Perfil from './pages/Perfil';
 import Error from './pages/Error';
 import Register from './pages/Register';
-
+import OferForm from './pages/OferForm';
+import SignUp from './pages/SignIn';
 function App() {
 	return (
 		<>
@@ -18,6 +19,8 @@ function App() {
 				<Route path="/" element={<Home />} />
 				<Route path="/login" element={<Login />} />
 				<Route path="/logout" element={<Logout />} />
+				<Route path="/SignIn" element={<SignUp />} />
+				<Route path="/OferForm" element={<OferForm />} />
 				<Route path="/registrar" element={<Register />} />
 				<Route path="/perfil" element={<Perfil />} />
 				<Route path="/ofertas" element={<Ofertas />} />
