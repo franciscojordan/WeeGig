@@ -21,7 +21,7 @@ public class LoginController {
     @CrossOrigin(origins = "http://localhost:5173")
     @PostMapping("/authentication")
     public AuthenticationResponse authenticate(@RequestBody Credentials credentials) {
-        String email = credentials.getUsername();
+        String email = credentials.getEmail();
         String password = credentials.getPassword();
 
         Login login = loginRepository.findByEmailAndPassword(email, password);
@@ -36,7 +36,7 @@ public class LoginController {
     
     @Getter @Setter
     public static class Credentials {
-        private String username;
+        private String email;
         private String password;
     }
 
