@@ -101,74 +101,76 @@
 
 package com.jpa.entities;
 
-import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Entity
-@Table(name = "USERS")
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+import java.util.Date;
+
 @Getter
 @Setter
-@NoArgsConstructor
-@AllArgsConstructor
+@Entity
+@Table(name = "USERS", schema = "WeeGigDB")
 public class User {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_user")
-    private int id;
+    @Column(name = "id_USER")
+    private Integer idUser;
 
-    @Column(name = "username")
+    @Column(name = "username", length = 16)
     private String username;
 
-    @Column(name = "name")
-    private String name;
-
-    @Column(name = "surname")
-    private String surname;
-
-    @Column(name = "email")
+    @Column(name = "email", length = 45)
     private String email;
 
-    @Column(name = "doc_type")
-    private int typeofdocument;
+    @Column(name = "name", length = 45)
+    private String name;
 
-    @Column(name = "document")
+    @Column(name = "surname", length = 45)
+    private String surname;
+
+    @Column(name = "doc_type")
+    private Integer docType;
+
+    @Column(name = "document", length = 9)
     private String document;
 
-    @Column(name = "phone_number")
-    private String phoneNumber; // Modificado a String para corresponder con la definición de la base de datos
+    @Column(name = "phone_number", length = 12)
+    private String phoneNumber;
 
-    @Column(name = "birth_date")
-    private String birthDate; // Considere usar LocalDate en lugar de String para fechas
+    @Column(name = "birthdate")
+    private Date birthdate;
 
-    @Column(name = "user_type")
-    @Enumerated(EnumType.STRING) // Si quieres almacenar el valor enum como String
-    private UserType typeOfUser;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "user_type", length = 9)
+    private UserType userType;
 
-    // Campos adicionales según la tabla
-    @Column(name = "company_name")
+    @Column(name = "company_name", length = 45)
     private String companyName;
 
-    @Column(name = "company_nif")
-    private String companyNIF;
+    @Column(name = "company_NIF", length = 9)
+    private String companyNif;
 
-    @Column(name = "address")
+    @Column(name = "address", length = 45)
     private String address;
 
-    @Column(name = "company_phone_pumber")
+    @Column(name = "company_phone_number", length = 12)
     private String companyPhoneNumber;
 
-    @Column(name = "website")
+    @Column(name = "website", length = 45)
     private String website;
 
     public enum UserType {
-        Employee, Employer
+        Employee,
+        Employer
     }
-
-    // Los constructores, getters y setters son generados automáticamente por Lombok
 }
-
-
