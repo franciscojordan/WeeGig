@@ -34,7 +34,7 @@ public class LoginController {
         System.out.println(login);
         if (login != null) {
 //            User user = userRepository.findByEmail(email); // Suponiendo que tienes un método findByEmail en tu repositorio de usuarios
-            return new AuthenticationResponse("success", Login);
+            return new AuthenticationResponse("success", login);
         } else {
             return new AuthenticationResponse("failure", null);
         }
