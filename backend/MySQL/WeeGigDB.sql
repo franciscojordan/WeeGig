@@ -78,7 +78,7 @@
 	  `category` VARCHAR(45) NULL,
 	  `id_Employer` INT NULL,
 	  `id_Employees` INT NULL,
-	  PRIMARY KEY (`idJOB_OFFERS`),
+	  PRIMARY KEY (`id_JOB_OFFERS`),
 	  INDEX `id_Employees` (`id_Employees` ASC) VISIBLE,
 	  INDEX `id_Employer` (`id_Employer` ASC) VISIBLE,
 	  CONSTRAINT `offer_creator`
@@ -100,7 +100,7 @@
 	  `application_date` VARCHAR(45) NULL,
 	  `application_status` VARCHAR(45) NULL,
 	  PRIMARY KEY (`id_USER`, `id_JOB_OFFERS`),
-	  INDEX `employer_idx` (`idJOB_OFFERS` ASC) VISIBLE,
+	  INDEX `employer_idx` (`id_JOB_OFFERS` ASC) VISIBLE,
 	  CONSTRAINT `employer`
 		FOREIGN KEY (`id_JOB_OFFERS`)
 		REFERENCES `WeeGigDB`.`JOB_OFFERS` (`id_JOB_OFFERS`)
@@ -131,12 +131,12 @@
 	  INDEX `id_Reviewed_idx` (`id_Reviewed` ASC) VISIBLE,
 	  CONSTRAINT `id_Reviewer_1`
 		FOREIGN KEY (`id_Reviewer`)
-		REFERENCES `WeeGigDB`.`USERS` (`idUSER`)
+		REFERENCES `WeeGigDB`.`USERS` (`id_USER`)
 		ON DELETE NO ACTION
 		ON UPDATE NO ACTION,
 	  CONSTRAINT `id_Reviewed`
 		FOREIGN KEY (`idReviewed`)
-		REFERENCES `WeeGigDB`.`USERS` (`idUSER`)
+		REFERENCES `WeeGigDB`.`USERS` (`id_USER`)
 		ON DELETE NO ACTION
 		ON UPDATE NO ACTION)
 	ENGINE = InnoDB;
@@ -194,7 +194,7 @@
 	SELECT id_USER INTO @employerID FROM USERS WHERE username = 'employer1';
 
 	-- Creación de ofertas de trabajo por employer1
-	INSERT INTO JOB_OFFERS (title, description, payment_type, payment, location, schedule, category, idEmployer)
+	INSERT INTO JOB_OFFERS (title, description, payment_type, payment, location, schedule, category, id_employer)
 	VALUES
 	  ('Oferta 1', 'Descripción de la oferta 1', 'Tipo de pago 1', 'Pago 1', 'Ubicación 1', NOW(), 'Categoría 1', @employerID),
 	  ('Oferta 2', 'Descripción de la oferta 2', 'Tipo de pago 2', 'Pago 2', 'Ubicación 2', NOW(), 'Categoría 2', @employerID),
