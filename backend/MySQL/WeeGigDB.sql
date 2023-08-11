@@ -42,7 +42,7 @@
 	  `surname` VARCHAR(45) NOT NULL,
 	  `doc_type` INT NOT NULL,
 	  `document` VARCHAR(9) NOT NULL,
-	  `phoneNumber` VARCHAR(12) NOT NULL,
+	  `phone_number` VARCHAR(12) NOT NULL,
 	  `birthdate` DATE NOT NULL,
 	  `user_type` ENUM('Employee', 'Employer') NOT NULL,
 	  `company_name` VARCHAR(45) NULL,
@@ -135,7 +135,7 @@
 		ON DELETE NO ACTION
 		ON UPDATE NO ACTION,
 	  CONSTRAINT `id_Reviewed`
-		FOREIGN KEY (`idReviewed`)
+		FOREIGN KEY (`id_Reviewed`)
 		REFERENCES `WeeGigDB`.`USERS` (`id_USER`)
 		ON DELETE NO ACTION
 		ON UPDATE NO ACTION)
