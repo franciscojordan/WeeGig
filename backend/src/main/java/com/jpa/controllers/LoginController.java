@@ -1,8 +1,10 @@
 package com.jpa.controllers;
 
 import com.jpa.entities.Login;
-//import com.jpa.entities.User;
+import com.jpa.entities.User;
 import com.jpa.repository.LoginRepository; // Asegúrate de importar el repositorio correcto
+import com.jpa.repository.UserRepository;
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.AllArgsConstructor;
@@ -18,6 +20,9 @@ public class LoginController {
     @Autowired
     private LoginRepository loginRepository; // Inyecta el repositorio
 
+    @Autowired
+    private UserRepository userRepository;
+    
     @CrossOrigin(origins = "http://localhost:5173")
     @PostMapping("/authentication")
     public AuthenticationResponse authenticate(@RequestBody Credentials credentials) {
@@ -28,7 +33,8 @@ public class LoginController {
         
         System.out.println(login);
         if (login != null) {
-            return new AuthenticationResponse("success", login);
+//            User user = userRepository.findByEmail(email); // Suponiendo que tienes un método findByEmail en tu repositorio de usuarios
+            return new AuthenticationResponse("success", Login);
         } else {
             return new AuthenticationResponse("failure", null);
         }
@@ -45,5 +51,6 @@ public class LoginController {
     public static class AuthenticationResponse {
         private String status;
         private Login user;
+        //private Login user;
     }
 }
