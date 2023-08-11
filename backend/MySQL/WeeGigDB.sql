@@ -83,7 +83,7 @@
 	  INDEX `id_Employer` (`id_Employer` ASC) VISIBLE,
 	  CONSTRAINT `offer_creator`
 		FOREIGN KEY (`id_employer`)
-		REFERENCES `WeeGigDB`.`USERS` (`idUSER`)
+		REFERENCES `WeeGigDB`.`USERS` (`id_USER`)
 		ON DELETE NO ACTION
 		ON UPDATE NO ACTION)
 	ENGINE = InnoDB;
