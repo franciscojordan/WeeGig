@@ -19,7 +19,7 @@ const pages = ["Ofertas", "Nosotros", "Contactanos"];
 const pageLinks = {
   Ofertas: "/ofertas",
   Nosotros: "/nosotros",
-  Contactanos: "/contactanos",
+  Contáctanos: "/contactanos",
 };
 
 const settings = ["Perfil", "Cuenta", "Trabajos", "Cerrar Sesión"];
