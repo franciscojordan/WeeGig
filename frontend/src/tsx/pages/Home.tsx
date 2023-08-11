@@ -3,10 +3,10 @@ import "../../css/pages/Home.css";
 function Button(props): JSX.Element {
     let color;
     if (props.type == "green") {
-        console.log(props.value + " IS GREEN");
+        // console.log(props.value + " IS GREEN");
         color = "button-green";
     } else {
-        console.log(props.value + " IS NOT GREEN");
+        // console.log(props.value + " IS NOT GREEN");
         color = "button-green-line";
     }
 
@@ -14,7 +14,6 @@ function Button(props): JSX.Element {
 }
 
 function DivBox(props): JSX.Element {
-    console.log(props);
     return (
         <>
             <div className="charts">

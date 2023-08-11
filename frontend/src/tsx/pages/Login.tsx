@@ -80,12 +80,14 @@ export default function SignIn() {
       console.log("POST DONE");
       const result = await response.json();
       if (result["status"] == "success") {
-        Cookies.set("username", email, {
+        Cookies.set("user", JSON.stringify(result["user"]), {
           expires: rememberMe ? 30 : undefined,
         });
+        console.log("GUARDADO EN COOKIES == " + result["user"]);
         setShowAlertErrorEmail(false);
         setShowSuccessAlert(true);
-        navigate("/ofertas");
+        // navigate("/ofertas");
+        window.location.href = '/ofertas';
       } else {
         setShowAlertErrorEmail(true);
         setShowSuccessAlert(false);
@@ -166,7 +168,7 @@ export default function SignIn() {
                 </Link>
               </Grid>
               <Grid item>
-                <Link href="./SignIn" variant="body2">
+                <Link href="./registrar" variant="body2">
                   {"¿No tienes una cuenta? Crea tu cuenta"}
                 </Link>
               </Grid>

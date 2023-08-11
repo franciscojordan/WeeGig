@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -16,26 +16,20 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 function Copyright(props: any) {
   return (
     <Typography variant="body2" color="text.primary" align="center" {...props}>
-      {' '}
-      <Link color="inherit" href="https://mui.com/">
-        
-      </Link>{' '}
-      
+      <Link color="inherit" href="https://mui.com/"></Link>{' '}
     </Typography>
   );
 }
 
 const theme = createTheme({
-    palette: {
-      primary: {
-        main: '#7FB800',
-      },
+  palette: {
+    primary: {
+      main: '#A8A8A8',
     },
-  });
-  
-const defaultTheme = createTheme();
+  },
+});
 
-export default function Register() {
+export default function SignUp() {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -46,7 +40,7 @@ export default function Register() {
   };
 
   return (
-    <ThemeProvider theme={defaultTheme}>
+    <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box
@@ -57,11 +51,11 @@ export default function Register() {
             alignItems: 'center',
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+          <Avatar sx={{ m: 1, bgcolor: 'primary.main' }}>
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign up
+            Regístrate
           </Typography>
           <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
             <Grid container spacing={2}>
@@ -69,7 +63,6 @@ export default function Register() {
                 <TextField
                   autoComplete="given-name"
                   name="firstName"
-                  required
                   fullWidth
                   id="firstName"
                   label="Nombre"
@@ -78,7 +71,6 @@ export default function Register() {
               </Grid>
               <Grid item xs={12} sm={6}>
                 <TextField
-                  required
                   fullWidth
                   id="lastName"
                   label="Apellidos"
@@ -88,7 +80,6 @@ export default function Register() {
               </Grid>
               <Grid item xs={12}>
                 <TextField
-                  required
                   fullWidth
                   id="email"
                   label="Correo Electronico"
@@ -98,7 +89,6 @@ export default function Register() {
               </Grid>
               <Grid item xs={12}>
                 <TextField
-                  required
                   fullWidth
                   name="password"
                   label="Contraseña"
@@ -118,9 +108,9 @@ export default function Register() {
               type="submit"
               fullWidth
               variant="contained"
-              sx={{ mt: 3, mb: 2 }}
+              sx={{ mt: 3, mb: 2, color: "white" }} // Agregar color: "white"
             >
-              Sign Up
+              Registrate
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>

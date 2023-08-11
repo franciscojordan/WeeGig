@@ -6,7 +6,7 @@ const Logout = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    Cookies.remove('username');
+    Cookies.remove('user');
     window.location.href = '/'; // Navega a la página y recarga
   }, [navigate]); // Dependencia del efecto
 

@@ -33,8 +33,8 @@ public class LoginController {
         
         System.out.println(login);
         if (login != null) {
-//            User user = userRepository.findByEmail(email); // Suponiendo que tienes un método findByEmail en tu repositorio de usuarios
-            return new AuthenticationResponse("success", login);
+            User user = userRepository.findByEmail(email); // Busca el usuario por correo electrónico
+            return new AuthenticationResponse("success", user);
         } else {
             return new AuthenticationResponse("failure", null);
         }
@@ -50,7 +50,7 @@ public class LoginController {
     @AllArgsConstructor
     public static class AuthenticationResponse {
         private String status;
-        private Login user;
+        private User user;
         //private Login user;
     }
 }
