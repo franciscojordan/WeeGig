@@ -6,21 +6,21 @@ import "../../css/components/Boxs.css";
 import { Link } from "react-router-dom";
 import Avatar from "@mui/material/Avatar";
 
-const handleStatusChange = (applicationId, status) => {
-  const updateData = {
-    applicationId: applicationId,
-    status: status,
-  };
-
-  fetch("http://localhost:8080/job-applications", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(updateData),
-  })
+const handleStatusChange = (userId, jobId, status) => {
+  fetch(
+    `http://localhost:8080/job-applications?userId=${userId}&jobId=${jobId}`,
+    {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      // body: JSON.stringify(status),
+      body: JSON.stringify({ applicationStatus: status }),
+    }
+  )
     .then((response) => response.json())
     .then((data) => {
+      console.log("Datos enviados a la API:", data);
       console.log("Estado actualizado con éxito");
       // Aquí puedes actualizar el estado local o refrescar los datos si es necesario
     })
@@ -37,7 +37,7 @@ function JobDetail() {
   const [hasApplied, setHasApplied] = useState(false);
   const [jobOffer, setJobOffer] = useState(null);
 
-  console.log(user.idUser);
+  // console.log(user.idUser);
 
   useEffect(() => {
     fetch(`http://localhost:8080/jobs/${id}`)
@@ -93,7 +93,7 @@ function JobDetail() {
       applicationDate: new Date().toISOString(),
       applicationStatus: "Applied",
     };
-
+    console.log("Datos enviados a la API:", applicationData);
     fetch("http://localhost:8080/job-applications", {
       method: "POST",
       headers: {
@@ -155,7 +155,11 @@ function JobDetail() {
                         variant="text"
                         color="success"
                         onClick={() =>
-                          handleStatusChange(application.id, "accepted")
+                          handleStatusChange(
+                            application.userId,
+                            application.jobId,
+                            "accepted"
+                          )
                         }
                       >
                         Aceptar
@@ -164,7 +168,11 @@ function JobDetail() {
                         variant="text"
                         color="error"
                         onClick={() =>
-                          handleStatusChange(application.id, "rejected")
+                          handleStatusChange(
+                            application.userId,
+                            application.jobId,
+                            "rejected"
+                          )
                         }
                       >
                         Rechazar
