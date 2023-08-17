@@ -4,7 +4,6 @@ import CardContent from "@mui/material/CardContent";
 import Avatar from "@mui/material/Avatar";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
-import "../../css/components/Ofertas.css";
 import AssignmentIcon from '@mui/icons-material/Assignment';
 import "../../css/components/Boxs.css";
 import { Link } from "react-router-dom";
@@ -90,34 +89,64 @@ function Ofertas(): JSX.Element {
     }, [user]);
     
 
-
-
-
-  
     return (
-      <>
-        <div className="big-box">
-          <div className="small-box">
-            <h1>Ofertas Component</h1>
-            <div className="box-flex">
-              {jobs.map((job) => (
-                <div key={job.idJobOffers}>
-                  <Link to={`/jobs/${job.idJobOffers}`}>
-                    <RecipeReviewCard
-                      title={job.title}
-                      schedule={job.schedule}
-                      description={job.description}
+      <div style={{ display: "flex", justifyContent: "center" }}>
+        <div style={{ maxWidth: "1040px" }}>
+          <h1 style={{ textAlign: "center" }}>Ofertas Component</h1>
+          <div
+            style={{
+              display: "flex",
+              flexWrap: "wrap",
+              justifyContent: "center",
+              gap: "20px",
+            }}
+          >
+            {jobs.map((job) => (
+              <div
+                key={job.idJobOffers}
+                style={{
+                  flex: "0 0 calc(25% - 20px)",
+                  margin: "10px",
+                  textAlign: "left",
+                  backgroundColor: "#F2F2F2",
+                  borderRadius: "10px",
+                  padding: "10px",
+                  transition: "background-color 0.3s",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.backgroundColor = "#E0E0E0";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.backgroundColor = "#F2F2F2";
+                }}
+              >
+                <Link to={`/jobs/${job.idJobOffers}`}>
+                  <RecipeReviewCard
+                    title={job.title}
+                    schedule={job.schedule}
+                    description={job.description}
+                  />
+                </Link>
+                <div style={{ textAlign: "center" }}>
+                  {applications.some(
+                    (app) =>
+                      app.jobId === job.idJobOffers &&
+                      app.applicationStatus === "Applied"
+                  ) && (
+                    <Chip
+                      icon={<HourglassTopIcon />}
+                      label="En espera"
+                      variant="outlined"
                     />
-                  </Link>
-                  {applications.some(app => app.jobId === job.idJobOffers && app.applicationStatus === "Applied") && <Chip icon={<HourglassTopIcon />} label="En espera" variant="outlined"/>}
-
+                  )}
                 </div>
-              ))}
-            </div>
+              </div>
+            ))}
           </div>
         </div>
-      </>
+      </div>
     );
+    
 }
 
 export default Ofertas;
