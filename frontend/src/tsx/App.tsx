@@ -9,13 +9,8 @@ import Logout from "./pages/Logout";
 import Perfil from './pages/Perfil';
 import Error from './pages/Error';
 import Register from './pages/Register';
-import MyOfferts from './pages/MyOfferts';
-import JobDetail from "./pages/JobDetail";
-import AboutUs from "./pages/AboutUs";
-import ContactUs from './pages/ContactUs';
-import NewOffert from './pages/NewOffert';
-import MyJobs from './pages/MyJobs';
-
+import OferForm from './pages/OferForm';
+import SignUp from './pages/SignIn';
 function App() {
 	return (
 		<>
@@ -24,6 +19,8 @@ function App() {
 				<Route path="/" element={<Home />} />
 				<Route path="/login" element={<Login />} />
 				<Route path="/logout" element={<Logout />} />
+				<Route path="/SignIn" element={<SignUp />} />
+				<Route path="/OferForm" element={<OferForm />} />
 				<Route path="/registrar" element={<Register />} />
 				<Route path="/perfil" element={<Perfil />} />
 				<Route path="/nosotros" element={<AboutUs />} />
