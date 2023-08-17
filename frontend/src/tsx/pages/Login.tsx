@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -15,6 +15,9 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Alert from "@mui/material/Alert";
 import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
+import Stack from '@mui/material/Stack';
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert, { AlertProps } from '@mui/material/Alert';
 
 function Copyright(props: any) {
   return (
@@ -39,8 +42,10 @@ const theme = createTheme({
 });
 
 export default function SignIn() {
+  const [emailError, setEmailError] = useState(false);
   const [showAlert, setShowAlertErrorEmail] = React.useState(false);
   const [showSuccessAlert, setShowSuccessAlert] = React.useState(false);
+  
 
   const navigate = useNavigate();
   const username = Cookies.get("username");
@@ -59,11 +64,12 @@ export default function SignIn() {
     const rememberMe = data.get("remember") === "on"; // Verifica si el checkbox está seleccionado
 
     const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-
-    if (!email || !emailPattern.test(email)) {
-      setShowAlertErrorEmail(true);
+    if (!emailPattern.test(email)) {
+      setEmailError(true);
       return;
     }
+
+    setEmailError(false);
 
     try {
       const url = "http://localhost:8080/authentication";
@@ -86,7 +92,6 @@ export default function SignIn() {
         console.log("GUARDADO EN COOKIES == " + result["user"]);
         setShowAlertErrorEmail(false);
         setShowSuccessAlert(true);
-        // navigate("/ofertas");
         window.location.href = '/ofertas';
       } else {
         setShowAlertErrorEmail(true);
@@ -98,7 +103,10 @@ export default function SignIn() {
     }
   };
 
+
   return (
+    <div className="box-contact">
+        <div className="contact-us">
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
@@ -116,14 +124,7 @@ export default function SignIn() {
           <Typography component="h1" variant="h5">
             Iniciar sesión
           </Typography>
-          {showAlert && (
-            <Alert severity="error">Error, invalid credentials!</Alert>
-          )}
-          {showSuccessAlert && (
-            <Alert severity="success">
-              This is a success alert — check it out!
-            </Alert>
-          )}
+
           <Box
             component="form"
             onSubmit={handleSubmit}
@@ -131,14 +132,16 @@ export default function SignIn() {
             sx={{ mt: 1 }}
           >
             <TextField
-              margin="normal"
-              fullWidth
-              id="email"
-              label="Correo Electrónico"
-              name="email"
-              autoComplete="email"
-              autoFocus
-            />
+            error={emailError}
+            helperText={emailError ? "Correo electrónico inválido." : ""}
+            margin="normal"
+            fullWidth
+            id="email"
+            label="Correo Electrónico"
+            name="email"
+            autoComplete="email"
+            autoFocus
+          />
             <TextField
               margin="normal"
               fullWidth
@@ -148,6 +151,9 @@ export default function SignIn() {
               id="password"
               autoComplete="current-password"
             />
+                      {showAlert && (
+            <Alert severity="error">Correo electrónico o contraseña incorrectos.</Alert>
+          )}
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
               label="Recordarme"
@@ -178,5 +184,7 @@ export default function SignIn() {
         <Copyright sx={{ mt: 8, mb: 4 }} />
       </Container>
     </ThemeProvider>
+    </div>
+    </div>
   );
 }

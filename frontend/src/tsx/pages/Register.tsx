@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from "react";
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -30,16 +30,31 @@ const theme = createTheme({
 });
 
 export default function SignUp() {
+  const [emailError, setEmailError] = useState(false);
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
+
+
+    const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    if (!emailPattern.test(data.get('email'))) {
+      setEmailError(true);
+      return;
+    }
+
+    setEmailError(false);
     console.log({
+      firstName: data.get('firstName'),
+      lastName: data.get('lastName'),
       email: data.get('email'),
       password: data.get('password'),
     });
+    console.log(data);
   };
 
   return (
+    <div className="box-contact">
+    <div className="contact-us">
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
@@ -79,13 +94,24 @@ export default function SignUp() {
                 />
               </Grid>
               <Grid item xs={12}>
-                <TextField
+              <TextField
+            error={emailError}
+            helperText={emailError ? "Correo electrónico inválido." : ""}
+            margin="normal"
+            fullWidth
+            id="email"
+            label="Correo Electrónico"
+            name="email"
+            autoComplete="email"
+            autoFocus
+          />
+                {/* <TextField
                   fullWidth
                   id="email"
                   label="Correo Electronico"
                   name="email"
                   autoComplete="email"
-                />
+                /> */}
               </Grid>
               <Grid item xs={12}>
                 <TextField
@@ -95,12 +121,6 @@ export default function SignUp() {
                   type="password"
                   id="password"
                   autoComplete="new-password"
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <FormControlLabel
-                  control={<Checkbox value="allowExtraEmails" color="primary" />}
-                  label="Quiero recibir, promociones de marketing y actualizaciones por correo electrónico."
                 />
               </Grid>
             </Grid>
@@ -115,7 +135,7 @@ export default function SignUp() {
             <Grid container justifyContent="flex-end">
               <Grid item>
                 <Link href="./Login" variant="body2">
-                  Ya tienes una cuenta? Inicia sesion
+                ¿Ya tienes una cuenta? Inicia sesion
                 </Link>
               </Grid>
             </Grid>
@@ -124,5 +144,7 @@ export default function SignUp() {
         <Copyright sx={{ mt: 5 }} />
       </Container>
     </ThemeProvider>
+    </div>
+    </div>
   );
 }

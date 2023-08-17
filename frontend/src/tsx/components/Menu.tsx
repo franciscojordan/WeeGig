@@ -15,25 +15,27 @@ import "../../css/components/Menu.css";
 import { Link } from "react-router-dom";
 import Cookies from "js-cookie";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { useCookies } from 'react-cookie';
+import { useCookies } from "react-cookie";
 
-const pages = ["Ofertas", "Nosotros", "Contactanos"];
+const pages = ["Inicio", "Ofertas", "Nosotros", "Contactanos"];
 const pageLinks = {
+  Inicio: "/",
   Ofertas: "/ofertas",
   Nosotros: "/nosotros",
-  Contáctanos: "/contactanos",
+  Contactanos: "/contactanos",
 };
 
-const settings = ["Perfil", "Cuenta", "Trabajos", "Cerrar Sesión"];
+// const settings = ["Perfil", "Mis ofertas", "Cerrar Sesión"];
+
 const settingsLinks = {
   Perfil: "/perfil",
-  Cuenta: "/cuenta",
-  Trabajos: "/ofertas",
+  "Mis ofertas": "/mis-ofertas",
+  "Mis trabajos": "/mis-trabajos",
   "Cerrar Sesión": "/logout",
 };
 
-
 const Bar = ({ user }) => {
+  let settings = [];
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null
   );
@@ -55,6 +57,13 @@ const Bar = ({ user }) => {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+
+  if (user) {
+    settings =
+      user.userType === "Employer"
+        ? ["Perfil", "Mis trabajos", "Cerrar Sesión"]
+        : ["Perfil", "Mis ofertas", "Cerrar Sesión"];
+  }
 
   return (
     <>
@@ -122,7 +131,7 @@ const Bar = ({ user }) => {
         </Menu>
       </Box>
       {/* Aqui inicia el mobile */}
-            {/*           <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
+      {/*           <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
        */}{" "}
       <Typography
         variant="h5"
@@ -174,7 +183,8 @@ const Bar = ({ user }) => {
         <Box sx={{ flexGrow: 0 }}>
           <Tooltip title="Open settings">
             <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-              <Avatar alt="Vemy Sharp" src="/static/images/avatar/2.jpg" />
+              {/* <Avatar alt="Vemy Sharp" src="/static/images/avatar/2.jpg" /> */}
+              <Avatar>{user.name.charAt(0)}</Avatar>
             </IconButton>
           </Tooltip>
           <Menu
@@ -195,15 +205,9 @@ const Bar = ({ user }) => {
           >
             {settings.map((setting) => (
               <Link to={settingsLinks[setting]} key={setting}>
-              <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                
-                <Typography
-                  textAlign="center"
-                >
-                  {setting}
-                </Typography>
-                
-              </MenuItem>
+                <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                  <Typography textAlign="center">{setting}</Typography>
+                </MenuItem>
               </Link>
             ))}
           </Menu>
@@ -211,38 +215,37 @@ const Bar = ({ user }) => {
       )}
       {!user && (
         <>
-        <Button
-          color="inherit"
-          href="/login"
-          sx={{
-            color: "#ffffff",
-            "&:hover": {
-              color: "white",
-              backgroundColor: "#9CC3A8",
-            },
-          }}
-        >
-          Iniciar Sesion
-        </Button>
-        <Button
-          color="inherit"
-          href="/registrar"
-          sx={{
-            color: "#ffffff",
-            "&:hover": {
-              color: "white",
-              backgroundColor: "#9CC3A8",
-            },
-          }}
-        >
-          Registrarse
-        </Button>
+          <Button
+            color="inherit"
+            href="/login"
+            sx={{
+              color: "#ffffff",
+              "&:hover": {
+                color: "white",
+                backgroundColor: "#9CC3A8",
+              },
+            }}
+          >
+            Iniciar Sesion
+          </Button>
+          <Button
+            color="inherit"
+            href="/registrar"
+            sx={{
+              color: "#ffffff",
+              "&:hover": {
+                color: "white",
+                backgroundColor: "#9CC3A8",
+              },
+            }}
+          >
+            Registrarse
+          </Button>
         </>
       )}
     </>
   );
-}
-
+};
 
 const theme = createTheme({
   palette: {
@@ -261,17 +264,16 @@ const theme = createTheme({
   },
 });
 
-
 function ResponsiveAppBar() {
-  const [cookies] = useCookies(['user']);
+  const [cookies] = useCookies(["user"]);
   const user = cookies.user;
 
   return (
     <ThemeProvider theme={theme}>
-        <AppBar position="static">
-        <Container  maxWidth="xl">
+      <AppBar position="static">
+        <Container maxWidth="xl">
           <Toolbar disableGutters>
-            <Bar user={user}/>
+            <Bar user={user} />
           </Toolbar>
         </Container>
       </AppBar>

@@ -57,8 +57,4 @@ public class JobOffer {
     @Column(name = "id_Employees")
     private Integer idEmployees;
 
-    // Assuming that there is an entity named User with the primary key idUser
-//    @ManyToOne
-//    @JoinColumn(name = "id_Employer", referencedColumnName = "id_USER", insertable = false, updatable = false)
-//    private User employer;
 }

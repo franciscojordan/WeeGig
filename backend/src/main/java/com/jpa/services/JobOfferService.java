@@ -21,4 +21,16 @@ public class JobOfferService {
         System.out.println(jobOfferRepository.findAll());
     	return jobOfferRepository.findAll();
     }
+    
+    public JobOffer getJobOfferById(int id) {
+        return jobOfferRepository.findById(id).orElse(null);
+    }
+    
+    public JobOffer save(JobOffer jobOffer) {
+        return jobOfferRepository.save(jobOffer);
+    }
+    
+    public List<JobOffer> getJobOffersByEmployerId(int idEmployer) {
+    	return jobOfferRepository.findByIdEmployer(idEmployer);
+    }
 }
