@@ -41,7 +41,7 @@ function MyOfferts() {
                   {application.applicationStatus === "Pending" && <Chip icon={<HourglassTopIcon />} label="En espera" variant="outlined"/>}
 
                 </Link>
-                {/* <Stack direction="row" spacing={1}>
+                <Stack direction="row" spacing={1}>
                   <Chip icon={<HourglassTopIcon />} label="En espera" />
                   <Chip icon={<HowToRegIcon />} label="Aceptado" />
                   <Chip icon={<DoDisturbOffIcon />} label="Rechazado" />
@@ -68,7 +68,7 @@ function MyOfferts() {
                     label="Trabajo realizado"
                     variant="outlined"
                   />
-                </Stack> */}
+                </Stack>
               </div>
             ))}
           </ul>

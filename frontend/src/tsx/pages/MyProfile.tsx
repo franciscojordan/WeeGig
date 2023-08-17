@@ -3,7 +3,7 @@ import { useCookies } from "react-cookie";
 import Rating from "@mui/material/Rating";
 import Avatar from "@mui/material/Avatar";
 
-const Perfil = () => {
+const MyProfile = () => {
   const [cookies] = useCookies(["user"]);
   const [reviews, setReviews] = useState(null);
   const user = cookies.user;
@@ -75,4 +75,4 @@ const Perfil = () => {
   );
 };
 
-export default Perfil;
+export default MyProfile;
