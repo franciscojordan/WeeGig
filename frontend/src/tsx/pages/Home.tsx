@@ -31,8 +31,8 @@ function Home() {
         <>
             <div className="container">
                 <div className="maxw">
-                    <h1>¡Bienvenidos a WEE GIG!</h1>
-                    <p>En WEE GIG, nos enorgullece ser un puente entre individuos comprometidos y apasionados por hacer una diferencia en el mundo y oportunidades de trabajo en el ámbito de la beneficencia. Somos más que una empresa; somos un catalizador para el cambio positivo. Nuestra misión es clara: conectar a personas con corazones generosos con proyectos y organizaciones benéficas que necesitan su apoyo. Trabajamos incansablemente para brindar oportunidades de voluntariado, empleo y colaboración en el sector de la beneficencia, asegurándonos de que cada acción contribuya a causas valiosas y a comunidades necesitadas.</p>
+                    <h1 className="big">¡Bienvenidos a WEE GIG!</h1>
+                    <p>En WEE GIG, nos enorgullece ser un puente entre individuos comprometidos y apasionados por hacer una diferencia en el mundo y oportunidades de trabajo en el ámbito de la beneficencia.</p>
                     <Button href='/SignIn' value="Crear Cuenta" type="green" />
                     <Button href='/Login' value="Iniciar Sesion" />
                 </div>
@@ -61,7 +61,7 @@ function Home() {
                         <div className="charts">
                             <DivBox
                                 img="./src/assets/img/3.jpg"
-                                title="Empleo con Propósito en el Sector de Beneficencia."
+                                title="Empleo con Propósito Solidario"
                                 content="¿Buscas un trabajo que vaya más allá de las ganancias? Explora nuestras ofertas laborales en el sector de beneficencia y únete a equipos comprometidos con un propósito. Ya sea en gestión, comunicaciones, desarrollo de programas o más, aquí encontrarás oportunidades para crecer profesionalmente y marcar la diferencia."
                                 subtitle="Ver Ofertas de Empleo"
                                 hrefcontent="./Ofertas"
