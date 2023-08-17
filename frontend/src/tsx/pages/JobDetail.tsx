@@ -126,7 +126,7 @@ function JobDetail() {
                 <h2>Usuarios que han aplicado:</h2>
                 {jobApplications.map((application) => (
                   <div key={application.id}>
-                    <Link to={`/user-profile/${application.userId}`}>
+                    <Link to={`/perfil/${application.userId}`}>
                     <Avatar>{user.name.charAt(0)}</Avatar>
                       Nombre:{" "}
                       {userDetails[application.userId]}

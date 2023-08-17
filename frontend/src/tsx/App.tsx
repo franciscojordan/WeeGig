@@ -17,6 +17,7 @@ import JobDetail from './pages/JobDetail';
 import ContactUs from './pages/ContactUs';
 import NewOffert from './pages/NewOffert';
 import MyJobs from './pages/MyJobs';
+import Profile from './pages/Profile';
 
 function App() {
 	return (
@@ -32,6 +33,7 @@ function App() {
 				<Route path="/ofertas" element={<Ofertas />} />
 				<Route path="/mis-ofertas" element={<MyOfferts />} />
 				<Route path="/jobs/:id" element={<JobDetail />} />
+				<Route path="/perfil/:id" element={<Profile />} />
 				<Route path="/contactanos" element={<ContactUs />} />
 				<Route path="/nuevo-trabajo" element={<NewOffert />} />
 				<Route path="/mis-trabajos" element={<MyJobs />} />
