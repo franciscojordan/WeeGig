@@ -1,7 +1,6 @@
 /* Estilos CSS para el Footer */
 .footer {
     text-align: justify;
-    /* Justificar el texto */
     display: flex;
     flex-direction: column;
     color: #ffffff;
@@ -11,31 +10,29 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    flex-wrap: wrap;
-    padding: 50px 20px 0px 20px;
+    flex-wrap: wrap;   
+    padding: 20px 5vw 20px 5vw;
     background-color: #72B89C;
-}
-
-.box_2 {
-    display: flex;
-    justify-content: space-between;
-    padding: 0px 20px 0px 20px;
-    background-color: #72B89C;
-    color: white;
-
 }
 
 .box_3 {
     text-align: center;
-    padding: 0px 20px 20px 20px;
+    padding: 0px 00px 20px 0px;
     background-color: #72B89C;
+}
 
+.socialmedia a {
+    text-decoration: none;
+    color: #ffffff;
+}
+
+.socialmedia a:hover {
+    color: #fff9f9;
 }
 
 .list {
     display: flex;
     align-items: center;
-    margin-left: auto;
 }
 
 .list ul {
@@ -47,10 +44,30 @@
 }
 
 .list li {
-    padding: 10px 20px;
+    padding: 0px 20px 0px 20px;
 }
 
-.cont {
-    flex-basis: calc(25% - 20px);
-    flex-direction: column;
+@media (max-width: 899.20px) {
+    .box_1 {
+        flex-direction: column;
+
+        align-items: center;
+    }
+    .list {
+        order: 0;
+        margin-top: 10px;
+    }
+}
+
+/* Estilos para cuando la media query ya no se cumple */
+@media (min-width: 899.21px) {
+    .box_1 {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+    }
+    .list {
+        order: initial;
+        margin-top: 0;
+    }
 }

@@ -14,7 +14,8 @@
 }
 
 .containers {
-    padding-top: 20px;
+    padding-bottom: 60px;
+    padding-top: 60px;
     padding-left: 5vw;
     padding-right: 5vw;
     text-align: center;
@@ -47,8 +48,8 @@
 .container img {
     border-radius: 5px;
     border: #333333 solid 1px;
-    margin-bottom: 20px;
-    margin-top: 20px;
+    margin-bottom: 120px;
+    margin-top: 120px;
     width: 100%;
 }
 

@@ -53,7 +53,7 @@ function Home() {
                             <DivBox
                                 img="./src/assets/img/2.jpg"
                                 title="Descubre Oportunidades de Voluntariado"
-                                content="Explora nuestras diversas oportunidades de voluntariado y únete a proyectos inspiradores que impactan positivamente en comunidades vulnerables. Desde educación y salud hasta empoderamiento y medio ambiente, hay una gama de opciones esperando tu compromiso"
+                                content="Explora nuestras diversas oportunidades de voluntariado y únete a proyectos inspiradores que impactan positivamente en comunidades vulnerables."
                                 subtitle="Explorar Oportunidades"
                                 hrefcontent="www.google.com"
                             />
@@ -62,7 +62,7 @@ function Home() {
                             <DivBox
                                 img="./src/assets/img/3.jpg"
                                 title="Empleo con Propósito Solidario"
-                                content="¿Buscas un trabajo que vaya más allá de las ganancias? Explora nuestras ofertas laborales en el sector de beneficencia y únete a equipos comprometidos con un propósito. Ya sea en gestión, comunicaciones, desarrollo de programas o más, aquí encontrarás oportunidades para crecer profesionalmente y marcar la diferencia."
+                                content="¿Buscas un trabajo que vaya más allá de las ganancias? Explora nuestras ofertas laborales en el sector de beneficencia y únete a equipos comprometidos con un propósito."
                                 subtitle="Ver Ofertas de Empleo"
                                 hrefcontent="./Ofertas"
                             />
@@ -71,7 +71,7 @@ function Home() {
                             <DivBox
                                 img="./src/assets/img/4.jpg"
                                 title="Colabora en Proyectos Benéficos Innovadores"
-                                content="Si tienes habilidades específicas, ¡puedes hacer una diferencia aún mayor! Únete a proyectos benéficos innovadores que buscan mentes creativas en diseño, tecnología, investigación y más. Tu experiencia puede impulsar el progreso en áreas críticas. Descubre cómo puedes colaborar para crear un mundo mejor."
+                                content="Si tienes habilidades específicas, ¡puedes hacer una diferencia aún mayor! Únete a proyectos benéficos innovadores que buscan mentes creativas en diseño, tecnología, investigación y más."
                                 subtitle="Explorar Colaboraciones"
                                 hrefcontent="www.google.com"
                             />
