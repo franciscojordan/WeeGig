@@ -109,7 +109,7 @@ function Ofertas(): JSX.Element {
                       description={job.description}
                     />
                   </Link>
-                  {applications.some(app => app.jobId === job.idJobOffers && app.applicationStatus === "Pending") && <Chip icon={<HourglassTopIcon />} label="En espera" variant="outlined"/>}
+                  {applications.some(app => app.jobId === job.idJobOffers && app.applicationStatus === "Applied") && <Chip icon={<HourglassTopIcon />} label="En espera" variant="outlined"/>}
 
                 </div>
               ))}

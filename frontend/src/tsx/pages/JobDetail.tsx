@@ -6,6 +6,27 @@ import "../../css/components/Boxs.css";
 import { Link } from "react-router-dom";
 import Avatar from "@mui/material/Avatar";
 
+const handleStatusChange = (applicationId, status) => {
+  const updateData = {
+    applicationId: applicationId,
+    status: status,
+  };
+
+  fetch("http://localhost:8080/job-applications", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(updateData),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log("Estado actualizado con éxito");
+      // Aquí puedes actualizar el estado local o refrescar los datos si es necesario
+    })
+    .catch((error) => console.error("Error:", error));
+};
+
 function JobDetail() {
   const [cookies] = useCookies(["user"]);
   const [userDetails, setUserDetails] = useState({});
@@ -70,7 +91,7 @@ function JobDetail() {
       userId: user.idUser,
       jobId: parseInt(id),
       applicationDate: new Date().toISOString(),
-      applicationStatus: "Pending",
+      applicationStatus: "Applied",
     };
 
     fetch("http://localhost:8080/job-applications", {
@@ -82,7 +103,6 @@ function JobDetail() {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log("OK");
         setHasApplied(true);
       })
       .catch((error) => console.error("Error:", error));
@@ -127,15 +147,26 @@ function JobDetail() {
                 {jobApplications.map((application) => (
                   <div key={application.id}>
                     <Link to={`/perfil/${application.userId}`}>
-                    <Avatar>{user.name.charAt(0)}</Avatar>
-                      Nombre:{" "}
-                      {userDetails[application.userId]}
+                      <Avatar>{user.name.charAt(0)}</Avatar>
+                      Nombre: {userDetails[application.userId]}
                     </Link>
                     <div>
-                      <Button variant="text" color="success">
+                      <Button
+                        variant="text"
+                        color="success"
+                        onClick={() =>
+                          handleStatusChange(application.id, "accepted")
+                        }
+                      >
                         Aceptar
                       </Button>
-                      <Button variant="text" color="error">
+                      <Button
+                        variant="text"
+                        color="error"
+                        onClick={() =>
+                          handleStatusChange(application.id, "rejected")
+                        }
+                      >
                         Rechazar
                       </Button>
                     </div>
