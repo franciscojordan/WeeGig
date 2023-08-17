@@ -251,7 +251,7 @@ function Ofertas(): JSX.Element {
     
 
     return (
-      <div style={{ display: "flex", justifyContent: "center" }}>
+      <div style={{ display: "flex", justifyContent: "center", minHeight: "80vh"}}>
         <div style={{ maxWidth: "1040px" }}>
           <h1 style={{ textAlign: "center" }}>Ofertas Component</h1>
           <div
