@@ -34,19 +34,7 @@ function RecipeReviewCard({ title, schedule, description }) {
   );
 }
 
-function BoxSx() {
-  return (
-    <Box
-      sx={{
-        width: 600,
-        height: 200,
-        backgroundColor: "primary.dark",
-      }}
-    ></Box>
-  );
-}
-
-function Ofertas(): JSX.Element {
+function Ofertas() {
   const [jobs, setJobs] = useState([]);
   const [applications, setApplications] = useState([]);
 
@@ -63,12 +51,8 @@ function Ofertas(): JSX.Element {
             "Content-Type": "application/json",
           },
         });
-        console.log("GET DONE");
         const result = await response.json();
-        console.log(result);
         if (Array.isArray(result)) {
-          console.log("pasa");
-          console.log(result);
           setJobs(result);
         } else {
           console.log("API response is not an array");
@@ -85,7 +69,6 @@ function Ofertas(): JSX.Element {
   }, []);
 
   useEffect(() => {
-    // <--- Nuevo useEffect para obtener las aplicaciones del usuario
     if (user) {
       fetch(`http://localhost:8080/job-applications/user/${user.idUser}`)
         .then((response) => response.json())
@@ -95,9 +78,7 @@ function Ofertas(): JSX.Element {
   }, [user]);
 
   return (
-    <div
-      style={{ display: "flex", justifyContent: "center", minHeight: "80vh" }}
-    >
+    <div style={{ display: "flex", justifyContent: "center", minHeight: "80vh"}}>
       <div style={{ maxWidth: "1040px" }}>
         <h1 style={{ textAlign: "center" }}>Ofertas Component</h1>
         <div
@@ -106,6 +87,7 @@ function Ofertas(): JSX.Element {
             flexWrap: "wrap",
             justifyContent: "center",
             gap: "20px",
+            marginBottom: "40px", // Espacio de separación respecto al footer
           }}
         >
           {jobs.map((job) => (
@@ -138,7 +120,7 @@ function Ofertas(): JSX.Element {
                 {applications.some(
                   (app) =>
                     app.jobId === job.idJobOffers &&
-                    app.applicationStatus === "applied"
+                    app.applicationStatus === "Applied"
                 ) && (
                   <Chip
                     icon={<HourglassTopIcon />}
@@ -146,31 +128,6 @@ function Ofertas(): JSX.Element {
                     variant="outlined"
                   />
                 )}
-                {applications.some(
-                  (app) =>
-                    app.jobId === job.idJobOffers &&
-                    app.applicationStatus === "rejected"
-                ) && (
-                  <Chip
-                    icon={<DoDisturbOffIcon />}
-                    label="Rechazado"
-                    variant="outlined"
-                  />
-                )}
-                {applications.some(
-                  (app) =>
-                    app.jobId === job.idJobOffers &&
-                    app.applicationStatus === "accepted"
-                ) && (
-                  <Chip
-                    icon={<HowToRegIcon />}
-                    label="Aceptado"
-                    variant="outlined"
-                  />
-                )}
-
-
-
               </div>
             </div>
           ))}
