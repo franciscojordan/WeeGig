@@ -7,8 +7,8 @@ const Logout = () => {
 
   useEffect(() => {
     Cookies.remove('user');
-    window.location.href = '/'; // Navega a la página y recarga
-  }, [navigate]); // Dependencia del efecto
+    window.location.href = '/';
+  }, [navigate]);
 
   return (
     <div>

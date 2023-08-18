@@ -11,7 +11,6 @@ const NewOffert: React.FC = () => {
 
   console.log(user);
   if (user && user["userType"] === "Employee" || !user) {
-    console.log("ES UN EMPLEADO");
     window.location.href = "/ofertas";
   }
   const [formData, setFormData] = useState({
@@ -21,7 +20,7 @@ const NewOffert: React.FC = () => {
     location: "",
     date: "",
     description: "",
-    status: "open", // Añadir este campo
+    status: "open",
     idEmployer: user ? user.idUser : "",
   });
 
@@ -37,7 +36,6 @@ const NewOffert: React.FC = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // console.log(formData);
 
     const finalData = {
       ...formData,
@@ -72,10 +70,10 @@ const NewOffert: React.FC = () => {
   const theme = createTheme({
     palette: {
       primary: {
-        main: "#A8A8A8", // Color principal
+        main: "#A8A8A8",
       },
       secondary: {
-        main: "#555", // Color secundario
+        main: "#555",
       },
     },
   });
@@ -176,11 +174,3 @@ const NewOffert: React.FC = () => {
 };
 
 export default NewOffert;
-
-// - Titulo
-// - Descripcion
-// - Tipo de pago (Temporal)
-// - Monto de pago (Temporal)
-// - Ubicacion
-// - Horario, dia, hora
-// - Categoria (de cara al publico, …)

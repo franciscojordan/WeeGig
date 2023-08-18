@@ -7,11 +7,10 @@ import { useParams } from "react-router-dom";
 const Profile = () => {
   const [cookies] = useCookies(["user"]);
   const [reviews, setReviews] = useState(null);
-  const [userData, setUserData] = useState(null); // Estado para guardar la respuesta de la API
-  const { id } = useParams(); // 2. Obtén el ID desde la URL
+  const [userData, setUserData] = useState(null);
+  const { id } = useParams();
 
   useEffect(() => {
-    // 3. Llamado a la API usando el ID obtenido
     fetch(`http://localhost:8080/users/search?id=${id}`)
       .then((res) => res.json())
       .then((data) => setUserData(data))

@@ -10,8 +10,6 @@ import { Link } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import HourglassTopIcon from "@mui/icons-material/HourglassTop";
 import Chip from "@mui/material/Chip";
-import DoDisturbOffIcon from "@mui/icons-material/DoDisturbOff";
-import HowToRegIcon from "@mui/icons-material/HowToReg";
 
 function RecipeReviewCard({ title, schedule, description }) {
   return (
@@ -87,7 +85,7 @@ function Ofertas() {
             flexWrap: "wrap",
             justifyContent: "center",
             gap: "20px",
-            marginBottom: "40px", // Espacio de separación respecto al footer
+            marginBottom: "40px",
           }}
         >
           {jobs.map((job) => (

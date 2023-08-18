@@ -4,7 +4,6 @@ import { useCookies } from "react-cookie";
 import Chip from "@mui/material/Chip";
 import Stack from "@mui/material/Stack";
 import DoneIcon from "@mui/icons-material/Done";
-import DeleteIcon from "@mui/icons-material/Delete";
 import HourglassTopIcon from "@mui/icons-material/HourglassTop";
 import DoDisturbOffIcon from "@mui/icons-material/DoDisturbOff";
 import HowToRegIcon from "@mui/icons-material/HowToReg";
@@ -37,7 +36,6 @@ function MyOfferts() {
                 <Link to={`/jobs/${application.jobId}`}>
                   <p>{`Trabajo ID: ${application.jobId}`}</p>
                   <p>{`Fecha de aplicación: ${application.applicationDate}`}</p>
-                  {/* <p>{`Estado: ${application.applicationStatus}`}</p> */}
                   {application.applicationStatus === "Pending" && <Chip icon={<HourglassTopIcon />} label="En espera" variant="outlined"/>}
 
                 </Link>
