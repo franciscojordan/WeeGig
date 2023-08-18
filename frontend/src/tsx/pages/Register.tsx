@@ -10,6 +10,20 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import Radio from "@mui/material/Radio";
+import RadioGroup from "@mui/material/RadioGroup";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import FormLabel from "@mui/material/FormLabel";
+import Select, { SelectChangeEvent } from "@mui/material/Select";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Switch from "@mui/material/Switch";
+import IconButton from "@mui/material/IconButton";
+import InputAdornment from "@mui/material/InputAdornment";
+import Visibility from "@mui/icons-material/Visibility";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import Alert from '@mui/material/Alert';
 
 function Copyright(props: any) {
   return (
@@ -28,6 +42,9 @@ const theme = createTheme({
 });
 
 export default function SignUp() {
+  const [showPassword, setShowPassword] = useState(false);
+  const [showVerPassword, setShowVerPassword] = useState(false);
+
   const [emailError, setEmailError] = useState(false);
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -47,6 +64,18 @@ export default function SignUp() {
       password: data.get("password"),
     });
     console.log(data);
+  };
+
+  const [age, setAge] = React.useState("");
+
+  const handleChange = (event: SelectChangeEvent) => {
+    setAge(event.target.value as string);
+  };
+
+  const [checked, setChecked] = React.useState(false);
+
+  const handleChange2 = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setChecked(event.target.checked);
   };
 
   return (
@@ -95,6 +124,52 @@ export default function SignUp() {
                       autoComplete="family-name"
                     />
                   </Grid>
+                  <Grid item xs={12} sm={6}>
+                    <FormControl fullWidth>
+                      <InputLabel id="demo-simple-select-label">
+                        Tipo de documento
+                      </InputLabel>
+                      <Select
+                        labelId="demo-simple-select-label"
+                        id="demo-simple-select"
+                        value={age}
+                        label="tipeOfDocument"
+                        onChange={handleChange}
+                      >
+                        <MenuItem value={10}>DNI</MenuItem>
+                        <MenuItem value={20}>NIE</MenuItem>
+                        <MenuItem value={30}>Pasaporte</MenuItem>
+                      </Select>
+                    </FormControl>
+                  </Grid>
+                  <Grid item xs={12} sm={6}>
+                    <TextField
+                      fullWidth
+                      id="document"
+                      label="Documento"
+                      name="document"
+                      autoComplete="family-name"
+                    />
+                  </Grid>
+                  <Grid item xs={12} sm={6}>
+                    <TextField
+                      autoComplete="given-name"
+                      name="phone"
+                      fullWidth
+                      id="phone"
+                      label="Numero"
+                      autoFocus
+                    />
+                  </Grid>
+                  <Grid item xs={12} sm={6}>
+                    <TextField
+                      fullWidth
+                      id="birthDate"
+                      label="Fecha de nacimiento"
+                      name="birthDate"
+                      autoComplete="family-name"
+                    />
+                  </Grid>
                   <Grid item xs={12}>
                     <TextField
                       error={emailError}
@@ -115,11 +190,131 @@ export default function SignUp() {
                       fullWidth
                       name="password"
                       label="Contraseña"
-                      type="password"
+                      type={showPassword ? "text" : "password"}
                       id="password"
                       autoComplete="new-password"
+                      InputProps={{
+                        endAdornment: (
+                          <InputAdornment position="end">
+                            <IconButton
+                              aria-label="toggle password visibility"
+                              onClick={() => setShowPassword(!showPassword)}
+                            >
+                              {showPassword ? (
+                                <Visibility />
+                              ) : (
+                                <VisibilityOff />
+                              )}
+                            </IconButton>
+                          </InputAdornment>
+                        ),
+                      }}
                     />
                   </Grid>
+                  <Grid item xs={12}>
+                    <TextField
+                      fullWidth
+                      name="verPassword"
+                      label="Verificar contraseña"
+                      type={showVerPassword ? "text" : "password"}
+                      id="verPassword"
+                      autoComplete="new-password"
+                      InputProps={{
+                        endAdornment: (
+                          <InputAdornment position="end">
+                            <IconButton
+                              aria-label="toggle verification password visibility"
+                              onClick={() =>
+                                setShowVerPassword(!showVerPassword)
+                              }
+                            >
+                              {showVerPassword ? (
+                                <Visibility />
+                              ) : (
+                                <VisibilityOff />
+                              )}
+                            </IconButton>
+                          </InputAdornment>
+                        ),
+                      }}
+                    />
+                  </Grid>
+                  <Grid container alignItems="center" justifyContent="center">
+                    <Grid item xs={12}>
+                      <RadioGroup
+                        aria-labelledby="demo-radio-buttons-group-label"
+                        defaultValue="female"
+                        name="radio-buttons-group"
+                        style={{
+                          textAlign: "center",
+                          paddingLeft: "20px",
+                          paddingTop: "20px",
+                        }}
+                      >
+                        <FormLabel id="demo-radio-buttons-group-label">
+                          ¿Quieres ofrecer trabajo?
+                        </FormLabel>
+                        <Switch
+                          checked={checked}
+                          onChange={handleChange2}
+                          inputProps={{ "aria-label": "controlled" }}
+                        />
+                      </RadioGroup>
+                    </Grid>
+                  </Grid>
+                  {checked && (
+                    <>
+                    <Alert severity="info">Este es un mensaje de alerta!</Alert>
+                      <Grid item xs={12} sm={6}>
+                        <TextField
+                          autoComplete="given-name"
+                          name="nameOfCompany"
+                          fullWidth
+                          id="nameOfCompany"
+                          label="Nombre de compañia"
+                          autoFocus
+                        />
+                      </Grid>
+                      <Grid item xs={12} sm={6}>
+                        <TextField
+                          fullWidth
+                          id="nif"
+                          label="NIF"
+                          name="nif"
+                          autoComplete="family-name"
+                        />
+                      </Grid>
+                      <Grid item xs={12} sm={6}>
+                        <TextField
+                          autoComplete="given-name"
+                          name="address"
+                          fullWidth
+                          id="address"
+                          label="Direccion"
+                          autoFocus
+                        />
+                      </Grid>
+                      <Grid item xs={12} sm={6}>
+                        <TextField
+                          fullWidth
+                          id="numberOfCompany"
+                          label="Numero de compañia"
+                          name="numberOfCompany"
+                          autoComplete="family-name"
+                        />
+                      </Grid>
+                      <Grid item xs={12} sm={6}>
+                        <TextField
+                          autoComplete="given-name"
+                          name="website"
+                          fullWidth
+                          id="website"
+                          label="Pagina web"
+                          autoFocus
+                        />
+                      </Grid>
+                    </>
+                  )}
                 </Grid>
                 <Button
                   type="submit"
