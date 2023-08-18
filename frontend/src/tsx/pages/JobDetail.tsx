@@ -8,8 +8,11 @@ import Avatar from "@mui/material/Avatar";
 import Chip from "@mui/material/Chip";
 import DoDisturbOffIcon from "@mui/icons-material/DoDisturbOff";
 import HowToRegIcon from "@mui/icons-material/HowToReg";
+// import { useNavigate } from "react-router-dom";
 
 function JobDetail() {
+  // const navigate = useNavigate();
+
   const [cookies] = useCookies(["user"]);
   const [userDetails, setUserDetails] = useState({});
 
@@ -19,6 +22,12 @@ function JobDetail() {
   const [applications, setApplications] = useState([]);
   const [hasApplied, setHasApplied] = useState(false);
   const [jobOffer, setJobOffer] = useState(null);
+
+  //   useEffect(() => {
+  //     if (!user || !user.idUser) {
+  //         navigate("/ofertas");
+  //     }
+  // }, [user, navigate]);
 
   const handleCloseJobProcess = () => {
     fetch(`http://localhost:8080/jobs/${id}/close`, {
@@ -35,30 +44,32 @@ function JobDetail() {
   };
 
   const handleStatusChange = (userId, jobId, status) => {
-    fetch(
-      `http://localhost:8080/job-applications?userId=${userId}&jobId=${jobId}`,
-      {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ applicationStatus: status }),
-      }
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        console.log("Datos enviados a la API:", data);
-        console.log("Estado actualizado con éxito");
+    if (user && user.idUser) {
+      fetch(
+        `http://localhost:8080/job-applications?userId=${userId}&jobId=${jobId}`,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ applicationStatus: status }),
+        }
+      )
+        .then((response) => response.json())
+        .then((data) => {
+          console.log("Datos enviados a la API:", data);
+          console.log("Estado actualizado con éxito");
 
-        setJobApplications((prevApplications) =>
-          prevApplications.map((app) =>
-            app.userId === userId && app.jobId === jobId
-              ? { ...app, applicationStatus: status }
-              : app
-          )
-        );
-      })
-      .catch((error) => console.error("Error:", error));
+          setJobApplications((prevApplications) =>
+            prevApplications.map((app) =>
+              app.userId === userId && app.jobId === jobId
+                ? { ...app, applicationStatus: status }
+                : app
+            )
+          );
+        })
+        .catch((error) => console.error("Error:", error));
+    }
   };
 
   useEffect(() => {
@@ -108,6 +119,7 @@ function JobDetail() {
   }, [id]);
 
   const handleApply = () => {
+    if (user && user.idUser) {
     const applicationData = {
       userId: user.idUser,
       jobId: parseInt(id),
@@ -127,6 +139,7 @@ function JobDetail() {
         setHasApplied(true);
       })
       .catch((error) => console.error("Error:", error));
+    }
   };
 
   const hasAcceptedUsers = jobApplications.some(
@@ -165,7 +178,7 @@ function JobDetail() {
                 Aplicar
               </Button>
             )}
-            {jobOffer.idEmployer === user.idUser && (
+            {user && user.idUser && jobOffer.idEmployer === user.idUser && (
               <div>
                 <h2>Usuarios que han aplicado ({jobApplications.length}):</h2>
                 {jobApplications.map((application, index) => (
