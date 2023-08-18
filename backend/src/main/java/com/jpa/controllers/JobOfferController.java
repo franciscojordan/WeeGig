@@ -65,13 +65,17 @@ public class JobOfferController {
             if (jobOffer == null) {
                 return new ResponseEntity<>("Job offer not found", HttpStatus.NOT_FOUND);
             }
-            jobOffer.setStatus("close"); // Asumiendo que la entidad JobOffer tiene un atributo 'status'
+            jobOffer.setStatus("close");
             jobOfferService.save(jobOffer);
             return new ResponseEntity<>(jobOffer, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>("Error closing job offer", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
-   
+    
+    @CrossOrigin(origins = "http://localhost:5173")
+    @GetMapping("/open")
+    public List<JobOffer> getAllOpenJobOffers() {
+        return jobOfferService.getAllOpenJobOffers();
+    }
 }

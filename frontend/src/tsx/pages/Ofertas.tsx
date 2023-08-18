@@ -44,7 +44,7 @@ function Ofertas() {
   useEffect(() => {
     async function fetchOfertas() {
       try {
-        const url = "http://localhost:8080/jobs";
+        const url = "http://localhost:8080/jobs/open";
         const response = await fetch(url, {
           method: "GET",
           headers: {

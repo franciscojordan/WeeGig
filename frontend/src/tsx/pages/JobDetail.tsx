@@ -48,6 +48,23 @@ function JobDetail() {
   const [hasApplied, setHasApplied] = useState(false);
   const [jobOffer, setJobOffer] = useState(null);
 
+  const handleCloseJobProcess = () => {
+    fetch(`http://localhost:8080/jobs/${id}/close`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Proceso de selección terminado:", data);
+
+        // Aquí puedes actualizar el estado local si es necesario
+        // Por ejemplo, puedes actualizar el estado del trabajo a "close" en el estado jobOffer.
+      })
+      .catch((error) => console.error("Error:", error));
+  };
+
   const handleStatusChange = (userId, jobId, status) => {
     fetch(
       `http://localhost:8080/job-applications?userId=${userId}&jobId=${jobId}`,
@@ -240,7 +257,7 @@ function JobDetail() {
                   </div>
                 ))}
                 {jobOffer.idEmployer === user.idUser && hasAcceptedUsers && (
-                  <Button variant="outlined">
+                  <Button variant="outlined" onClick={handleCloseJobProcess}>
                     Terminar proceso de seleccion
                   </Button>
                 )}

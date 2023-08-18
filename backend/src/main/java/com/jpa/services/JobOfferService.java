@@ -33,4 +33,8 @@ public class JobOfferService {
     public List<JobOffer> getJobOffersByEmployerId(int idEmployer) {
     	return jobOfferRepository.findByIdEmployer(idEmployer);
     }
+    
+    public List<JobOffer> getAllOpenJobOffers() {
+        return jobOfferRepository.findByStatus("open");
+    }
 }
