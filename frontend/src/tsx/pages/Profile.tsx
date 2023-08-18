@@ -2,21 +2,28 @@ import { useState, useEffect } from "react";
 import { useCookies } from "react-cookie";
 import Rating from "@mui/material/Rating";
 import Avatar from "@mui/material/Avatar";
+import { useParams } from "react-router-dom";
 
-const Perfil = () => {
+const Profile = () => {
   const [cookies] = useCookies(["user"]);
   const [reviews, setReviews] = useState(null);
-  const user = cookies.user;
-
+  const [userData, setUserData] = useState(null); // Estado para guardar la respuesta de la API
+  const { id } = useParams(); // 2. Obtén el ID desde la URL
 
   useEffect(() => {
-    if (user) {
-      fetch(`http://localhost:8080/reviews?to=${user.idUser}`)
+    // 3. Llamado a la API usando el ID obtenido
+    fetch(`http://localhost:8080/users/search?id=${id}`)
+      .then((res) => res.json())
+      .then((data) => setUserData(data))
+      .catch((error) => console.error(error));
+
+    if (cookies.user) {
+      fetch(`http://localhost:8080/reviews?to=${id}`)
         .then((res) => res.json())
         .then((data) => setReviews(data))
         .catch((error) => console.error(error));
     }
-  }, [user]);
+  }, [id, cookies.user]);
 
   return (
     <div className="big-box">
@@ -30,27 +37,27 @@ const Perfil = () => {
             margin: "20px auto",
           }}
         >
-          {user ? (
+          {userData ? (
             <>
-              <Avatar>{user.name.charAt(0)}</Avatar>
+              <Avatar>{userData.name.charAt(0)}</Avatar>
               <h2>
-                {user.name} {user.surname}
+                {userData.name} {userData.surname}
               </h2>
               <p>
-                <strong>Usuario:</strong> {user.username}
+                <strong>Usuario:</strong> {userData.username}
               </p>
               <p>
-                <strong>Email:</strong> {user.email}
+                <strong>Email:</strong> {userData.email}
               </p>
               <p>
-                <strong>Número de teléfono:</strong> {user.phone_number}
+                <strong>Número de teléfono:</strong> {userData.phone_number}
               </p>
               <p>
-                <strong>Fecha de nacimiento:</strong> {user.birthdate}
+                <strong>Fecha de nacimiento:</strong> {userData.birthdate}
               </p>
               <p>
                 <strong>Nombre de compañía:</strong>{" "}
-                {user.company_name || "N/A"}
+                {userData.company_name || "N/A"}
               </p>
               <h3>Reseñas:</h3>
               {reviews ? (
@@ -75,4 +82,4 @@ const Perfil = () => {
   );
 };
 
-export default Perfil;
+export default Profile;

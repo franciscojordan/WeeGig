@@ -14,10 +14,11 @@
 }
 
 .containers {
-    padding-top: 20px;
+    padding-bottom: 60px;
+    padding-top: 60px;
     padding-left: 5vw;
     padding-right: 5vw;
-    text-align: left;
+    text-align: center;
     background-color: #fff9f9;
 }
 
@@ -32,25 +33,29 @@
 }
 
 /*Text styles*/
-.b h1 {
-    font-size: 40px;
+.big {
+    font-size: 60px;
 }
 
 .textmarg {
     margin-top: 25px;
 }
 .maxw {
-    width: 500px;
+    width: 700px;
 }
 
 /*Images*/
 .container img {
-    margin-bottom: 20px;
-    margin-top: 20px;
+    border-radius: 5px;
+    border: #333333 solid 1px;
+    margin-bottom: 120px;
+    margin-top: 120px;
     width: 100%;
 }
 
 .chart img {
+    border-radius: 5px;
+    border: #333333 solid 1px;
     width: 100%;
 }
 

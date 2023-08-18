@@ -21,6 +21,8 @@ const NewOffert: React.FC = () => {
     location: "",
     date: "",
     description: "",
+    status: "open", // Añadir este campo
+    idEmployer: user ? user.idUser : "",
   });
 
   const handleChange = (
@@ -35,7 +37,15 @@ const NewOffert: React.FC = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log(formData);
+    // console.log(formData);
+
+    const finalData = {
+      ...formData,
+      status: "open",
+      idEmployer: user.idUser
+    };
+
+    console.log(finalData);
 
     fetch("http://localhost:8080/jobs", {
       method: "POST",

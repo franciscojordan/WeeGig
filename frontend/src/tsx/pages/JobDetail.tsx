@@ -5,6 +5,37 @@ import { useCookies } from "react-cookie";
 import "../../css/components/Boxs.css";
 import { Link } from "react-router-dom";
 import Avatar from "@mui/material/Avatar";
+import Chip from "@mui/material/Chip";
+import DoDisturbOffIcon from "@mui/icons-material/DoDisturbOff";
+import HowToRegIcon from "@mui/icons-material/HowToReg";
+
+const handleStatusChange = (userId, jobId, status) => {
+  fetch(
+    `http://localhost:8080/job-applications?userId=${userId}&jobId=${jobId}`,
+    {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ applicationStatus: status }),
+    }
+  )
+    .then((response) => response.json())
+    .then((data) => {
+      console.log("Datos enviados a la API:", data);
+      console.log("Estado actualizado con éxito");
+
+      // Actualizar el estado local
+      setJobApplications((prevApplications) =>
+        prevApplications.map((app) =>
+          app.userId === userId && app.jobId === jobId
+            ? { ...app, applicationStatus: status }
+            : app
+        )
+      );
+    })
+    .catch((error) => console.error("Error:", error));
+};
 
 function JobDetail() {
   const [cookies] = useCookies(["user"]);
@@ -16,7 +47,7 @@ function JobDetail() {
   const [hasApplied, setHasApplied] = useState(false);
   const [jobOffer, setJobOffer] = useState(null);
 
-  console.log(user.idUser);
+  // console.log(user.idUser);
 
   useEffect(() => {
     fetch(`http://localhost:8080/jobs/${id}`)
@@ -70,9 +101,9 @@ function JobDetail() {
       userId: user.idUser,
       jobId: parseInt(id),
       applicationDate: new Date().toISOString(),
-      applicationStatus: "Pending",
+      applicationStatus: "applied",
     };
-
+    console.log("Datos enviados a la API:", applicationData);
     fetch("http://localhost:8080/job-applications", {
       method: "POST",
       headers: {
@@ -82,7 +113,6 @@ function JobDetail() {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log("OK");
         setHasApplied(true);
       })
       .catch((error) => console.error("Error:", error));
@@ -124,21 +154,59 @@ function JobDetail() {
             {jobOffer.idEmployer === user.idUser && (
               <div>
                 <h2>Usuarios que han aplicado:</h2>
-                {jobApplications.map((application) => (
-                  <div key={application.id}>
-                    <Link to={`/user-profile/${application.userId}`}>
-                    <Avatar>{user.name.charAt(0)}</Avatar>
-                      Nombre:{" "}
-                      {userDetails[application.userId]}
+                {jobApplications.map((application, index) => (
+                  <div key={index}>
+                    <Link to={`/perfil/${application.userId}`}>
+                      <Avatar>{user.name.charAt(0)}</Avatar>
+                      Nombre: {userDetails[application.userId]}
                     </Link>
-                    <div>
-                      <Button variant="text" color="success">
-                        Aceptar
-                      </Button>
-                      <Button variant="text" color="error">
-                        Rechazar
-                      </Button>
-                    </div>
+                    {application.applicationStatus === "applied" ? (
+                      <div>
+                        <Button
+                          variant="text"
+                          color="success"
+                          onClick={() =>
+                            handleStatusChange(
+                              application.userId,
+                              application.jobId,
+                              "accepted"
+                            )
+                          }
+                        >
+                          Aceptar
+                        </Button>
+                        <Button
+                          variant="text"
+                          color="error"
+                          onClick={() =>
+                            handleStatusChange(
+                              application.userId,
+                              application.jobId,
+                              "rejected"
+                            )
+                          }
+                        >
+                          Rechazar
+                        </Button>
+                      </div>
+                    ) : (
+                      <div>
+                        {application.applicationStatus === "rejected" && (
+                          <Chip
+                            icon={<DoDisturbOffIcon />}
+                            label="Rechazado"
+                            variant="outlined"
+                          />
+                        )}
+                        {application.applicationStatus === "accepted" && (
+                          <Chip
+                            icon={<HowToRegIcon />}
+                            label="Aceptado"
+                            variant="outlined"
+                          />
+                        )}
+                      </div>
+                    )}
                   </div>
                 ))}
               </div>

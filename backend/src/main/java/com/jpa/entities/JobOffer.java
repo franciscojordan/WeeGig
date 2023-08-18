@@ -30,6 +30,9 @@ public class JobOffer {
     @Column(name = "id_JOB_OFFERS")
     private Integer idJobOffers;
 
+    @Column(name = "status")
+    private String status;
+    
     @Column(name = "title", length = 45)
     private String title;
 
