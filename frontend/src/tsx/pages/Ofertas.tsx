@@ -4,18 +4,23 @@ import CardContent from "@mui/material/CardContent";
 import Avatar from "@mui/material/Avatar";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
-import AssignmentIcon from '@mui/icons-material/Assignment';
+import AssignmentIcon from "@mui/icons-material/Assignment";
+import "../../css/components/Boxs.css";
 import { Link } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import HourglassTopIcon from "@mui/icons-material/HourglassTop";
 import Chip from "@mui/material/Chip";
+import DoDisturbOffIcon from "@mui/icons-material/DoDisturbOff";
+import HowToRegIcon from "@mui/icons-material/HowToReg";
 
 function RecipeReviewCard({ title, schedule, description }) {
   return (
     <Box sx={{ maxWidth: 400 }}>
       <CardHeader
         avatar={
-          <Avatar sx={{ bgcolor: "#BDBDBD" }} aria-label="recipe"><AssignmentIcon /></Avatar>
+          <Avatar sx={{ bgcolor: "#BDBDBD" }} aria-label="recipe">
+            <AssignmentIcon />
+          </Avatar>
         }
         title={title}
         subheader={schedule}
@@ -53,11 +58,14 @@ function Ofertas() {
           console.log("API response is not an array");
         }
       } catch (error) {
-        console.error("Ocurrió un error al obtener los datos de las ofertas:", error);
+        console.error(
+          "Ocurrió un error al obtener los datos de las ofertas:",
+          error
+        );
         alert("Ocurrió un error. Por favor, inténtalo de nuevo.");
       }
     }
-    fetchOfertas()
+    fetchOfertas();
   }, []);
 
   useEffect(() => {

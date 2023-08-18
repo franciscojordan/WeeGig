@@ -5,6 +5,9 @@ import { useCookies } from "react-cookie";
 import "../../css/components/Boxs.css";
 import { Link } from "react-router-dom";
 import Avatar from "@mui/material/Avatar";
+import Chip from "@mui/material/Chip";
+import DoDisturbOffIcon from "@mui/icons-material/DoDisturbOff";
+import HowToRegIcon from "@mui/icons-material/HowToReg";
 
 const handleStatusChange = (userId, jobId, status) => {
   fetch(
@@ -14,7 +17,6 @@ const handleStatusChange = (userId, jobId, status) => {
       headers: {
         "Content-Type": "application/json",
       },
-      // body: JSON.stringify(status),
       body: JSON.stringify({ applicationStatus: status }),
     }
   )
@@ -22,7 +24,15 @@ const handleStatusChange = (userId, jobId, status) => {
     .then((data) => {
       console.log("Datos enviados a la API:", data);
       console.log("Estado actualizado con éxito");
-      // Aquí puedes actualizar el estado local o refrescar los datos si es necesario
+
+      // Actualizar el estado local
+      setJobApplications((prevApplications) =>
+        prevApplications.map((app) =>
+          app.userId === userId && app.jobId === jobId
+            ? { ...app, applicationStatus: status }
+            : app
+        )
+      );
     })
     .catch((error) => console.error("Error:", error));
 };
@@ -91,7 +101,7 @@ function JobDetail() {
       userId: user.idUser,
       jobId: parseInt(id),
       applicationDate: new Date().toISOString(),
-      applicationStatus: "Applied",
+      applicationStatus: "applied",
     };
     console.log("Datos enviados a la API:", applicationData);
     fetch("http://localhost:8080/job-applications", {
@@ -144,40 +154,59 @@ function JobDetail() {
             {jobOffer.idEmployer === user.idUser && (
               <div>
                 <h2>Usuarios que han aplicado:</h2>
-                {jobApplications.map((application) => (
-                  <div key={application.id}>
+                {jobApplications.map((application, index) => (
+                  <div key={index}>
                     <Link to={`/perfil/${application.userId}`}>
                       <Avatar>{user.name.charAt(0)}</Avatar>
                       Nombre: {userDetails[application.userId]}
                     </Link>
-                    <div>
-                      <Button
-                        variant="text"
-                        color="success"
-                        onClick={() =>
-                          handleStatusChange(
-                            application.userId,
-                            application.jobId,
-                            "accepted"
-                          )
-                        }
-                      >
-                        Aceptar
-                      </Button>
-                      <Button
-                        variant="text"
-                        color="error"
-                        onClick={() =>
-                          handleStatusChange(
-                            application.userId,
-                            application.jobId,
-                            "rejected"
-                          )
-                        }
-                      >
-                        Rechazar
-                      </Button>
-                    </div>
+                    {application.applicationStatus === "applied" ? (
+                      <div>
+                        <Button
+                          variant="text"
+                          color="success"
+                          onClick={() =>
+                            handleStatusChange(
+                              application.userId,
+                              application.jobId,
+                              "accepted"
+                            )
+                          }
+                        >
+                          Aceptar
+                        </Button>
+                        <Button
+                          variant="text"
+                          color="error"
+                          onClick={() =>
+                            handleStatusChange(
+                              application.userId,
+                              application.jobId,
+                              "rejected"
+                            )
+                          }
+                        >
+                          Rechazar
+                        </Button>
+                      </div>
+                    ) : (
+                      <div>
+                        {application.applicationStatus === "rejected" && (
+                          <Chip
+                            icon={<DoDisturbOffIcon />}
+                            label="Rechazado"
+                            variant="outlined"
+                          />
+                        )}
+                        {application.applicationStatus === "accepted" && (
+                          <Chip
+                            icon={<HowToRegIcon />}
+                            label="Aceptado"
+                            variant="outlined"
+                          />
+                        )}
+                      </div>
+                    )}
                   </div>
                 ))}
               </div>
