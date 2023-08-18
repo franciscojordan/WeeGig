@@ -98,6 +98,7 @@ function Ofertas() {
                 backgroundColor: "#F2F2F2",
                 borderRadius: "10px",
                 padding: "10px",
+                minWidth: "240px",
                 transition: "background-color 0.3s",
               }}
               onMouseEnter={(e) => {

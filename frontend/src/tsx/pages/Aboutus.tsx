@@ -1,46 +1,133 @@
-import React from "react";
+import { Carousel } from "react-responsive-carousel";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+import Image1 from "../../assets/img/fran.jpg";
+import Image2 from "../../assets/img/victor.jpg";
+import Image3 from "../../assets/img/ale.jpg";
 
 const AboutUs: React.FC = () => {
   return (
-    <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100vh" }}>
-      <div>
+    <div style={{ display: "flex", flexDirection: "column" }}>
+      <div style={{ position: "relative", width: "100%" }}>
+        <video autoPlay loop muted style={{ width: "100%", height: "auto" }}>
+          <source src="./src/assets/img/sexo.mp4" type="video/mp4" />
+          Tu navegador no admite la etiqueta de video.
+        </video>
         <div>
-          <h1>Sobre Nosotros</h1>
-          <p>
-            Somos una empresa dedicada a brindar las mejores soluciones
-            tecnológicas. Nuestra misión es ofrecer productos y servicios de
-            alta calidad que agreguen valor a nuestros clientes.
+          <h1
+            style={{
+              fontSize: "48px",
+              position: "absolute",
+              top: "90px",
+              left: "50%",
+              transform: "translateX(-50%)",
+              color: "white",
+              textAlign: "center",
+            }}
+          >
+            Sobre Nosotros
+          </h1>
+          {/* Media query para ocultar los párrafos en modo tablet */}
+          <p
+            style={{
+              fontSize: "24px",
+              position: "absolute",
+              top: "205px",
+              left: "50%",
+              transform: "translateX(-50%)",
+              color: "white",
+              textAlign: "center",
+              display: "block",
+            }}
+          >
+            Nuestra empresa promueve el empleo sostenible a través de soluciones
+            tecnológicas avanzadas. Nos dedicamos a brindar servicios y
+            productos de alta calidad que impulsan tanto a nuestros clientes
+            como al desarrollo laboral sostenible.
           </p>
-          <p>
+          {/* <p
+            style={{
+              fontSize: "24px",
+              position: "absolute",
+              top: "500px",
+              left: "50%",
+              transform: "translateX(-50%)",
+              color: "white",
+              textAlign: "center",
+              display: "block",
+            }}
+          >
             Con años de experiencia en la industria, hemos construido un equipo
             fuerte y apasionado que trabaja arduamente para alcanzar nuestros
             objetivos y visión.
-          </p>
-        </div>
-        <div>
-          <h2>Nuestro Equipo</h2>
-          <p>
-            Nuestro equipo está compuesto por profesionales altamente
-            calificados en diferentes áreas de la tecnología. Trabajamos juntos
-            para innovar y crear soluciones que marquen la diferencia.
-          </p>
-          <div style={{ display: "flex", justifyContent: "center" }}>
-            <img src="./src/assets/img/fran.jpg" alt="Imagen 1" style={{ margin: "10px", width: "100px", height: "100px" }} />
-            <img src="./src/assets/img/victor.jpg" alt="Imagen 2" style={{ margin: "10px", width: "100px", height: "100px" }} />
-            <img src="./src/assets/img/ale.jpg" alt="Imagen 3" style={{ margin: "10px", width: "100px", height: "100px" }} />
-          </div>
-        </div>
-        <div>
-          <h2>Contacto</h2>
-          <address>
-            Dirección: 123 Calle Principal, Ciudad, País
-            <br />
-            Teléfono: (123) 456-7890
-            <br />
-            Email: info@nuestraempresa.com
-          </address>
+          </p> */}
         </div>
       </div>
+      <div style={{ padding: "20px", textAlign: "center" }}>
+        <h1>Nuestro Equipo</h1>
+        <div
+          style={{
+            width: "100%",
+            display: "flex",
+            justifyContent: "center",
+          }}
+        >
+          <Carousel
+            showThumbs={false}
+            autoPlay
+            interval={2000}
+            infiniteLoop
+            showArrows={false}
+          >
+            <div>
+              <img
+                src={Image1}
+                alt="Imagen 1"
+                style={{ width: "400px", height: "400px" }}
+              />
+            </div>
+            <div>
+              <img
+                src={Image2}
+                alt="Imagen 2"
+                style={{ width: "400px", height: "400px" }}
+              />
+            </div>
+            <div>
+              <img
+                src={Image3}
+                alt="Imagen 3"
+                style={{ width: "400px", height: "400px" }}
+              />
+            </div>
+          </Carousel>
+        </div>
+      </div>
+      <div
+        style={{
+          backgroundColor: "#F2F2F2",
+          padding: "20px",
+          textAlign: "center",
+        }}
+      >
+        <h1>Contacto</h1>
+        <address>
+          Dirección: Carrer d'En Llàstics, 2, 08003 Barcelona
+          <br />
+          Teléfono: (+34) 611 16 87 37
+          <br />
+          Email: info@weegig.com
+        </address>
+      </div>
+      {/* Media query para ocultar los párrafos en modo tablet */}
+      <style>
+        {`
+          @media (max-width: 768px) {
+            p {
+              display: none;
+            }
+          }
+        `}
+      </style>
     </div>
   );
 };
