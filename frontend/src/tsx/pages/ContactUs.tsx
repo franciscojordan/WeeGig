@@ -48,14 +48,14 @@ const ContactUs: React.FC = () => {
             mensaje.
           </p>
           <form onSubmit={handleSubmit}>
-            <div style={{ display: "flex", justifyContent: "space-between" }}>
+            <div style={{ display: "flex", justifyContent: "center" }}>
               <TextField
                 name="name"
                 value={formData.name}
                 onChange={handleChange}
                 label="Nombre"
                 variant="outlined"
-                style={{ width: "48%" }}
+                style={{ margin: "10px", width: "43%" }}
               />
               <TextField
                 name="email"
@@ -63,7 +63,7 @@ const ContactUs: React.FC = () => {
                 onChange={handleChange}
                 label="Email"
                 variant="outlined"
-                style={{ width: "48%" }}
+                style={{margin: "10px", width: "43%" }}
               />
             </div>
             <div style={{ marginTop: "10px" }}>
@@ -75,7 +75,8 @@ const ContactUs: React.FC = () => {
                 multiline
                 maxRows={4}
                 variant="outlined"
-                fullWidth
+                /* fullWidth */
+                style={{ width: "90%" }}
               />
             </div>
             <div style={{ textAlign: "center", marginTop: "10px" }}>
