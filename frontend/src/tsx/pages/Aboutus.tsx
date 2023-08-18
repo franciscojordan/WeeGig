@@ -66,9 +66,10 @@ const AboutUs: React.FC = () => {
         <h1>Nuestro Equipo</h1>
         <div
           style={{
-            width: "100%",
+            maxWidth: "990px",
             display: "flex",
             justifyContent: "center",
+            alignItems:"center"
           }}
         >
           <Carousel
@@ -82,22 +83,25 @@ const AboutUs: React.FC = () => {
               <img
                 src={Image1}
                 alt="Imagen 1"
-                style={{ width: "400px", height: "400px" }}
+                style={{ width: "400px", height: "400px", borderRadius: "10%" }}
               />
+              <h2>Francisco</h2>
             </div>
             <div>
               <img
                 src={Image2}
                 alt="Imagen 2"
-                style={{ width: "400px", height: "400px" }}
+                style={{ width: "400px", height: "400px", borderRadius: "10%" }}
               />
+              <h2>Victor</h2>
             </div>
             <div>
               <img
                 src={Image3}
                 alt="Imagen 3"
-                style={{ width: "400px", height: "400px" }}
+                style={{ width: "400px", height: "400px", borderRadius: "10%" }}
               />
+              <h2>Alejandro</h2>
             </div>
           </Carousel>
         </div>
