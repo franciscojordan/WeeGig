@@ -9,37 +9,38 @@ import Chip from "@mui/material/Chip";
 import DoDisturbOffIcon from "@mui/icons-material/DoDisturbOff";
 import HowToRegIcon from "@mui/icons-material/HowToReg";
 
-const handleStatusChange = (userId, jobId, status) => {
-  fetch(
-    `http://localhost:8080/job-applications?userId=${userId}&jobId=${jobId}`,
-    {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ applicationStatus: status }),
-    }
-  )
-    .then((response) => response.json())
-    .then((data) => {
-      console.log("Datos enviados a la API:", data);
-      console.log("Estado actualizado con éxito");
+// const handleStatusChange = (userId, jobId, status) => {
+//   fetch(
+//     `http://localhost:8080/job-applications?userId=${userId}&jobId=${jobId}`,
+//     {
+//       method: "PATCH",
+//       headers: {
+//         "Content-Type": "application/json",
+//       },
+//       body: JSON.stringify({ applicationStatus: status }),
+//     }
+//   )
+//     .then((response) => response.json())
+//     .then((data) => {
+//       console.log("Datos enviados a la API:", data);
+//       console.log("Estado actualizado con éxito");
 
-      // Actualizar el estado local
-      setJobApplications((prevApplications) =>
-        prevApplications.map((app) =>
-          app.userId === userId && app.jobId === jobId
-            ? { ...app, applicationStatus: status }
-            : app
-        )
-      );
-    })
-    .catch((error) => console.error("Error:", error));
-};
+//       // Actualizar el estado local
+//       setJobApplications((prevApplications) =>
+//         prevApplications.map((app) =>
+//           app.userId === userId && app.jobId === jobId
+//             ? { ...app, applicationStatus: status }
+//             : app
+//         )
+//       );
+//     })
+//     .catch((error) => console.error("Error:", error));
+// };
 
 function JobDetail() {
   const [cookies] = useCookies(["user"]);
   const [userDetails, setUserDetails] = useState({});
+
   const user = cookies.user;
   const { id } = useParams();
 
@@ -47,7 +48,50 @@ function JobDetail() {
   const [hasApplied, setHasApplied] = useState(false);
   const [jobOffer, setJobOffer] = useState(null);
 
-  // console.log(user.idUser);
+  const handleCloseJobProcess = () => {
+    fetch(`http://localhost:8080/jobs/${id}/close`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Proceso de selección terminado:", data);
+
+        // Aquí puedes actualizar el estado local si es necesario
+        // Por ejemplo, puedes actualizar el estado del trabajo a "close" en el estado jobOffer.
+      })
+      .catch((error) => console.error("Error:", error));
+  };
+
+  const handleStatusChange = (userId, jobId, status) => {
+    fetch(
+      `http://localhost:8080/job-applications?userId=${userId}&jobId=${jobId}`,
+      {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ applicationStatus: status }),
+      }
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Datos enviados a la API:", data);
+        console.log("Estado actualizado con éxito");
+
+        // Actualizar el estado local
+        setJobApplications((prevApplications) =>
+          prevApplications.map((app) =>
+            app.userId === userId && app.jobId === jobId
+              ? { ...app, applicationStatus: status }
+              : app
+          )
+        );
+      })
+      .catch((error) => console.error("Error:", error));
+  };
 
   useEffect(() => {
     fetch(`http://localhost:8080/jobs/${id}`)
@@ -117,7 +161,10 @@ function JobDetail() {
       })
       .catch((error) => console.error("Error:", error));
   };
-  // console.log(jobOffer.idEmployer);
+
+  const hasAcceptedUsers = jobApplications.some(
+    (application) => application.applicationStatus === "accepted"
+  );
   return (
     <div className="big-box">
       <div className="small-box">
@@ -153,7 +200,7 @@ function JobDetail() {
             )}
             {jobOffer.idEmployer === user.idUser && (
               <div>
-                <h2>Usuarios que han aplicado:</h2>
+                <h2>Usuarios que han aplicado ({jobApplications.length}):</h2>
                 {jobApplications.map((application, index) => (
                   <div key={index}>
                     <Link to={`/perfil/${application.userId}`}>
@@ -209,6 +256,11 @@ function JobDetail() {
                     )}
                   </div>
                 ))}
+                {jobOffer.idEmployer === user.idUser && hasAcceptedUsers && (
+                  <Button variant="outlined" onClick={handleCloseJobProcess}>
+                    Terminar proceso de seleccion
+                  </Button>
+                )}
               </div>
             )}
           </div>

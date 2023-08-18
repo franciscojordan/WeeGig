@@ -69,7 +69,7 @@ const Bar = ({ user }) => {
   return (
     <>
       <a href="/">
-        <img className="menuimg" src="./src/assets/img/logo_small_full.png" />
+        <img className="menuimg" src="/src/assets/img/logo_small_full.png" />
       </a>
       {/* This is the logo */}
       <Typography
