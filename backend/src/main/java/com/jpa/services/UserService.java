@@ -25,21 +25,17 @@ public class UserService {
         return userRepository.findAll();
     }
     
-//    public User getUserByEmail(String email) {
-//        return userRepository.findByEmail(email);
-//    }
 
-//	public User getUserById(Integer id) {
-//		return userRepository.findById(id);
-//	}
     public User getUserById(Integer id) {
         Optional <User> userOptional = userRepository.findById(id);
         if (userOptional.isPresent()) {
             return userOptional.get();
         } else {
-            // Handle the case where the user is not found.
-            // You might return null or throw an exception depending on your use case.
             return null; 
         }
+    }
+    
+    public User registerUser(User user) {
+        return userRepository.save(user);
     }
 }

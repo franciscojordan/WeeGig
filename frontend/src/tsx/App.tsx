@@ -3,21 +3,20 @@ import { Routes, Route } from "react-router-dom";
 import Footer from './components/Footer'
 import Home from './pages/Home'; 
 import Login from './pages/Login'
-import Ofertas from './pages/Ofertas'
+import Ofertas from './pages/Offers'
 import ResponsiveAppBar from './components/Menu'
 import Logout from "./pages/Logout";
 import MyProfile from './pages/MyProfile';
 import Error from './pages/Error';
 import Register from './pages/Register';
-// import OferForm from './pages/OferForm';
-// import SignUp from './pages/SignIn';
 import AboutUs from './pages/AboutUs';
-import MyOfferts from './pages/MyOfferts'
+import MyOfferts from './pages/MyOffers'
 import JobDetail from './pages/JobDetail';
 import ContactUs from './pages/ContactUs';
-import NewOffert from './pages/NewOffert';
+import NewOffert from './pages/NewOffer';
 import MyJobs from './pages/MyJobs';
 import Profile from './pages/Profile';
+import Reviews from './pages/Reviews';
 
 function App() {
 	return (
@@ -37,6 +36,7 @@ function App() {
 				<Route path="/contactanos" element={<ContactUs />} />
 				<Route path="/nuevo-trabajo" element={<NewOffert />} />
 				<Route path="/mis-trabajos" element={<MyJobs />} />
+				<Route path="/resenas" element={<Reviews />} />
 				<Route path="*"  element={<Error />} />
 			</Routes>
       <Footer />

@@ -9,4 +9,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface JobOfferRepository extends JpaRepository<JobOffer, Integer> {
 	List<JobOffer> findByIdEmployer(Integer idEmployer);
+	List<JobOffer> findByStatus(String status);
 }
