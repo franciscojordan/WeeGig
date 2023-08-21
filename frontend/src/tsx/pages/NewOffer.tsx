@@ -44,10 +44,6 @@ const NewOffert: React.FC = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-<<<<<<< HEAD:frontend/src/tsx/pages/NewOffert.tsx
-    console.log(formData);
-=======
->>>>>>> ea699e690c745558bf176e12c45b3037c350e65e:frontend/src/tsx/pages/NewOffer.tsx
 
     const finalData = {
       ...formData,
