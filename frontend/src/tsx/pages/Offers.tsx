@@ -119,7 +119,7 @@ function Ofertas() {
                 {applications.some(
                   (app) =>
                     app.jobId === job.idJobOffers &&
-                    app.applicationStatus === "Applied"
+                    app.applicationStatus === "applied"
                 ) && (
                   <Chip
                     icon={<HourglassTopIcon />}
