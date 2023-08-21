@@ -28,7 +28,7 @@ function MyOfferts() {
 
   return (
     <div className="big-box">
-      <div className="small-box">
+      <div className="small-box" >
         <h1>Mis Ofertas</h1>
         {applications.length > 0 ? (
           <ul>
