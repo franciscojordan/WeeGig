@@ -62,6 +62,7 @@ const AboutUs: React.FC = () => {
                 style={{ width: "400px", height: "400px", borderRadius: "10%" }}
               />
               <h2>Francisco</h2>
+              <p>Chico Back</p>
             </div>
             <div style={{ margin: "0 20px" }}>
               <img
@@ -70,6 +71,7 @@ const AboutUs: React.FC = () => {
                 style={{ width: "400px", height: "400px", borderRadius: "10%" }}
               />
               <h2>Victor</h2>
+              <p>Chico Git</p>
             </div>
             <div style={{ margin: "0 20px" }}>
               <img
@@ -78,6 +80,7 @@ const AboutUs: React.FC = () => {
                 style={{ width: "400px", height: "400px", borderRadius: "10%" }}
               />
               <h2>Alejandro</h2>
+              <p>Chico Front</p>
             </div>
           </div>
         </div>
