@@ -37,7 +37,7 @@ function Footer() {
           </ul>
         </div>
       </div>
-      <div className="box_3">© 2023 Copyright: WeeGig</div>
+      <div className="box_3">© 2023 Copyright WeeGig</div>
     </div>
   );
 }

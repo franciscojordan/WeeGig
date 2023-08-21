@@ -7,8 +7,8 @@ import { useParams } from "react-router-dom";
 const Profile = () => {
   const [cookies] = useCookies(["user"]);
   const [reviews, setReviews] = useState(null);
-  const [userData, setUserData] = useState(null); // Estado para guardar la respuesta de la API
-  const { id } = useParams(); // 2. Obtén el ID desde la URL
+  const [userData, setUserData] = useState(null);
+  const { id } = useParams();
 
   useEffect(() => {
     if (id) {

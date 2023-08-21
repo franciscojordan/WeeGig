@@ -30,11 +30,6 @@ public class JobApplicationController {
     public JobApplicationController(JobApplicationRepository jobApplicationRepository) {
         this.jobApplicationRepository = jobApplicationRepository;
     }
-
-//    @GetMapping("/user/1")
-//    public List<JobApplication> getUser1Applications() {
-//        return jobApplicationRepository.findByIdUserId(1);
-//    }
     
     @GetMapping("/user/{userId}")
     public List<JobApplication> getUserApplications(@PathVariable int userId) {
@@ -56,7 +51,6 @@ public class JobApplicationController {
     
 
     @PatchMapping
-    
     public ResponseEntity<?> updateApplicationStatus(@RequestParam int userId, @RequestParam int jobId, @RequestBody ApplicationStatusUpdate statusUpdate) {
         // Buscamos la aplicación basada en userId y jobId
         JobApplication application = jobApplicationRepository.findById(new JobApplicationId(userId, jobId)).orElse(null);

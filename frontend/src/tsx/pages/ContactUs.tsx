@@ -30,10 +30,10 @@ const ContactUs: React.FC = () => {
   const theme = createTheme({
     palette: {
       primary: {
-        main: "#A8A8A8", // Color principal
+        main: "#A8A8A8",
       },
       secondary: {
-        main: "#555", // Color secundario
+        main: "#555",
       },
     },
   });

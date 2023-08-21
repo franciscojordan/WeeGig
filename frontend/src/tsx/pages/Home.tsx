@@ -3,13 +3,10 @@ import "../../css/pages/Home.css";
 function Button(props): JSX.Element {
     let color;
     if (props.type == "green") {
-        // console.log(props.value + " IS GREEN");
         color = "button-green";
     } else {
-        // console.log(props.value + " IS NOT GREEN");
         color = "button-green-line";
     }
-
     return <button className={color}>{props.value}</button>;
 }
 

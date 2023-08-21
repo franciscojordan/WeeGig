@@ -25,8 +25,6 @@ const pageLinks = {
   Contactanos: "/contactanos",
 };
 
-// const settings = ["Perfil", "Mis ofertas", "Cerrar Sesión"];
-
 const settingsLinks = {
   Perfil: "/mi-perfil",
   "Nuevo trabajo": "/nuevo-trabajo",
@@ -71,7 +69,6 @@ const Bar = ({ user }) => {
       <a href="/">
         <img className="menuimg" src="/src/assets/img/logo_small_full.png" />
       </a>
-      {/* This is the logo */}
       <Typography
         variant="h6"
         noWrap
@@ -153,7 +150,7 @@ const Bar = ({ user }) => {
           },
         }}
       >
-        WEE GIGm
+        WEE GIG
       </Typography>
       <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
         {pages.map(

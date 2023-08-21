@@ -6,7 +6,7 @@ import Divider from '@mui/material/Divider';
 
 const MyJobs: React.FC = () => {
     const [applications, setApplications] = useState([]);
-    const [jobDetails, setJobDetails] = useState({}); // Nuevo estado para almacenar detalles de trabajos
+    const [jobDetails, setJobDetails] = useState({});
 
     const [cookies] = useCookies(["user"]);
     const user = cookies.user;
@@ -17,8 +17,6 @@ const MyJobs: React.FC = () => {
         .then((data) => {
           setApplications(data);
 
-          console.log(data);
-          // Obtener los detalles de cada trabajo
           data.forEach(application => {
             fetch(`http://localhost:8080/jobs/${application.idJobOffers}`)
               .then(res => res.json())
