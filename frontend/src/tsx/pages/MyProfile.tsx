@@ -23,6 +23,8 @@ const MyProfile = () => {
       <div className="small-box">
         <div
           style={{
+            display: "flex",
+            flexDirection: "column",
             padding: "20px",
             border: "1px solid #ccc",
             borderRadius: "10px",
@@ -32,39 +34,69 @@ const MyProfile = () => {
         >
           {user ? (
             <>
-              <Avatar>{user.name.charAt(0)}</Avatar>
-              <h2>
-                {user.name} {user.surname}
-              </h2>
-              <p>
-                <strong>Usuario:</strong> {user.username}
-              </p>
-              <p>
-                <strong>Email:</strong> {user.email}
-              </p>
-              <p>
-                <strong>Número de teléfono:</strong> {user.phone_number}
-              </p>
-              <p>
-                <strong>Fecha de nacimiento:</strong> {user.birthdate}
-              </p>
-              <p>
-                <strong>Nombre de compañía:</strong>{" "}
-                {user.company_name || "N/A"}
-              </p>
-              <h3>Reseñas:</h3>
-              {reviews ? (
-                reviews.map((review) => (
-                  <div key={review.id}>
-                    <Rating name="read-only" value={review.rating} readOnly />
-                    <h4>{review.reviewTitle}</h4>
-                    <p>{review.reviewContent}</p>
-                    <p>{review.reviewerName}</p>
-                  </div>
-                ))
-              ) : (
-                <p>Cargando reseñas...</p>
-              )}
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  marginBottom: "20px",
+                }}
+              >
+                <div
+                  style={{
+                    borderRight: "1px solid #ccc",
+                    paddingRight: "20px",
+                    marginRight: "20px",
+                    textAlign: "left", // Alinea el texto hacia la izquierda
+                  }}
+                >
+                  <Avatar>{user.name.charAt(0)}</Avatar>
+                  <h2>
+                    {user.name} {user.surname}
+                  </h2>
+                  <p>
+                    <strong>Usuario:</strong> {user.username}
+                  </p>
+                  <p>
+                    <strong>Email:</strong> {user.email}
+                  </p>
+                  <p>
+                    <strong>Número de teléfonos:</strong> {user.phone_number}
+                  </p>
+                  <p>
+                    <strong>Fecha de nacimiento:</strong> {user.birthdate}
+                  </p>
+                  <p>
+                    <strong>Nombre de compañía:</strong>{" "}
+                    {user.company_name || "N/A"}
+                  </p>
+                </div>
+                <div
+                  style={{
+                    paddingLeft: "20px",
+                    marginLeft: "20px",
+                    textAlign: "left", // Alinea el texto hacia la izquierda
+                  }}
+                >
+                  <h3>Reseñas:</h3>
+                  {reviews ? (
+                    reviews.map((review) => (
+                      <div key={review.id}>
+                        <Rating
+                          name="read-only"
+                          value={review.rating}
+                          readOnly
+                        />
+                        <h4>{review.reviewTitle}</h4>
+                        <p>{review.reviewContent}</p>
+                        <p>{review.reviewerName}</p>
+                      </div>
+                    ))
+                  ) : (
+                    <p>Cargando reseñas...</p>
+                  )}
+                </div>
+              </div>
             </>
           ) : (
             <p>No eres un usuario...</p>
@@ -73,6 +105,9 @@ const MyProfile = () => {
       </div>
     </div>
   );
+  
+  
+  
 };
 
 export default MyProfile;

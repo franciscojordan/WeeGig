@@ -29,50 +29,29 @@ function MyOfferts() {
     <div className="big-box">
       <div className="small-box">
         <h1>Mis Ofertas</h1>
-        {applications.length > 0 ? (
-          <ul>
-            {applications.map((application, index) => (
-              <div key={index}>
-                <Link to={`/jobs/${application.jobId}`}>
-                  <p>{`Trabajo ID: ${application.jobId}`}</p>
-                  <p>{`Fecha de aplicación: ${application.applicationDate}`}</p>
-                  {application.applicationStatus === "Pending" && <Chip icon={<HourglassTopIcon />} label="En espera" variant="outlined"/>}
-
-                </Link>
-                <Stack direction="row" spacing={1}>
-                  <Chip icon={<HourglassTopIcon />} label="En espera" />
-                  <Chip icon={<HowToRegIcon />} label="Aceptado" />
-                  <Chip icon={<DoDisturbOffIcon />} label="Rechazado" />
-                  <Chip icon={<DoneIcon />} label="Trabajo realizado" />
-                </Stack>
-                <Stack direction="row" spacing={1}>
-                  <Chip
-                    icon={<HourglassTopIcon />}
-                    label="En espera"
-                    variant="outlined"
-                  />
-                  <Chip
-                    icon={<HowToRegIcon />}
-                    label="Aceptado"
-                    variant="outlined"
-                  />
-                  <Chip
-                    icon={<DoDisturbOffIcon />}
-                    label="Rechazado"
-                    variant="outlined"
-                  />
-                  <Chip
-                    icon={<DoneIcon />}
-                    label="Trabajo realizado"
-                    variant="outlined"
-                  />
-                </Stack>
-              </div>
-            ))}
-          </ul>
-        ) : (
-          <p>No hay aplicaciones disponibles.</p>
-        )}
+        <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "flex-start", gap: "20px", maxWidth: "1200px", margin: "0 auto" }}>
+          {applications.length > 0 ? (
+            <ul style={{ padding: "0", listStyle: "none" }}>
+              {applications.map((application, index) => (
+                <li key={index} style={{ background: "#f5f5f5", borderRadius: "10px", padding: "10px", border: "1px solid #ccc", flex: "0 1 calc(30% - 20px)", marginBottom: "20px", display: "flex", flexDirection: "column", textAlign: "left" }}>
+                  <Link to={`/jobs/${application.jobId}`}>
+                    <p>{`Trabajo ID: ${application.jobId}`}</p>
+                    <p>{`Fecha de aplicación: ${application.applicationDate}`}</p>
+                    {application.applicationStatus === "Pending" && <Chip icon={<HourglassTopIcon />} label="En espera" variant="outlined" />}
+                  </Link>
+                  <Stack direction="row" spacing={1} style={{ margin: "0 auto", textAlign: "center"  }}>
+                    <Chip icon={<HourglassTopIcon />} label="En espera" variant="outlined" />
+                    <Chip icon={<HowToRegIcon />} label="Aceptado" variant="outlined" />
+                    <Chip icon={<DoDisturbOffIcon />} label="Rechazado" variant="outlined" />
+                    <Chip icon={<DoneIcon />} label="Trabajo realizado" variant="outlined" />
+                  </Stack>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p>No hay aplicaciones disponibles.</p>
+          )}
+        </div>
       </div>
     </div>
   );

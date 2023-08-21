@@ -1,5 +1,3 @@
-import { Carousel } from "react-responsive-carousel";
-import "react-responsive-carousel/lib/styles/carousel.min.css";
 import Image1 from "../../assets/img/fran.jpg";
 import Image2 from "../../assets/img/victor.jpg";
 import Image3 from "../../assets/img/ale.jpg";
@@ -26,7 +24,6 @@ const AboutUs: React.FC = () => {
           >
             Sobre Nosotros
           </h1>
-          {/* Media query para ocultar los párrafos en modo tablet */}
           <p
             style={{
               fontSize: "24px",
@@ -44,62 +41,48 @@ const AboutUs: React.FC = () => {
             productos de alta calidad que impulsan tanto a nuestros clientes
             como al desarrollo laboral sostenible.
           </p>
-          {/* <p
-            style={{
-              fontSize: "24px",
-              position: "absolute",
-              top: "500px",
-              left: "50%",
-              transform: "translateX(-50%)",
-              color: "white",
-              textAlign: "center",
-              display: "block",
-            }}
-          >
-            Con años de experiencia en la industria, hemos construido un equipo
-            fuerte y apasionado que trabaja arduamente para alcanzar nuestros
-            objetivos y visión.
-          </p> */}
         </div>
       </div>
       <div style={{ padding: "20px", textAlign: "center" }}>
         <h1>Nuestro Equipo</h1>
         <div
           style={{
-            width: "100%",
+            maxWidth: "990px",
+            margin: "0 auto", // Centrar el contenido
             display: "flex",
             justifyContent: "center",
+            alignItems: "center",
           }}
         >
-          <Carousel
-            showThumbs={false}
-            autoPlay
-            interval={2000}
-            infiniteLoop
-            showArrows={false}
-          >
-            <div>
+          <div style={{ display: "flex", justifyContent: "center" }}>
+            <div style={{ margin: "0 20px" }}>
               <img
                 src={Image1}
                 alt="Imagen 1"
-                style={{ width: "400px", height: "400px" }}
+                style={{ width: "400px", height: "400px", borderRadius: "10%" }}
               />
+              <h2>Francisco</h2>
+              <p>Chico Back</p>
             </div>
-            <div>
+            <div style={{ margin: "0 20px" }}>
               <img
                 src={Image2}
                 alt="Imagen 2"
-                style={{ width: "400px", height: "400px" }}
+                style={{ width: "400px", height: "400px", borderRadius: "10%" }}
               />
+              <h2>Victor</h2>
+              <p>Chico Git</p>
             </div>
-            <div>
+            <div style={{ margin: "0 20px" }}>
               <img
                 src={Image3}
                 alt="Imagen 3"
-                style={{ width: "400px", height: "400px" }}
+                style={{ width: "400px", height: "400px", borderRadius: "10%" }}
               />
+              <h2>Alejandro</h2>
+              <p>Chico Front</p>
             </div>
-          </Carousel>
+          </div>
         </div>
       </div>
       <div
@@ -118,16 +101,6 @@ const AboutUs: React.FC = () => {
           Email: info@weegig.com
         </address>
       </div>
-      {/* Media query para ocultar los párrafos en modo tablet */}
-      <style>
-        {`
-          @media (max-width: 768px) {
-            p {
-              display: none;
-            }
-          }
-        `}
-      </style>
     </div>
   );
 };
