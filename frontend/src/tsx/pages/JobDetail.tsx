@@ -149,46 +149,74 @@ function JobDetail() {
     <div className="big-box">
       <div className="small-box">
         {jobOffer ? (
-          <div>
-            <h1>{jobOffer.title}</h1>
-            <p>
-              <strong>Descripción:</strong> {jobOffer.description}
-            </p>
-            <p>
-              <strong>Tipo de Pago:</strong> {jobOffer.paymentType}
-            </p>
-            <p>
-              <strong>Pago:</strong> {jobOffer.payment}
-            </p>
-            <p>
-              <strong>Ubicación:</strong> {jobOffer.location}
-            </p>
-            <p>
-              <strong>Horario:</strong>{" "}
-              {new Date(jobOffer.schedule).toLocaleString()}
-            </p>
-            <p>
-              <strong>Categoría:</strong> {jobOffer.category}
-            </p>
-            <p>
-              <strong>ID del Empleador:</strong> {jobOffer.idEmployer}
-            </p>
-            {user && user["userType"] === "Employee" && !hasApplied && (
-              <Button variant="outlined" onClick={handleApply}>
-                Aplicar
-              </Button>
-            )}
-            {user && user.idUser && jobOffer.idEmployer === user.idUser && (
+          <div
+            style={{
+              background: "#f5f5f5", // Cambiar al color deseado
+              borderRadius: "10px",
+              padding: "20px",
+              border: "1px solid #ccc",
+              maxWidth: "800px",
+              margin: "20px auto",
+              textAlign: "left",
+              display: "grid",
+              gridTemplateColumns: "2fr 1fr", // Ajusta el ancho de las columnas
+              columnGap: "20px", // Ajusta el espacio entre las columnas
+              alignItems: "start", // Alinea contenido arriba
+            }}
+          >
+            <div>
+              <h1>{jobOffer.title}</h1>
+              <p>
+                <strong>Descripción:</strong> {jobOffer.description}
+              </p>
+              <p>
+                <strong>Tipo de Pago:</strong> {jobOffer.paymentType}
+              </p>
+              <p>
+                <strong>Pago:</strong> {jobOffer.payment}
+              </p>
+              <p>
+                <strong>Ubicación:</strong> {jobOffer.location}
+              </p>
+              <p>
+                <strong>Horario:</strong>{" "}
+                {new Date(jobOffer.schedule).toLocaleString()}
+              </p>
+              <p>
+                <strong>Categoría:</strong> {jobOffer.category}
+              </p>
+              <p>
+                <strong>ID del Empleador:</strong> {jobOffer.idEmployer}
+              </p>
+              {user && user["userType"] === "Employee" && !hasApplied && (
+                <div style={{ textAlign: "right" }}>
+                  <Button
+                    variant="outlined"
+                    style={{
+                      color: "#ffffff", // Cambia el color del texto
+                      backgroundColor: "#A8A8A8", // Cambia el color de fondo
+                      borderColor: "#A8A8A8", // Cambia el color del borde
+                      transition: "background-color 0.3s, border-color 0.3s",
+                    }}
+                    className="hover-button"
+                    onClick={handleApply}
+                  >
+                    Aplicar
+                  </Button>
+                </div>
+              )}
+            </div>
+            {jobOffer.idEmployer === user.idUser && (
               <div>
                 <h2>Usuarios que han aplicado ({jobApplications.length}):</h2>
                 {jobApplications.map((application, index) => (
-                  <div key={index}>
+                  <div key={index} style={{ display: "flex", alignItems: "center" }}>
                     <Link to={`/perfil/${application.userId}`}>
                       <Avatar>{user.name.charAt(0)}</Avatar>
                       Nombre: {userDetails[application.userId]}
                     </Link>
                     {application.applicationStatus === "applied" ? (
-                      <div>
+                      <div style={{ marginLeft: "10px" }}>
                         <Button
                           variant="text"
                           color="success"
@@ -217,7 +245,8 @@ function JobDetail() {
                         </Button>
                       </div>
                     ) : (
-                      <div>
+                      <div style={{ displey: "flex" }}>
+                        <div style={{ marginLeft: "10px" }}>
                         {application.applicationStatus === "rejected" && (
                           <Chip
                             icon={<DoDisturbOffIcon />}
@@ -232,6 +261,7 @@ function JobDetail() {
                             variant="outlined"
                           />
                         )}
+                      </div>
                       </div>
                     )}
                   </div>
