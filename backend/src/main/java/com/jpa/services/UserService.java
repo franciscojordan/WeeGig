@@ -1,6 +1,9 @@
 package com.jpa.services;
 
 //import org.apache.el.stream.Optional;
+import com.jpa.entities.Login;
+import com.jpa.entities.UserRegistrationDto;
+import com.jpa.repository.LoginRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +17,15 @@ import java.util.Optional;
 @Service
 public class UserService {
 
-    private final UserRepository userRepository;
+
+    @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
+    private LoginService loginService;
+
+    @Autowired
+    private LoginRepository loginRepository;
 
     @Autowired
     public UserService(UserRepository userRepository) {
@@ -34,8 +45,42 @@ public class UserService {
             return null; 
         }
     }
-    
-    public User registerUser(User user) {
+
+    public User register(UserRegistrationDto registrationDto) {
+        // Primero, verifica si ya existe un registro con el mismo email en la tabla 'login'.
+        Optional<Login> existingLogin = loginRepository.findById(registrationDto.getEmail());
+        if (existingLogin.isPresent()) {
+            throw new RuntimeException("El email ya existe.");
+        }
+
+        // Inserta en la tabla 'login' primero.
+        Login login = new Login();
+        login.setEmail(registrationDto.getEmail());
+        login.setPassword(registrationDto.getPassword()); // considera cifrar la contraseña
+        loginRepository.save(login);
+
+        // Luego, inserta en la tabla 'users'.
+//        User user = new User();
+//        // Rellena los atributos de 'user' usando 'registrationDto'...
+//        userRepository.save(user);
+        User user = new User();
+        user.setUsername(registrationDto.getUsername());
+        user.setEmail(registrationDto.getEmail());
+        // No establezcas la contraseña aquí, eso ya lo manejaste en el Login
+        user.setName(registrationDto.getName());
+        user.setSurname(registrationDto.getSurname());
+        user.setDocType(registrationDto.getDocType());
+        user.setDocument(registrationDto.getDocument());
+        user.setPhoneNumber(registrationDto.getPhoneNumber());
+        user.setBirthdate(registrationDto.getBirthdate());
+        user.setUserType(registrationDto.getUserType());
+        user.setCompanyName(registrationDto.getCompanyName());
+        user.setCompanyNif(registrationDto.getCompanyNif());
+        user.setAddress(registrationDto.getAddress());
+        user.setCompanyPhoneNumber(registrationDto.getCompanyPhoneNumber());
+        user.setWebsite(registrationDto.getWebsite());
+
         return userRepository.save(user);
     }
+
 }
