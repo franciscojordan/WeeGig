@@ -44,6 +44,7 @@ const Profile = () => {
               padding: "20px",
               border: "1px solid #ccc",
               borderRadius: "10px",
+              textAlign: "left", // Añadido para alinear el texto a la izquierda
             }}
           >
             {userData ? (
@@ -79,6 +80,7 @@ const Profile = () => {
               padding: "20px",
               border: "1px solid #ccc",
               borderRadius: "10px",
+              textAlign: "left", // Añadido para alinear el texto a la izquierda
             }}
           >
             <h3>Reseñas:</h3>
@@ -106,6 +108,7 @@ const Profile = () => {
       </div>
     </div>
   );
+  
   
 };
 
