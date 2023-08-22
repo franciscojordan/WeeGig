@@ -30,8 +30,8 @@ function Home() {
                 <div className="maxw">
                     <h1 className="big">¡Bienvenidos a WEE GIG!</h1>
                     <p>En WEE GIG, nos enorgullece ser un puente entre individuos comprometidos y apasionados por hacer una diferencia en el mundo y oportunidades de trabajo en el ámbito de la beneficencia.</p>
-                    <Button href='/SignIn' value="Crear Cuenta" type="green" />
-                    <Button href='/Login' value="Iniciar Sesion" />
+                    <a href="/registrar"><Button href='/register' value="Crear Cuenta" type="green" /></a>
+                    <a href="/Login"><Button href='/login' value="Iniciar Sesion" /></a>
                 </div>
                 <div className="leftimg">
                     <img src="./src/assets/img/initial.jpg" alt="" />
