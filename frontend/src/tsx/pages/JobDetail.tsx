@@ -8,11 +8,10 @@ import Avatar from "@mui/material/Avatar";
 import Chip from "@mui/material/Chip";
 import DoDisturbOffIcon from "@mui/icons-material/DoDisturbOff";
 import HowToRegIcon from "@mui/icons-material/HowToReg";
-// import { useNavigate } from "react-router-dom";
+import Alert from "@mui/material/Alert";
+import AlertTitle from "@mui/material/AlertTitle";
 
 function JobDetail() {
-  // const navigate = useNavigate();
-
   const [cookies] = useCookies(["user"]);
   const [userDetails, setUserDetails] = useState({});
 
@@ -22,12 +21,11 @@ function JobDetail() {
   const [applications, setApplications] = useState([]);
   const [hasApplied, setHasApplied] = useState(false);
   const [jobOffer, setJobOffer] = useState(null);
+  const [showAlert, setShowAlert] = useState(false);
 
-  //   useEffect(() => {
-  //     if (!user || !user.idUser) {
-  //         navigate("/ofertas");
-  //     }
-  // }, [user, navigate]);
+  const jobOfferDate = jobOffer?.schedule ? new Date(jobOffer.schedule) : null;
+  const currentDate = new Date();
+  const showReviewButton = jobOfferDate < currentDate;
 
   const handleCloseJobProcess = () => {
     fetch(`http://localhost:8080/jobs/${id}/close`, {
@@ -38,7 +36,12 @@ function JobDetail() {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log("Proceso de selección terminado:", data);
+        if (data && data.status === "close") {
+          setJobOffer((prevJobOffer) => ({
+            ...prevJobOffer,
+            status: "close",
+          }));
+        }
       })
       .catch((error) => console.error("Error:", error));
   };
@@ -120,34 +123,49 @@ function JobDetail() {
 
   const handleApply = () => {
     if (user && user.idUser) {
-    const applicationData = {
-      userId: user.idUser,
-      jobId: parseInt(id),
-      applicationDate: new Date().toISOString(),
-      applicationStatus: "applied",
-    };
-    console.log("Datos enviados a la API:", applicationData);
-    fetch("http://localhost:8080/job-applications", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(applicationData),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        setHasApplied(true);
+      const applicationData = {
+        userId: user.idUser,
+        jobId: parseInt(id),
+        applicationDate: new Date().toISOString(),
+        applicationStatus: "applied",
+      };
+      console.log("Datos enviados a la API:", applicationData);
+      fetch("http://localhost:8080/job-applications", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(applicationData),
       })
-      .catch((error) => console.error("Error:", error));
+        .then((response) => response.json())
+        .then((data) => {
+          setHasApplied(true);
+        })
+        .catch((error) => console.error("Error:", error));
     }
   };
 
   const hasAcceptedUsers = jobApplications.some(
     (application) => application.applicationStatus === "accepted"
   );
+
+
   return (
+    <>
     <div className="big-box">
       <div className="small-box">
+        {/* {jobOffer && jobOffer.status === "close" && (
+          <Alert severity="info">
+            Oferta cerrada, el proceso de seleccion ya esta{" "}
+            <strong>cerrado</strong>
+          </Alert>
+        )} */}
+        {jobOffer && jobOffer.status === "close" && (
+        <Alert severity="info">
+          Oferta cerrada, el proceso de seleccion ya esta{" "}
+          <strong>cerrado</strong>
+        </Alert>
+      )}
         {jobOffer ? (
           <div
             style={{
@@ -210,12 +228,19 @@ function JobDetail() {
               <div>
                 <h2>Usuarios que han aplicado ({jobApplications.length}):</h2>
                 {jobApplications.map((application, index) => (
-                  <div key={index} style={{ display: "flex", alignItems: "center" }}>
+                  <div
+                    key={index}
+                    style={{ display: "flex", alignItems: "center" }}
+                  >
                     <Link to={`/perfil/${application.userId}`}>
+                      
                       <Avatar>{user.name.charAt(0)}</Avatar>
-                      Nombre: {userDetails[application.userId]}
+                      
+                      {userDetails[application.userId]}
+
                     </Link>
-                    {application.applicationStatus === "applied" ? (
+                    {jobOffer && jobOffer.status === "open" &&
+                    application.applicationStatus === "applied" ? (
                       <div style={{ marginLeft: "10px" }}>
                         <Button
                           variant="text"
@@ -247,30 +272,32 @@ function JobDetail() {
                     ) : (
                       <div style={{ displey: "flex" }}>
                         <div style={{ marginLeft: "10px" }}>
-                        {application.applicationStatus === "rejected" && (
-                          <Chip
-                            icon={<DoDisturbOffIcon />}
-                            label="Rechazado"
-                            variant="outlined"
-                          />
-                        )}
-                        {application.applicationStatus === "accepted" && (
-                          <Chip
-                            icon={<HowToRegIcon />}
-                            label="Aceptado"
-                            variant="outlined"
-                          />
-                        )}
-                      </div>
+                          {application.applicationStatus === "rejected" && (
+                            <Chip
+                              icon={<DoDisturbOffIcon />}
+                              label="Rechazado"
+                              variant="outlined"
+                            />
+                          )}
+                          {application.applicationStatus === "accepted" && (
+                            <Chip
+                              icon={<HowToRegIcon />}
+                              label="Aceptado"
+                              variant="outlined"
+                            />
+                          )}
+                        </div>
                       </div>
                     )}
                   </div>
                 ))}
-                {jobOffer.idEmployer === user.idUser && hasAcceptedUsers && (
-                  <Button variant="outlined" onClick={handleCloseJobProcess}>
-                    Terminar proceso de seleccion
-                  </Button>
-                )}
+                {jobOffer.idEmployer === user.idUser &&
+                  hasAcceptedUsers &&
+                  jobOffer.status === "open" && (
+                    <Button variant="outlined" onClick={handleCloseJobProcess}>
+                      Terminar proceso de seleccion
+                    </Button>
+                  )}
               </div>
             )}
           </div>
@@ -278,7 +305,11 @@ function JobDetail() {
           <p>Cargando detalles de la oferta...</p>
         )}
       </div>
+      
     </div>
+      <Button variant="outlined">Ya puedes hacer review</Button>
+    </>
+    
   );
 }
 

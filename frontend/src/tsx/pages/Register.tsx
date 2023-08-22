@@ -23,7 +23,7 @@ import IconButton from "@mui/material/IconButton";
 import InputAdornment from "@mui/material/InputAdornment";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
-import Alert from '@mui/material/Alert';
+import Alert from "@mui/material/Alert";
 
 function Copyright(props: any) {
   return (
@@ -44,27 +44,10 @@ const theme = createTheme({
 export default function SignUp() {
   const [showPassword, setShowPassword] = useState(false);
   const [showVerPassword, setShowVerPassword] = useState(false);
+  const [registrationSuccess, setRegistrationSuccess] = useState(false);
+
 
   const [emailError, setEmailError] = useState(false);
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-
-    const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-    if (!emailPattern.test(data.get("email"))) {
-      setEmailError(true);
-      return;
-    }
-
-    setEmailError(false);
-    console.log({
-      firstName: data.get("firstName"),
-      lastName: data.get("lastName"),
-      email: data.get("email"),
-      password: data.get("password"),
-    });
-    console.log(data);
-  };
 
   const [age, setAge] = React.useState("");
 
@@ -77,6 +60,70 @@ export default function SignUp() {
   const handleChange2 = (event: React.ChangeEvent<HTMLInputElement>) => {
     setChecked(event.target.checked);
   };
+
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const data = new FormData(event.currentTarget);
+
+    const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    if (!emailPattern.test(data.get("email") as string)) {
+      setEmailError(true);
+      return;
+    }
+
+    setEmailError(false);
+
+    const userPayload = {
+      username: data.get("email"),
+      email: data.get("email"),
+      password: data.get("password"),
+      name: data.get("firstName"),
+      surname: data.get("lastName"),
+      docType: parseInt(data.get("tipeOfDocument") as string),
+      document: data.get("document"),
+      phoneNumber: data.get("phone"),
+      birthdate: data.get("birthDate"),
+      userType: checked ? "Employer" : "Employee",
+      companyName: data.get("nameOfCompany"),
+      companyNif: data.get("nif"),
+      address: data.get("address"),
+      companyPhoneNumber: data.get("numberOfCompany"),
+      website: data.get("website")
+    };
+
+    console.log(userPayload);
+
+    fetch("http://localhost:8080/api/register", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(userPayload),
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data.success) {
+        console.log("Usuario registrado con éxito!");
+        setRegistrationSuccess(true);
+        
+        // Redirigir después de 5 segundos
+        setTimeout(() => {
+            window.location.href = "/login/";
+        }, 2000);
+      } else {
+        console.error("Error al registrar:", data.message);
+        setRegistrationSuccess(false);
+      }
+    })
+    .catch(error => {
+      console.error("Error al enviar los datos:", error);
+      setRegistrationSuccess(false);
+    });
+  };
+
+  // ... (resto de tu código, como handleChange y el componente renderizado)
+
+
 
   return (
     <div className="box-contact">
@@ -98,6 +145,7 @@ export default function SignUp() {
               <Typography component="h1" variant="h5">
                 Regístrate
               </Typography>
+              {registrationSuccess && <Alert severity="success">Registrado correctamente</Alert>}
               <Box
                 component="form"
                 noValidate
@@ -133,12 +181,12 @@ export default function SignUp() {
                         labelId="demo-simple-select-label"
                         id="demo-simple-select"
                         value={age}
-                        label="tipeOfDocument"
+                        name="tipeOfDocument"
                         onChange={handleChange}
                       >
-                        <MenuItem value={10}>DNI</MenuItem>
-                        <MenuItem value={20}>NIE</MenuItem>
-                        <MenuItem value={30}>Pasaporte</MenuItem>
+                        <MenuItem value={1}>DNI</MenuItem>
+                        <MenuItem value={2}>NIE</MenuItem>
+                        <MenuItem value={3}>Pasaporte</MenuItem>
                       </Select>
                     </FormControl>
                   </Grid>
@@ -254,17 +302,32 @@ export default function SignUp() {
                         <FormLabel id="demo-radio-buttons-group-label">
                           ¿Quieres ofrecer trabajo?
                         </FormLabel>
-                        <Switch
-                          checked={checked}
-                          onChange={handleChange2}
-                          inputProps={{ "aria-label": "controlled" }}
-                        />
+                        <div
+                          style={{
+                            display: "flex",
+                            justifyContent: "center",
+                            alignItems: "center",
+                            height: "30px",
+                          }}
+                        >
+                          <Switch
+                            checked={checked}
+                            onChange={handleChange2}
+                            inputProps={{ "aria-label": "controlled" }}
+                          />
+                        </div>
                       </RadioGroup>
                     </Grid>
                   </Grid>
                   {checked && (
                     <>
-                    <Alert severity="info">Este es un mensaje de alerta!</Alert>
+                      <Alert
+                        severity="info"
+                        style={{ margin: "0 auto", maxWidth: "600px" }}
+                      >
+                        Al ofrecer trabajo, te estas negando a poder aplicar a estos. Los campos de abajo no son obligatorios
+                      </Alert>
+
                       <Grid item xs={12} sm={6}>
                         <TextField
                           autoComplete="given-name"
@@ -303,7 +366,7 @@ export default function SignUp() {
                           autoComplete="family-name"
                         />
                       </Grid>
-                      <Grid item xs={12} sm={6}>
+                      <Grid item xs={12}>
                         <TextField
                           autoComplete="given-name"
                           name="website"

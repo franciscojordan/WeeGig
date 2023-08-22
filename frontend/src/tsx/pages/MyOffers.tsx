@@ -23,7 +23,8 @@ function MyOfferts() {
       .then((response) => response.json())
       .then((data) => setApplications(data))
       .catch((error) => console.error("Hubo un error:", error));
-  }, []);
+    }, []);
+    
 
   return (
     <div className="big-box">
@@ -37,14 +38,12 @@ function MyOfferts() {
                   <Link to={`/jobs/${application.jobId}`}>
                     <p>{`Trabajo ID: ${application.jobId}`}</p>
                     <p>{`Fecha de aplicación: ${application.applicationDate}`}</p>
-                    {application.applicationStatus === "Pending" && <Chip icon={<HourglassTopIcon />} label="En espera" variant="outlined" />}
+                    {application.applicationStatus === "applied" && <Chip icon={<HourglassTopIcon />} label="En espera" variant="outlined" />}
+                    {application.applicationStatus === "accepted" && <Chip icon={<HowToRegIcon />} label="Aceptado" variant="outlined" />}
+                    {application.applicationStatus === "rejected" && <Chip icon={<DoDisturbOffIcon />} label="Rechazado" variant="outlined" />}
+                    {application.applicationStatus === "done" && <Chip icon={<DoneIcon />} label="Trabajo realizado" variant="outlined" />}
+
                   </Link>
-                  <Stack direction="row" spacing={1} style={{ margin: "0 auto", textAlign: "center"  }}>
-                    <Chip icon={<HourglassTopIcon />} label="En espera" variant="outlined" />
-                    <Chip icon={<HowToRegIcon />} label="Aceptado" variant="outlined" />
-                    <Chip icon={<DoDisturbOffIcon />} label="Rechazado" variant="outlined" />
-                    <Chip icon={<DoneIcon />} label="Trabajo realizado" variant="outlined" />
-                  </Stack>
                 </li>
               ))}
             </ul>

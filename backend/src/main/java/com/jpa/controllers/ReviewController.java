@@ -58,14 +58,4 @@ public class ReviewController {
         return response;
     }
     
-//    @CrossOrigin(origins = "http://localhost:5173")
-//    @GetMapping
-//    public List<Review> getReviewsByReviewedId(@RequestParam(name = "to", required = false) Integer id) {
-//        if (id != null) {
-//            return reviewRepository.findByIdReviewed(id);
-//        }
-//        return reviewRepository.findAll();
-//    }
-    
-
 }

@@ -15,6 +15,10 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Alert from "@mui/material/Alert";
 import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
+import IconButton from "@mui/material/IconButton";
+import InputAdornment from "@mui/material/InputAdornment";
+import Visibility from "@mui/icons-material/Visibility";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
 
 function Copyright(props: any) {
   return (
@@ -39,6 +43,7 @@ const theme = createTheme({
 });
 
 export default function SignIn() {
+  const [showPassword, setShowPassword] = useState(false);
   const [emailError, setEmailError] = useState(false);
   const [showAlert, setShowAlertErrorEmail] = React.useState(false);
 
@@ -133,14 +138,29 @@ export default function SignIn() {
                   autoFocus
                 />
                 <TextField
-                  margin="normal"
-                  fullWidth
-                  name="password"
-                  label="Contraseña"
-                  type="password"
-                  id="password"
-                  autoComplete="current-password"
-                />
+                      fullWidth
+                      name="password"
+                      label="Contraseña"
+                      type={showPassword ? "text" : "password"}
+                      id="password"
+                      autoComplete="new-password"
+                      InputProps={{
+                        endAdornment: (
+                          <InputAdornment position="end">
+                            <IconButton
+                              aria-label="toggle password visibility"
+                              onClick={() => setShowPassword(!showPassword)}
+                            >
+                              {showPassword ? (
+                                <Visibility />
+                              ) : (
+                                <VisibilityOff />
+                              )}
+                            </IconButton>
+                          </InputAdornment>
+                        ),
+                      }}
+                    />
                 {showAlert && (
                   <Alert severity="error">
                     Correo electrónico o contraseña incorrectos.
@@ -160,11 +180,6 @@ export default function SignIn() {
                 </Button>
 
                 <Grid container>
-                  <Grid item xs>
-                    <Link href="#" variant="body2">
-                      ¿Has olvidado tu contraseña?
-                    </Link>
-                  </Grid>
                   <Grid item>
                     <Link href="./registrar" variant="body2">
                       {"¿No tienes una cuenta? Crea tu cuenta"}

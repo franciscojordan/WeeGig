@@ -1,5 +1,6 @@
 package com.jpa.controllers;
 
+import com.jpa.entities.UserRegistrationDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -35,9 +36,9 @@ public class UserController {
     public User getUserByEmail(@RequestParam Integer id) {
         return userService.getUserById(id); // Este método debe ser definido en tu servicio
     }
-    
+
     @PostMapping("/register")
-    public User registerUser(@RequestBody User user) {
-        return userService.registerUser(user);
+    public User registerUser(@RequestBody UserRegistrationDto registrationDto) {
+        return userService.register(registrationDto);
     }
 }
