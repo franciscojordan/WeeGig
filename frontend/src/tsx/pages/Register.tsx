@@ -24,6 +24,8 @@ import InputAdornment from "@mui/material/InputAdornment";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import Alert from "@mui/material/Alert";
+import DatePicker from 'react-datepicker'; // Import DatePicker
+import 'react-datepicker/dist/react-datepicker.css';
 
 function Copyright(props: any) {
   return (
@@ -82,7 +84,7 @@ export default function SignUp() {
       docType: parseInt(data.get("tipeOfDocument") as string),
       document: data.get("document"),
       phoneNumber: data.get("phone"),
-      birthdate: data.get("birthDate"),
+      birthdate: selectedDate,
       userType: checked ? "Employer" : "Employee",
       companyName: data.get("nameOfCompany"),
       companyNif: data.get("nif"),
@@ -122,7 +124,13 @@ export default function SignUp() {
   };
 
   // ... (resto de tu código, como handleChange y el componente renderizado)
+  const [selectedDate, setSelectedDate] = useState<Date | null>(
+    new Date("2005-08-31")
+  );
 
+  const handleDateChange = (date: Date | null) => {
+    setSelectedDate(date); // Update the selectedDate state
+  };
 
 
   return (
@@ -210,12 +218,17 @@ export default function SignUp() {
                     />
                   </Grid>
                   <Grid item xs={12} sm={6}>
-                    <TextField
-                      fullWidth
-                      id="birthDate"
-                      label="Fecha de nacimiento"
-                      name="birthDate"
-                      autoComplete="family-name"
+                    <DatePicker
+                      selected={selectedDate}
+                      onChange={handleDateChange}
+                      timeIntervals={15}
+                      dateFormat="yyyy-MM-dd"
+                      customInput={<TextField label="Fecha de nacimiento" inputProps={{ readOnly: true }}/>}
+                      maxDate={new Date("2005-08-31")}
+                      showYearDropdown
+                      showMonthDropdown
+                      scrollableYearDropdown
+                      yearDropdownItemNumber={50}
                     />
                   </Grid>
                   <Grid item xs={12}>
