@@ -18,20 +18,8 @@ function Reviews(){
     }, [user]);
     return (
         <div>
-            <h2>Trabajos pendientes de hacer reseña</h2>
-            <h2>Reseñas</h2>
-                          {reviews ? (
-                reviews.map((review) => (
-                  <div key={review.id}>
-                    <Rating name="read-only" value={review.rating} readOnly />
-                    <h4>{review.reviewTitle}</h4>
-                    <p>{review.reviewContent}</p>
-                    <p>{review.reviewerName}</p>
-                  </div>
-                ))
-              ) : (
-                <p>Cargando reseñas...</p>
-              )}
+            <h2>Reseñas por realizar</h2>
+
         </div>
     )
 }

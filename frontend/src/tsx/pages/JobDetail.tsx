@@ -23,6 +23,10 @@ function JobDetail() {
   const [jobOffer, setJobOffer] = useState(null);
   const [showAlert, setShowAlert] = useState(false);
 
+  const jobOfferDate = jobOffer?.schedule ? new Date(jobOffer.schedule) : null;
+  const currentDate = new Date();
+  const showReviewButton = jobOfferDate < currentDate;
+
   const handleCloseJobProcess = () => {
     fetch(`http://localhost:8080/jobs/${id}/close`, {
       method: "PUT",
@@ -145,7 +149,9 @@ function JobDetail() {
     (application) => application.applicationStatus === "accepted"
   );
 
+
   return (
+    <>
     <div className="big-box">
       <div className="small-box">
         {/* {jobOffer && jobOffer.status === "close" && (
@@ -227,8 +233,11 @@ function JobDetail() {
                     style={{ display: "flex", alignItems: "center" }}
                   >
                     <Link to={`/perfil/${application.userId}`}>
+                      
                       <Avatar>{user.name.charAt(0)}</Avatar>
-                      Nombre: {userDetails[application.userId]}
+                      
+                      {userDetails[application.userId]}
+
                     </Link>
                     {jobOffer && jobOffer.status === "open" &&
                     application.applicationStatus === "applied" ? (
@@ -296,7 +305,11 @@ function JobDetail() {
           <p>Cargando detalles de la oferta...</p>
         )}
       </div>
+      
     </div>
+      <Button variant="outlined">Ya puedes hacer review</Button>
+    </>
+    
   );
 }
 
