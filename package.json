@@ -1,9 +1,0 @@
-{
-  "dependencies": {
-    "@googlemaps/js-api-loader": "^1.16.2",
-    "react-datepicker": "^4.16.0"
-  },
-  "devDependencies": {
-    "sass": "^1.66.0"
-  }
-}
