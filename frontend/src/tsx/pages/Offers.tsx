@@ -112,7 +112,7 @@ function Ofertas() {
               <Link to={`/jobs/${job.idJobOffers}`}>
                 <RecipeReviewCard
                   title={job.title}
-                  schedule={job.schedule}
+                  schedule={new Date(job.schedule).toLocaleString()}
                   description={job.description}
                 />
               </Link>

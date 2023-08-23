@@ -26,6 +26,7 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import Alert from "@mui/material/Alert";
 import DatePicker from 'react-datepicker'; // Import DatePicker
 import 'react-datepicker/dist/react-datepicker.css';
+import RegisterLocationAutocomplete from '../components/RegisterLocationAutocomplete';
 
 function Copyright(props: any) {
   return (
@@ -47,7 +48,9 @@ export default function SignUp() {
   const [showPassword, setShowPassword] = useState(false);
   const [showVerPassword, setShowVerPassword] = useState(false);
   const [registrationSuccess, setRegistrationSuccess] = useState(false);
-
+  
+  const [userPayload, setUserPayload] = useState(false);
+  const [selectedLocation, setSelectedLocation] = useState(null);
 
   const [emailError, setEmailError] = useState(false);
 
@@ -88,7 +91,7 @@ export default function SignUp() {
       userType: checked ? "Employer" : "Employee",
       companyName: data.get("nameOfCompany"),
       companyNif: data.get("nif"),
-      address: data.get("address"),
+      address: address,
       companyPhoneNumber: data.get("numberOfCompany"),
       website: data.get("website")
     };
@@ -132,6 +135,22 @@ export default function SignUp() {
     setSelectedDate(date); // Update the selectedDate state
   };
 
+  const handleLocationSelect = (location) => {
+    console.log('Selected location:', location);
+    setUserPayload((prevData) => ({
+      ...prevData,
+      location: location,
+    }));
+  };
+  
+  const handleLocationChange = (newLocation) => {
+    console.log('Location changed:', newLocation);
+    setUserPayload((prevData) => ({
+      ...prevData,
+      location: newLocation,
+    }));
+  };
+  
 
   return (
     <div className="big-box">
@@ -213,7 +232,7 @@ export default function SignUp() {
                       name="phone"
                       fullWidth
                       id="phone"
-                      label="Numero"
+                      label="Número de teléfono"
                       autoFocus
                     />
                   </Grid>
@@ -338,10 +357,10 @@ export default function SignUp() {
                         severity="info"
                         style={{ margin: "0 auto", maxWidth: "600px" }}
                       >
-                        Al ofrecer trabajo, te estas negando a poder aplicar a estos. Los campos de abajo no son obligatorios
+                        Al ofrecer trabajo, te estas negando a poder aplicar a estos. Los campos de abajo no son obligatorios.
                       </Alert>
 
-                      <Grid item xs={12} sm={6}>
+                      <Grid item xs={12}>
                         <TextField
                           autoComplete="given-name"
                           name="nameOfCompany"
@@ -362,22 +381,19 @@ export default function SignUp() {
                       </Grid>
                       <Grid item xs={12} sm={6}>
                         <TextField
-                          autoComplete="given-name"
-                          name="address"
-                          fullWidth
-                          id="address"
-                          label="Direccion"
-                          autoFocus
-                        />
-                      </Grid>
-                      <Grid item xs={12} sm={6}>
-                        <TextField
                           fullWidth
                           id="numberOfCompany"
-                          label="Numero de compañia"
+                          label="Número de teléfono"
                           name="numberOfCompany"
                           autoComplete="family-name"
                         />
+                      </Grid>
+                      <Grid item xs={12}>
+                      <RegisterLocationAutocomplete
+                        onSelect={handleLocationSelect}
+                        onLocationChange={handleLocationChange}
+                        selectedLocation={selectedLocation}
+                    />
                       </Grid>
                       <Grid item xs={12}>
                         <TextField

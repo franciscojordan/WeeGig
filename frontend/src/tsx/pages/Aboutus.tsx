@@ -1,11 +1,7 @@
 import Image1 from "../../assets/img/fran.jpg";
 import Image2 from "../../assets/img/victor.jpg";
-<<<<<<< HEAD
-import Image3 from "../../assets/img/ale.jpg";
-import MapComponent from '../components/Map';
-=======
 import Image3 from "../../assets/img/alej.jpg";
->>>>>>> origin/develop
+import MapComponent from '../components/Map';
 
 const AboutUs: React.FC = () => {
   const mapCenter = { lat: 41.38837180727378, lng: 2.1799002828303 };
@@ -101,11 +97,9 @@ const AboutUs: React.FC = () => {
       >
         <h1>Donde encontrarnos</h1>
         <address>
+          <p>
           Dirección: Carrer d'En Llàstics, 2, 08003 Barcelona
-          <br />
-          Teléfono: (+34) 611 16 87 37
-          <br />
-          Email: info@weegig.com
+          </p>
         </address>
         <MapComponent center={mapCenter} zoom={mapZoom} markerPosition={markerPosition} />
       </div>

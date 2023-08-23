@@ -10,7 +10,7 @@ interface MapProps {
 
 const MapComponent: React.FC<MapProps> = ({ center, zoom, markerPosition }) => {
     return (
-        <div style={{ height: '500px', width: '50%' }}>
+        <div style={{ height: '500px', width: '50%', paddingLeft: "24vw"}}>
             <GoogleMapReact
                 bootstrapURLKeys={{ key: credentials.apiKey }} // Replace with your Google Maps API key
                 defaultCenter={center}
