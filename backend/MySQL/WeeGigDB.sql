@@ -178,6 +178,14 @@ ENGINE = InnoDB;
 -- Ahora que hemos combinado las tablas, podemos eliminar la antigua tabla REVIEW_DATE.
 -- DROP TABLE IF EXISTS `WeeGigDB`.`REVIEW_DATE`;
 
+-- Insertar 3 reviews en la tabla REVIEWS
+INSERT INTO `WeeGigDB`.`REVIEWS` 
+(`review_title`, `review_content`, `rating`, `id_Reviewer`, `id_Reviewed`, `id_Job`, `review_date`)
+VALUES 
+('Gran trabajo', 'El empleado hizo un trabajo excepcional y fue muy puntual.', 5, 1, 2, 1, '2023-08-01'),
+('Promedio', 'El trabajo fue decente, pero hubo un par de áreas que necesitan mejora.', 3, 1, 2, 2, '2023-08-05'),
+('No recomendado', 'Desafortunadamente, la calidad del trabajo no cumplió con nuestras expectativas.', 1, 2, 1, 3, '2023-08-10');
+
 
 
 	-- -----------------------------------------------------
