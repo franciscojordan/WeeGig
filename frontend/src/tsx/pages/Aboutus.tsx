@@ -1,8 +1,12 @@
 import Image1 from "../../assets/img/fran.jpg";
 import Image2 from "../../assets/img/victor.jpg";
 import Image3 from "../../assets/img/ale.jpg";
+import MapComponent from '../components/Map';
 
 const AboutUs: React.FC = () => {
+  const mapCenter = { lat: 41.38837180727378, lng: 2.1799002828303 };
+  const mapZoom = 15;
+  const markerPosition = {lat: 41.38837180727378, lng: 2.1799002828303 };
   return (
     <div style={{ display: "flex", flexDirection: "column" }}>
       <div style={{ position: "relative", width: "100%" }}>
@@ -92,7 +96,7 @@ const AboutUs: React.FC = () => {
           textAlign: "center",
         }}
       >
-        <h1>Contacto</h1>
+        <h1>Donde encontrarnos</h1>
         <address>
           Dirección: Carrer d'En Llàstics, 2, 08003 Barcelona
           <br />
@@ -100,6 +104,7 @@ const AboutUs: React.FC = () => {
           <br />
           Email: info@weegig.com
         </address>
+        <MapComponent center={mapCenter} zoom={mapZoom} markerPosition={markerPosition} />
       </div>
     </div>
   );

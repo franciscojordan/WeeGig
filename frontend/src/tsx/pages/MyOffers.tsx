@@ -18,7 +18,7 @@ function MyOfferts() {
     window.location.href = "/nueva-oferta";
   }
 
- useEffect(() => {
+useEffect(() => {
   fetch(`http://localhost:8080/job-applications/user/${user.idUser}`)
     .then((response) => response.json())
     .then(async (data) => {
