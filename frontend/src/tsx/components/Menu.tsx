@@ -27,7 +27,8 @@ const pageLinks = {
 
 const settingsLinks = {
   Perfil: "/mi-perfil",
-  "Reseñas": "/resenas",
+  "Reseñas": "/resenas-trabajos",
+  "Reseñas ": "/resenas-ofertas",
   "Nuevo trabajo": "/nuevo-trabajo",
   "Mis ofertas": "/mis-ofertas",
   "Mis trabajos": "/mis-trabajos",
@@ -62,7 +63,7 @@ const Bar = ({ user }) => {
     settings =
       user.userType === "Employer"
         ? ["Perfil", "Reseñas", "Nuevo trabajo", "Mis trabajos", "Cerrar Sesión"]
-        : ["Perfil", "Reseñas", "Mis ofertas", "Cerrar Sesión"];
+        : ["Perfil", "Reseñas ", "Mis ofertas", "Cerrar Sesión"];
   }
 
   return (

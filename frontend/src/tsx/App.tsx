@@ -16,7 +16,8 @@ import ContactUs from './pages/ContactUs';
 import NewOffert from './pages/NewOffer';
 import MyJobs from './pages/MyJobs';
 import Profile from './pages/Profile';
-import Reviews from './pages/Reviews';
+import ReviewsEmployer from './pages/ReviewsEmployer';
+import ReviewsEmployee from './pages/ReviewsEmployee';
 
 function App() {
 	return (
@@ -36,7 +37,8 @@ function App() {
 				<Route path="/contactanos" element={<ContactUs />} />
 				<Route path="/nuevo-trabajo" element={<NewOffert />} />
 				<Route path="/mis-trabajos" element={<MyJobs />} />
-				<Route path="/resenas" element={<Reviews />} />
+				<Route path="/resenas-trabajos" element={<ReviewsEmployer />} />
+				<Route path="/resenas-ofertas" element={<ReviewsEmployee />} />
 				<Route path="*"  element={<Error />} />
 			</Routes>
       <Footer />
