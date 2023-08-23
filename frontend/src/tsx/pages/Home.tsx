@@ -30,8 +30,8 @@ function Home() {
                 <div className="maxw">
                     <h1 className="big">¡Bienvenidos a WEE GIG!</h1>
                     <p>En WEE GIG, nos enorgullece ser un puente entre individuos comprometidos y apasionados por hacer una diferencia en el mundo y oportunidades de trabajo en el ámbito de la beneficencia.</p>
-                    <Button href='/SignIn' value="Crear Cuenta" type="green" />
-                    <Button href='/Login' value="Iniciar Sesion" />
+                    <a href="/registrar"><Button href='/register' value="Crear Cuenta" type="green" /></a>
+                    <a href="/Login"><Button href='/login' value="Iniciar Sesion" /></a>
                 </div>
                 <div className="leftimg">
                     <img src="./src/assets/img/initial.jpg" alt="" />
@@ -41,7 +41,7 @@ function Home() {
                 <div>
                     <h1 className="textmarg">Descubre todo lo que ofrece WEE GIG</h1>
                     <h2>
-                        <a href="">
+                        <a href="/contactanos">
                             Para mayor información no dude en ponerse en contacto con nosotros.                        
                         </a>
                     </h2>
@@ -52,7 +52,7 @@ function Home() {
                                 title="Descubre Oportunidades de Voluntariado"
                                 content="Explora nuestras diversas oportunidades de voluntariado y únete a proyectos inspiradores que impactan positivamente en comunidades vulnerables."
                                 subtitle="Explorar Oportunidades"
-                                hrefcontent="www.google.com"
+                                hrefcontent="/nosotros"
                             />
                         </div>
                         <div className="charts">
@@ -61,7 +61,7 @@ function Home() {
                                 title="Empleo con Propósito Solidario"
                                 content="¿Buscas un trabajo que vaya más allá de las ganancias? Explora nuestras ofertas laborales en el sector de beneficencia y únete a equipos comprometidos con un propósito."
                                 subtitle="Ver Ofertas de Empleo"
-                                hrefcontent="./Ofertas"
+                                hrefcontent="/ofertas"
                             />
                         </div>
                         <div className="charts">
@@ -70,7 +70,7 @@ function Home() {
                                 title="Colabora en Proyectos Benéficos Innovadores"
                                 content="Si tienes habilidades específicas, ¡puedes hacer una diferencia aún mayor! Únete a proyectos benéficos innovadores que buscan mentes creativas en diseño, tecnología, investigación y más."
                                 subtitle="Explorar Colaboraciones"
-                                hrefcontent="www.google.com"
+                                hrefcontent="/contactanos"
                             />
                         </div>
                     </div>

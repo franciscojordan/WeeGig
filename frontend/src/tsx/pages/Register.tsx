@@ -134,7 +134,7 @@ export default function SignUp() {
 
 
   return (
-    <div className="box-contact">
+    <div className="big-box">
       <div className="contact-us">
         <ThemeProvider theme={theme}>
           <Container component="main" maxWidth="xs">
