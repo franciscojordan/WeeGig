@@ -13,27 +13,64 @@ function Reviews() {
   const [jobs, setJobs] = useState([]);
   const [ratings, setRatings] = useState({});
   const [reviews, setReviews] = useState({});
+  const [sentReviews, setSentReviews] = useState({});
 
   const user = cookies.user;
 
   // Manejar la calificación para un usuario específico
-  const handleRatingChange = (userId, newValue) => {
-    setRatings((prevRatings) => ({ ...prevRatings, [userId]: newValue }));
+  const handleRatingChange = (jobId, userId, newValue) => {
+    const key = `${jobId}-${userId}`;
+    setRatings((prevRatings) => ({ ...prevRatings, [key]: newValue }));
   };
 
   // Manejar el cambio en el área de texto de reseña para un usuario específico
-  const handleReviewChange = (userId, event) => {
+  const handleReviewChange = (jobId, userId, event) => {
+    const key = `${jobId}-${userId}`;
     setReviews((prevReviews) => ({
       ...prevReviews,
-      [userId]: event.target.value,
+      [key]: event.target.value,
     }));
   };
 
   // TODO: Implementar la función para enviar la reseña a tu API/backend
-  const handleSendReview = (userId) => {
-    const rating = ratings[userId];
-    const review = reviews[userId];
-    // Aquí envías `rating` y `review` a tu backend/API
+  const handleSendReview = (jobId, userId) => {
+    const key = `${jobId}-${userId}`;
+    const rating = ratings[key];
+    const review = reviews[key];
+
+    const reviewData = {
+      idReviews: null, // Si tienes autoincremento en la base de datos
+      reviewTitle: review,
+      reviewContent: review,
+      rating: rating,
+      idReviewer: user.idUser, // Suponiendo que la cookie `user` tiene un idUser
+      idReviewed: userId,
+      idJob: jobId,
+      reviewDate: new Date().toISOString().split("T")[0],
+    };
+
+    fetch("http://localhost:8080/reviews/save", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(reviewData),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          // Si hay un error, obtener el mensaje de error del cuerpo de la respuesta
+          return response.text().then((text) => Promise.reject(text));
+        }
+        return response.json(); // Si todo está bien, obtener el objeto Review
+      })
+      .then((data) => {
+        // Aquí puedes manejar el objeto Review que fue guardado
+        // Por ejemplo, mostrar un mensaje de éxito
+      })
+      .catch((error) => {
+        console.error("Hubo un error al enviar la reseña:", error);
+        // Aquí puedes mostrar el mensaje de error en tu UI
+      });
   };
 
   useEffect(() => {
@@ -105,45 +142,61 @@ function Reviews() {
                     <Typography variant="subtitle1" gutterBottom>
                       Aceptados:
                     </Typography>
-                    {job.acceptedApplications.map((app) => (
-                      <div key={app.userId}>
-                        <Avatar>{user.name.charAt(0)}</Avatar>
-                        <Chip
-                          label={app.userName}
-                          variant="outlined"
-                          style={{ marginRight: "8px", marginBottom: "8px" }}
-                        />
-                        <Rating
-                          name={`rating-${app.userId}`}
-                          value={ratings[app.userId] || 0}
-                          onChange={(event, newValue) =>
-                            handleRatingChange(app.userId, newValue)
-                          }
-                        />
-                        <TextField
-                          label="Añadir reseña"
-                          variant="outlined"
-                          multiline
-                          rows={3}
-                          value={reviews[app.userId] || ""}
-                          onChange={(event) =>
-                            handleReviewChange(app.userId, event)
-                          }
-                          style={{
-                            marginTop: "8px",
-                            marginBottom: "8px",
-                            width: "100%",
-                          }}
-                        />
-                        <Button
-                          variant="contained"
-                          color="primary"
-                          onClick={() => handleSendReview(app.userId)}
-                        >
-                          Enviar
-                        </Button>
-                      </div>
-                    ))}
+                    {job.acceptedApplications.map((app) =>
+                      !sentReviews[`${job.idJobOffers}-${app.userId}`] ? (
+                        <div key={app.userId}>
+                          <Avatar>{user.name.charAt(0)}</Avatar>
+                          <Chip
+                            label={app.userName}
+                            variant="outlined"
+                            style={{ marginRight: "8px", marginBottom: "8px" }}
+                          />
+                          <Rating
+                            name={`rating-${job.idJobOffers}-${app.userId}`}
+                            value={
+                              ratings[`${job.idJobOffers}-${app.userId}`] || 1
+                            }
+                            onChange={(event, newValue) =>
+                              handleRatingChange(
+                                job.idJobOffers,
+                                app.userId,
+                                newValue
+                              )
+                            }
+                          />
+                          <TextField
+                            label="Añadir reseña"
+                            variant="outlined"
+                            multiline
+                            rows={3}
+                            value={
+                              reviews[`${job.idJobOffers}-${app.userId}`] || ""
+                            }
+                            onChange={(event) =>
+                              handleReviewChange(
+                                job.idJobOffers,
+                                app.userId,
+                                event
+                              )
+                            }
+                            style={{
+                              marginTop: "8px",
+                              marginBottom: "8px",
+                              width: "100%",
+                            }}
+                          />
+                          <Button
+                            variant="contained"
+                            color="primary"
+                            onClick={() =>
+                              handleSendReview(job.idJobOffers, app.userId)
+                            }
+                          >
+                            Enviar reseña
+                          </Button>
+                        </div>
+                      ) : null
+                    )}
                   </div>
                 )}
               </CardContent>
