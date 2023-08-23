@@ -11,7 +11,6 @@ import { useCookies } from "react-cookie";
 import HourglassTopIcon from "@mui/icons-material/HourglassTop";
 import Chip from "@mui/material/Chip";
 
-
 function RecipeReviewCard({ title, schedule, description }) {
   return (
     <Box sx={{ maxWidth: 400 }}>
@@ -77,7 +76,9 @@ function Ofertas() {
   }, [user]);
 
   return (
-    <div style={{ display: "flex", justifyContent: "center", minHeight: "80vh"}}>
+    <div
+      style={{ display: "flex", justifyContent: "center", minHeight: "80vh" }}
+    >
       <div style={{ maxWidth: "1040px" }}>
         <h1 style={{ textAlign: "center" }}>Ofertas Component</h1>
         <div
@@ -111,7 +112,17 @@ function Ofertas() {
             >
               <Link to={`/jobs/${job.idJobOffers}`}>
                 <RecipeReviewCard
-                  title={job.title}
+                  title={
+                    <span
+                      style={{
+                        color: "#1A1A1A",
+                        fontSize: "20px",
+                        fontWeight: "bold",
+                      }}
+                    >
+                      {job.title}
+                    </span>
+                  }
                   schedule={job.schedule}
                   description={job.description}
                 />

@@ -23,26 +23,78 @@ function MyOfferts() {
       .then((response) => response.json())
       .then((data) => setApplications(data))
       .catch((error) => console.error("Hubo un error:", error));
-    }, []);
-    
+  }, []);
 
   return (
     <div className="big-box">
       <div className="small-box">
         <h1>Mis Ofertas</h1>
-        <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "flex-start", gap: "20px", maxWidth: "1200px", margin: "0 auto" }}>
+        <div
+          style={{
+            display: "flex",
+            flexWrap: "wrap",
+            justifyContent: "flex-start",
+            gap: "20px",
+            maxWidth: "1200px",
+            margin: "0 auto",
+          }}
+        >
           {applications.length > 0 ? (
             <ul style={{ padding: "0", listStyle: "none" }}>
               {applications.map((application, index) => (
-                <li key={index} style={{ background: "#f5f5f5", borderRadius: "10px", padding: "10px", border: "1px solid #ccc", flex: "0 1 calc(30% - 20px)", marginBottom: "20px", display: "flex", flexDirection: "column", textAlign: "left" }}>
+                <li
+                  key={index}
+                  style={{
+                    background: "#f5f5f5",
+                    borderRadius: "10px",
+                    padding: "10px",
+                    border: "1px solid #ccc",
+                    flex: "0 1 calc(30% - 20px)",
+                    marginBottom: "20px",
+                    display: "flex",
+                    flexDirection: "column",
+                    textAlign: "left",
+                  }}
+                >
                   <Link to={`/jobs/${application.jobId}`}>
-                    <p>{`Trabajo ID: ${application.jobId}`}</p>
-                    <p>{`Fecha de aplicación: ${application.applicationDate}`}</p>
-                    {application.applicationStatus === "applied" && <Chip icon={<HourglassTopIcon />} label="En espera" variant="outlined" />}
-                    {application.applicationStatus === "accepted" && <Chip icon={<HowToRegIcon />} label="Aceptado" variant="outlined" />}
-                    {application.applicationStatus === "rejected" && <Chip icon={<DoDisturbOffIcon />} label="Rechazado" variant="outlined" />}
-                    {application.applicationStatus === "done" && <Chip icon={<DoneIcon />} label="Trabajo realizado" variant="outlined" />}
-
+                    <p
+                      style={{
+                        color: "#1A1A1A",
+                        fontSize: "16px",
+                        fontWeight: "bold",
+                      }}
+                    >{`Trabajo ID: ${application.jobId}`}</p>
+                    <p
+                      style={{ color: "black" }}
+                    >{`Fecha de aplicación: ${application.applicationDate}`}</p>
+                    {application.applicationStatus === "applied" && (
+                      <Chip
+                        icon={<HourglassTopIcon />}
+                        label="En espera"
+                        variant="outlined"
+                      />
+                    )}
+                    {application.applicationStatus === "accepted" && (
+                      <Chip
+                        icon={<HowToRegIcon />}
+                        label="Aceptado"
+                        variant="outlined"
+                      />
+                    )}
+                    {application.applicationStatus === "rejected" && (
+                      <Chip
+                        icon={<DoDisturbOffIcon />}
+                        label="Rechazado"
+                        variant="outlined"
+                      />
+                    )}
+                    {application.applicationStatus === "done" && (
+                      <Chip
+                        icon={<DoneIcon />}
+                        label="Trabajo realizado"
+                        variant="outlined"
+                      />
+                    )}
                   </Link>
                 </li>
               ))}

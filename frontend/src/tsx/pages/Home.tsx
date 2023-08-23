@@ -1,8 +1,8 @@
 import "../../css/pages/Home.css";
 
-function Button(props): JSX.Element {
+function Button(props) {
     let color;
-    if (props.type == "green") {
+    if (props.type === "green") {
         color = "button-green";
     } else {
         color = "button-green-line";
@@ -10,28 +10,34 @@ function Button(props): JSX.Element {
     return <button className={color}>{props.value}</button>;
 }
 
-function DivBox(props): JSX.Element {
+function DivBox(props) {
     return (
-        <>
-            <div className="charts">
-                <img src={props.img} alt="" />
-                <h3>{props.title} </h3>
-                <p>{props.content}</p>
-                <a href={props.hrefcontent}>{props.subtitle}</a>
-            </div>
-        </>
+        <div className="charts">
+            <img src={props.img} alt="" />
+            <h3>{props.title} </h3>
+            <p>{props.content}</p>
+            <a href={props.hrefcontent}>{props.subtitle}</a>
+        </div>
     );
 }
 
 function Home() {
+    // Simulando que el usuario está registrado (cambiar a true o false según corresponda)
+    const userIsRegistered = false;
+
     return (
-        <>
+        <div>
             <div className="container">
                 <div className="maxw">
                     <h1 className="big">¡Bienvenidos a WEE GIG!</h1>
                     <p>En WEE GIG, nos enorgullece ser un puente entre individuos comprometidos y apasionados por hacer una diferencia en el mundo y oportunidades de trabajo en el ámbito de la beneficencia.</p>
-                    <a href="/registrar"><Button href='/register' value="Crear Cuenta" type="green" /></a>
-                    <a href="/Login"><Button href='/login' value="Iniciar Sesion" /></a>
+                    {/* Condición para mostrar o no los botones */}
+                    {!userIsRegistered && (
+                        <div>
+                            <a href="/registrar"><Button value="Crear Cuenta" type="green" /></a>
+                            <a href="/Login"><Button value="Iniciar Sesión" /></a>
+                        </div>
+                    )}
                 </div>
                 <div className="leftimg">
                     <img src="./src/assets/img/initial.jpg" alt="" />
@@ -42,7 +48,7 @@ function Home() {
                     <h1 className="textmarg">Descubre todo lo que ofrece WEE GIG</h1>
                     <h2>
                         <a href="/contactanos">
-                            Para mayor información no dude en ponerse en contacto con nosotros.                        
+                            Para mayor información no dude en ponerse en contacto con nosotros.
                         </a>
                     </h2>
                     <div className="chart">
@@ -76,7 +82,7 @@ function Home() {
                     </div>
                 </div>
             </div>
-        </>
+        </div>
     );
 }
 
