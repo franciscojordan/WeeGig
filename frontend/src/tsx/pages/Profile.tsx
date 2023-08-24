@@ -36,83 +36,84 @@ const Profile = () => {
 
   return (
     <div className="big-box">
-      <div className="small-box">
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            width: "80%",
-            margin: "0 auto",
-          }}
-        >
-          <div
-            style={{
-              width: "40%",
-              padding: "20px",
-              border: "1px solid #ccc",
-              borderRadius: "10px",
-              textAlign: "left", // Añadido para alinear el texto a la izquierda
-            }}
-          >
-            {userData ? (
-              <>
-                <Avatar>{userData.name.charAt(0)}</Avatar>
-                <h2>
-                  {userData.name} {userData.surname}
-                </h2>
-                <p>
-                  <strong>Usuario:</strong> {userData.username}
-                </p>
-                <p>
-                  <strong>Email:</strong> {userData.email}
-                </p>
-                <p>
-                  <strong>Número de teléfonoss:</strong> {userData.phone_number}
-                </p>
-                <p>
-                  <strong>Fecha de nacimiento:</strong> {userData.birthdate}
-                </p>
-                <p>
-                  <strong>Nombre de compañía:</strong>{" "}
-                  {userData.company_name || "N/A"}
-                </p>
-              </>
-            ) : (
-              <p>No eres un usuario...</p>
-            )}
-          </div>
-          <div
-            style={{
-              width: "40%",
-              padding: "20px",
-              border: "1px solid #ccc",
-              borderRadius: "10px",
-              textAlign: "left", // Añadido para alinear el texto a la izquierda
-            }}
-          >
-            <h3>Reseñas:</h3>
-            {reviews ? (
-              reviews.map((review) => (
-                <div
-                  key={review.id}
-                  style={{
-                    marginBottom: "20px",
-                    borderBottom: "1px solid #ccc",
-                    paddingBottom: "10px",
-                  }}
-                >
-                  <Rating name="read-only" value={review.rating} readOnly />
-                  <p>{review.review_content}</p>
-                  <p>{review.reviewerName}</p>
-                </div>
-              ))
-            ) : (
-              <p>Cargando reseñas...</p>
-            )}
-          </div>
-        </div>
+  <div className="small-box">
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "space-between",
+        width: "80%",
+        margin: "5vh auto", // Agregado margen superior e inferior
+      }}
+    >
+      <div
+        style={{
+          width: "40%",
+          padding: "20px",
+          border: "1px solid #ccc",
+          borderRadius: "10px",
+          textAlign: "left",
+        }}
+      >
+        {userData ? (
+          <>
+            <Avatar>{userData.name.charAt(0)}</Avatar>
+            <h2>
+              {userData.name} {userData.surname}
+            </h2>
+            <p>
+              <strong>Usuario:</strong> {userData.username}
+            </p>
+            <p>
+              <strong>Email:</strong> {userData.email}
+            </p>
+            <p>
+              <strong>Número de teléfono:</strong> {userData.phone_number}
+            </p>
+            <p>
+              <strong>Fecha de nacimiento:</strong> {userData.birthdate}
+            </p>
+            <p>
+              <strong>Nombre de compañía:</strong>{" "}
+              {userData.company_name || "N/A"}
+            </p>
+          </>
+        ) : (
+          <p>No eres un usuario...</p>
+        )}
+      </div>
+      <div
+        style={{
+          width: "40%",
+          padding: "20px",
+          border: "1px solid #ccc",
+          borderRadius: "10px",
+          textAlign: "left",
+        }}
+      >
+        <h3>Reseñas:</h3>
+        {reviews ? (
+          reviews.map((review) => (
+            <div
+              key={review.id}
+              style={{
+                marginBottom: "20px",
+                borderBottom: "1px solid #ccc",
+                paddingBottom: "10px",
+              }}
+            >
+              <Rating name="read-only" value={review.rating} readOnly />
+              <p>{review.review_content}</p>
+              <p>{review.reviewerName}</p>
+            </div>
+          ))
+        ) : (
+          <p>Cargando reseñas...</p>
+        )}
       </div>
     </div>
+  </div>
+</div>
+
   );
   
   

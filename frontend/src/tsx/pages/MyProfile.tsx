@@ -35,7 +35,7 @@ const MyProfile = () => {
             border: "1px solid #ccc",
             borderRadius: "10px",
             maxWidth: "700px",
-            margin: "20px auto",
+            margin: "5vh auto",
           }}
         >
           {user ? (
@@ -81,13 +81,21 @@ const MyProfile = () => {
                   style={{
                     paddingLeft: "20px",
                     marginLeft: "20px",
-                    textAlign: "left", // Alinea el texto hacia la izquierda
+                    textAlign: "left", 
+                    
                   }}
                 >
                   <h3>Reseñas:</h3>
                   {reviews ? (
                     reviews.map((review) => (
-                      <div key={review.id}>
+                      <div
+              key={review.id}
+              style={{
+                marginBottom: "20px",
+                borderBottom: "1px solid #ccc",
+                paddingBottom: "10px",
+              }}
+            >
                         <Rating
                           name="read-only"
                           value={review.rating}
