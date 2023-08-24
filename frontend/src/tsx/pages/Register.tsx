@@ -26,7 +26,7 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import Alert from "@mui/material/Alert";
 import DatePicker from 'react-datepicker'; // Import DatePicker
 import 'react-datepicker/dist/react-datepicker.css';
-// import RegisterLocationAutocomplete from '../components/RegisterLocationAutocomplete';
+import RegisterLocationAutocomplete from '../components/RegisterLocationAutocomplete';
 
 function Copyright(props: any) {
   return (
@@ -385,11 +385,11 @@ export default function SignUp() {
                         />
                       </Grid>
                       <Grid item xs={12}>
-                      {/* <RegisterLocationAutocomplete
+                      <RegisterLocationAutocomplete
                         onSelect={handleLocationSelect}
                         onLocationChange={handleLocationChange}
                         selectedLocation={selectedLocation}
-                      /> */}
+                      />
                       </Grid>
                       <Grid item xs={12}>
                         <TextField
