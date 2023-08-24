@@ -35,7 +35,7 @@ const MyJobs: React.FC = () => {
   return (
     <div className="big-box">
       <div className="small-box">
-        <h1>Mis Trabajos</h1>
+        <h1>Mis Ofertas de Trabajo</h1>
         {applications.length > 0 ? (
           <ul
             style={{
@@ -89,7 +89,7 @@ const MyJobs: React.FC = () => {
             ))}
           </ul>
         ) : (
-          <p>No hay aplicaciones disponibles.</p>
+          <p>Aun no has ofrecido ningun empleo, ¿A que estas esperando?</p>
         )}
       </div>
     </div>
