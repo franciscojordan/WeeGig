@@ -21,7 +21,14 @@ const Profile = () => {
     if (cookies.user && id) {
       fetch(`http://localhost:8080/reviews?to=${id}`)
         .then((res) => res.json())
-        .then((data) => setReviews(data))
+        .then((data) => {
+          if (Array.isArray(data)) {
+            setReviews(data);
+          } else {
+            // console.error("Data is not an array:", data);
+            setReviews([]); // establece reviews a un array vacío o maneja este caso de error de manera diferente si lo prefieres
+          }
+        })
         .catch((error) => console.error(error));
     }
   }, [id, cookies.user]);
@@ -95,8 +102,7 @@ const Profile = () => {
                   }}
                 >
                   <Rating name="read-only" value={review.rating} readOnly />
-                  <h4>{review.reviewTitle}</h4>
-                  <p>{review.reviewContent}</p>
+                  <p>{review.review_content}</p>
                   <p>{review.reviewerName}</p>
                 </div>
               ))

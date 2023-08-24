@@ -307,7 +307,6 @@ function JobDetail() {
       </div>
       
     </div>
-      <Button variant="outlined">Ya puedes hacer review</Button>
     </>
     
   );

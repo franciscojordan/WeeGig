@@ -1,11 +1,9 @@
 import * as React from "react";
-
 import { useCookies } from "react-cookie";
 import { useState, useEffect } from "react";
 import { Card, CardContent, Typography, Chip, Grid } from "@mui/material";
 import { TextField, Button } from "@mui/material";
 import Avatar from "@mui/material/Avatar";
-
 import Rating from "@mui/material/Rating";
 
 function ReviewsEmployee() {
@@ -15,11 +13,19 @@ function ReviewsEmployee() {
   const [reviews, setReviews] = useState({});
   const [sentReviews, setSentReviews] = useState({});
   const [successfulReviews, setSuccessfulReviews] = useState({});
-
   const user = cookies.user;
-
-  // console.log("USER", user);
   const [existingReviews, setExistingReviews] = useState([]);
+
+  useEffect(() => {
+    fetch(`http://localhost:8080/reviews`)
+        .then((response) => response.json())
+        .then((allReviews) => {
+          // Filtramos para obtener solo las reseñas del usuario actual
+          const userReviews = allReviews.filter(review => review.id_Reviewer === user.idUser);
+          setExistingReviews(userReviews);
+        });
+}, []);
+
 
   useEffect(() => {
     if (user) {
@@ -47,15 +53,6 @@ function ReviewsEmployee() {
     }
   }, [user]);
 
-  const hasReviewBeenGiven = (jobId, userId) => {
-    return existingReviews.some(
-      (review) =>
-        review.id_Reviewer === user.idUser &&
-        review.id_Reviewed === userId &&
-        review.id_Job === jobId
-    );
-  };
-
   // Manejar la calificación para un usuario específico
   const handleRatingChange = (jobId, userId, newValue) => {
     console.log("Inside handleRatingChange:", jobId, userId, newValue);
@@ -71,7 +68,6 @@ function ReviewsEmployee() {
       [key]: event.target.value,
     }));
   };
-  
 
   // TODO: Implementar la función para enviar la reseña a tu API/backend
   const handleSendReview = (jobId, userId) => {
@@ -126,10 +122,15 @@ function ReviewsEmployee() {
   };
 
   return (
-    <div>
+    <div className="big-box">
+        <div className="small-box">
       <Typography variant="h4" gutterBottom>
         Reseñas por realizar EMPLOYEE
       </Typography>
+      <h4>
+        Sólo puedes realizar reseñas después de 24 horas de haber culminado el
+        trabajo.
+      </h4>
       <Grid container spacing={3}>
         {jobs
           .filter((job) => {
@@ -141,6 +142,14 @@ function ReviewsEmployee() {
             const isMoreThan24Hours = timeDifference > oneDayInMilliseconds;
             return isClosed && isMoreThan24Hours;
           })
+          .filter((job) => {
+            // Agregamos esta verificación: si la reseña ha sido enviada exitosamente, no mostramos el contenido.
+            const key = `${job.idJobOffers}-${job.idEmployer}`;
+            return !successfulReviews[key];
+          })
+          .filter((job) => {
+            return !existingReviews.some(review => review.id_Job === job.idJobOffers);
+        })
           .map((job) => (
             <Grid item xs={12} key={job.idJobOffers}>
               <Card>
@@ -158,15 +167,6 @@ function ReviewsEmployee() {
                     Status: {job.status}
                   </Typography>
                   <div key={job.idEmployer}>
-                    <Avatar>{user.name.charAt(0)}</Avatar>
-                    <Chip
-                      label={job.userName}
-                      variant="outlined"
-                      style={{
-                        marginRight: "8px",
-                        marginBottom: "8px",
-                      }}
-                    />
                     <Rating
                       name={`rating-${job.idJobOffers}-${job.idEmployer}`}
                       value={
@@ -225,6 +225,8 @@ function ReviewsEmployee() {
           ))}
       </Grid>
     </div>
+    </div>
   );
 }
+
 export default ReviewsEmployee;

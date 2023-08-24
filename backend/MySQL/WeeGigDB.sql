@@ -114,46 +114,14 @@
 	ENGINE = InnoDB;
 
 
-	-- -----------------------------------------------------
-	-- Table `WeeGigDB`.`REVIEWS`
-	-- -----------------------------------------------------
-	-- DROP TABLE IF EXISTS `WeeGigDB`.`REVIEWS` ;
-
--- 	CREATE TABLE IF NOT EXISTS `WeeGigDB`.`REVIEWS` (
--- 	  `id_REVIEWS` INT NOT NULL AUTO_INCREMENT,
--- 	  `review_title` VARCHAR(45) NULL,
--- 	  `review_content` VARCHAR(256) NULL,
--- 	  `rating` INT NULL,
--- 	  `id_Reviewer` INT NOT NULL,
--- 	  `id_Reviewed` INT NOT NULL,
--- 	  PRIMARY KEY (`id_REVIEWS`),
--- 	  INDEX `id_Reviewer_idx` (`id_Reviewer` ASC) VISIBLE,
--- 	  INDEX `id_Reviewed_idx` (`id_Reviewed` ASC) VISIBLE,
--- 	  CONSTRAINT `id_Reviewer_1`
--- 		FOREIGN KEY (`id_Reviewer`)
--- 		REFERENCES `WeeGigDB`.`USERS` (`id_USER`)
--- 		ON DELETE NO ACTION
--- 		ON UPDATE NO ACTION,
--- 	  CONSTRAINT `id_Reviewed`
--- 		FOREIGN KEY (`id_Reviewed`)
--- 		REFERENCES `WeeGigDB`.`USERS` (`id_USER`)
--- 		ON DELETE NO ACTION
--- 		ON UPDATE NO ACTION)
--- 	ENGINE = InnoDB;
--- -----------------------------------------------------
--- Table `WeeGigDB`.`REVIEWS`
--- -----------------------------------------------------
--- DROP TABLE IF EXISTS `WeeGigDB`.`REVIEWS`;
-
 CREATE TABLE IF NOT EXISTS `WeeGigDB`.`REVIEWS` (
   `id_REVIEWS` INT NOT NULL AUTO_INCREMENT,
-  `review_title` VARCHAR(45) NULL,
-  `review_content` TEXT NULL,           -- Cambiado a TEXT para permitir más contenido
-  `rating` TINYINT NOT NULL CHECK (rating >= 1 AND rating <= 5),   -- Definición más estricta para el rating
+  `review_content` VARCHAR(255) NULL,
+  `rating` TINYINT NOT NULL CHECK (rating >= 1 AND rating <= 5),
   `id_Reviewer` INT NOT NULL,
   `id_Reviewed` INT NOT NULL,
-  `id_Job` INT NOT NULL,                -- ID del trabajo para el cual se hace la revisión
-  `review_date` DATE NOT NULL,          -- Fecha en la que se hizo la revisión
+  `id_Job` INT NOT NULL,
+  `review_date` DATE NOT NULL,
   PRIMARY KEY (`id_REVIEWS`),
   INDEX `id_Reviewer_idx` (`id_Reviewer` ASC) VISIBLE,
   INDEX `id_Reviewed_idx` (`id_Reviewed` ASC) VISIBLE,
@@ -175,108 +143,8 @@ CREATE TABLE IF NOT EXISTS `WeeGigDB`.`REVIEWS` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
--- Ahora que hemos combinado las tablas, podemos eliminar la antigua tabla REVIEW_DATE.
--- DROP TABLE IF EXISTS `WeeGigDB`.`REVIEW_DATE`;
-
--- Insertar 3 reviews en la tabla REVIEWS
-INSERT INTO `WeeGigDB`.`REVIEWS` 
-(`review_title`, `review_content`, `rating`, `id_Reviewer`, `id_Reviewed`, `id_Job`, `review_date`)
-VALUES 
-('Gran trabajo', 'El empleado hizo un trabajo excepcional y fue muy puntual.', 5, 1, 2, 1, '2023-08-01'),
-('Promedio', 'El trabajo fue decente, pero hubo un par de áreas que necesitan mejora.', 3, 1, 2, 2, '2023-08-05'),
-('No recomendado', 'Desafortunadamente, la calidad del trabajo no cumplió con nuestras expectativas.', 1, 2, 1, 3, '2023-08-10');
-
-
-
-	-- -----------------------------------------------------
-	-- Table `WeeGigDB`.`REVIEW_DATE`
-	-- -----------------------------------------------------
-	DROP TABLE IF EXISTS `WeeGigDB`.`REVIEW_DATE` ;
-
-	CREATE TABLE IF NOT EXISTS `WeeGigDB`.`REVIEW_DATE` (
-	  `id_Review` INT NOT NULL,
-	  `id_Reviewer` INT NOT NULL,
-	  `id_Job` INT NOT NULL,
-	  `review_date` DATE NULL,
-	  `id_Reviewed` INT NOT NULL,
-	  PRIMARY KEY (`id_Review`, `id_Reviewer`, `id_Job`),
-	  INDEX `id_Reviewer_idx` (`id_Reviewer` ASC) VISIBLE,
-	  INDEX `id_Job_idx` (`id_Job` ASC) VISIBLE,
-	  CONSTRAINT `id_Review`
-		FOREIGN KEY (`id_Review`)
-		REFERENCES `WeeGigDB`.`REVIEWS` (`id_REVIEWS`)
-		ON DELETE NO ACTION
-		ON UPDATE NO ACTION,
-	  CONSTRAINT `id_Reviewer`
-		FOREIGN KEY (`id_Reviewer`)
-		REFERENCES `WeeGigDB`.`USERS` (`id_USER`)
-		ON DELETE NO ACTION
-		ON UPDATE NO ACTION,
-	  CONSTRAINT `id_Job`
-		FOREIGN KEY (`id_Job`)
-		REFERENCES `WeeGigDB`.`JOB_OFFERS` (`id_JOB_OFFERS`)
-		ON DELETE NO ACTION
-		ON UPDATE NO ACTION)
-	ENGINE = InnoDB;
 
 
 	SET SQL_MODE=@OLD_SQL_MODE;
 	SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 	SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
-
-	-- Creación de usuarios y empleador
-	INSERT INTO LOGIN (email, password) VALUES
-	  ('employee1@example.com', 'employee1password'),
-	  ('employee2@example.com', 'employee2password'),
-	  ('employer1@example.com', 'employer1password');
-
-	INSERT INTO USERS (username, email, name, surname, doc_type, document, phone_number, birthdate, user_type, company_name, company_NIF, address, company_phone_number, website)
-	VALUES
-	  ('employee1', 'employee1@example.com', 'Employee One', 'Last Name', 1, '12345678A', '1234567890', '1990-01-01', 'Employee', NULL, NULL, NULL, NULL, NULL),
-	  ('employee2', 'employee2@example.com', 'Employee Two', 'Last Name', 1, '23456789B', '9876543210', '1995-05-15', 'Employee', NULL, NULL, NULL, NULL, NULL),
-	  ('employer1', 'employer1@example.com', 'Employer One', 'Company', 2, '34567890C', '5555555555', '1985-08-20', 'Employer', 'My Company', '123456789', '123 Street', '555-555-5555', 'www.mycompany.com');
-
-	-- Obtén el ID del employer1
-	SELECT id_USER INTO @employerID FROM USERS WHERE username = 'employer1';
-
-	-- Creación de ofertas de trabajo por employer1
-	INSERT INTO JOB_OFFERS (title, status, description, payment_type, payment, location, schedule, category, id_employer)
-	VALUES
-	  ('Oferta 1', 'open', 'Descripción de la oferta 1', 'Tipo de pago 1', 'Pago 1', 'Ubicación 1', NOW(), 'Categoría 1', @employerID),
-	  ('Oferta 2', 'open', 'Descripción de la oferta 2', 'Tipo de pago 2', 'Pago 2', 'Ubicación 2', NOW(), 'Categoría 2', @employerID),
-	  ('Oferta 3', 'open', 'Descripción de la oferta 3', 'Tipo de pago 3', 'Pago 3', 'Ubicación 3', NOW(), 'Categoría 3', @employerID);
-
-
-	-- Aplicación a ofertas de trabajo
-	-- Obtén el ID de los empleados
-	SELECT id_USER INTO @employeeID1 FROM USERS WHERE username = 'employee1';
-	SELECT id_USER INTO @employeeID2 FROM USERS WHERE username = 'employee2';
-
-	-- Insertar aplicaciones a ofertas
-	INSERT INTO JOB_APPLICATION (id_USER, id_JOB_OFFERS, application_date, application_status)
-	VALUES
-	  (@employeeID1, 1, NOW(), 'Applied'),
-	  (@employeeID2, 1, NOW(), 'Applied');
-
-	-- Creación de revisiones
-	-- Insertar revisiones
-	INSERT INTO REVIEWS (review_title, review_content, rating, id_reviewer, id_reviewed)
-	VALUES
-	  ('Buena Experiencia', 'Trabajé en una oferta con este empleador y fue una experiencia positiva.', 4, @employeeID1, @employerID),
-	  ('Satisfactorio', 'Colaboré con este empleado en un proyecto y cumplió con las expectativas.', 5, @employerID, @employeeID1);
-
-	-- Pruebas
-	SELECT * FROM WeeGigDB.JOB_APPLICATION;
-    SELECT * FROM WeeGigDB.JOB_OFFERS;
-    SELECT * FROM WeeGigDB.REVIEWS;
-    SELECT * FROM WeeGigDB.REVIEW_DATE;
-    SELECT * FROM WeeGigDB.USERS;
-    SELECT * FROM WeeGigDB.LOGIN;
-    -- DELETE FROM `WeeGigDB`.`job_application`;
-	-- DELETE FROM `WeeGigDB`.`LOGIN`;
-	-- DELETE FROM `WeeGigDB`.`USERS`;
-	-- DELETE * FROM WeeGigDB.JOB_APPLICATION;
-	-- SELECT * FROM WeeGigDB.USERS WHERE id_USER = 1;
-    -- DROP DATABASE WeeGigDB;
-	-- ALTER TABLE `WeeGigDB`.`JOB_OFFERS` MODIFY `description` VARCHAR(255);
-      

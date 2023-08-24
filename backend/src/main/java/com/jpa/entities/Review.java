@@ -50,9 +50,6 @@ public class Review {
     @Column(name = "id_REVIEWS")
     private Integer idReviews; // Cambiado a camelCase
 
-    @Column(name = "review_title")
-    private String reviewTitle;
-
     @Column(name = "review_content")
     private String reviewContent;
 
