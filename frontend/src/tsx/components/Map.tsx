@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import GoogleMapReact from 'google-map-react';
-import credentials from '../../../../credentials';
-import getGoogleMapsApiClient from '../../../../lib/googleApiClient';
+import credentials from '../../../credentials';
+import getGoogleMapsApiClient from '../../../lib/googleApiClient';
 
 interface MapProps {
     center: { lat: number; lng: number };

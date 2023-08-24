@@ -7,7 +7,7 @@ import { useCookies } from "react-cookie";
 import DatePicker from 'react-datepicker'; // Import DatePicker
 import 'react-datepicker/dist/react-datepicker.css';
 import { Autocomplete } from "@mui/material";
-import getGoogleMapsApiClient from "../../../../lib/googleApiClient";
+import getGoogleMapsApiClient from "../../../lib/googleApiClient";
 import { setHours, setMinutes, subHours } from 'date-fns';
 import { Google } from "@mui/icons-material";
 import LocationAutocomplete from '../components/LocationAutocomplete';
