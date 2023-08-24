@@ -58,11 +58,11 @@ const RegisterLocationAutocomplete: React.FC<RegisterLocationAutocompleteProps> 
             freeSolo
             options={options}
             inputValue={inputValue}
-            selectedLocation={selectedLocation} // Use the selectedLocation prop
             onInputChange={handleInputChange}
             onSelect={(event, newValue) => {
                 if (newValue) {
                     onSelect(newValue);
+                    onLocationChange(newValue);
                     // You don't need to set the formData location here
                 }
             }}

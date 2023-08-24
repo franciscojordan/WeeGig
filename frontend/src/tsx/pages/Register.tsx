@@ -77,6 +77,8 @@ export default function SignUp() {
     }
 
     setEmailError(false);
+    
+    console.log("Selected location in handleSubmit:", selectedLocation);
 
     const userPayload = {
       username: data.get("email"),
@@ -91,7 +93,7 @@ export default function SignUp() {
       userType: checked ? "Employer" : "Employee",
       companyName: data.get("nameOfCompany"),
       companyNif: data.get("nif"),
-      address: address,
+      address: selectedLocation,
       companyPhoneNumber: data.get("numberOfCompany"),
       website: data.get("website")
     };
@@ -137,18 +139,12 @@ export default function SignUp() {
 
   const handleLocationSelect = (location) => {
     console.log('Selected location:', location);
-    setUserPayload((prevData) => ({
-      ...prevData,
-      location: location,
-    }));
+    setSelectedLocation(location); // Update selectedLocation
   };
   
   const handleLocationChange = (newLocation) => {
     console.log('Location changed:', newLocation);
-    setUserPayload((prevData) => ({
-      ...prevData,
-      location: newLocation,
-    }));
+    setSelectedLocation(newLocation); // Update selectedLocation
   };
   
 
@@ -393,7 +389,7 @@ export default function SignUp() {
                         onSelect={handleLocationSelect}
                         onLocationChange={handleLocationChange}
                         selectedLocation={selectedLocation}
-                    />
+                      />
                       </Grid>
                       <Grid item xs={12}>
                         <TextField

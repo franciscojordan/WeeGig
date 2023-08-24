@@ -36,6 +36,17 @@ const redPinStyle: React.CSSProperties = {
 };  
 const mapOptions = {
     fullscreenControl: false, // Hide fullscreen button
+    mapTypeControl: true,
+    mapTypeId: google.maps.MapTypeId.SATELLITE,
+    mapTypeControlOptions: {
+        style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
+        position: google.maps.ControlPosition.BOTTOM_CENTER,
+        mapTypeIds: [
+            google.maps.MapTypeId.ROADMAP,
+            google.maps.MapTypeId.SATELLITE,
+            google.maps.MapTypeId.HYBRID
+        ]
+    },
 };
 const Marker: React.FC<{ lat: number; lng: number; text: string }> = () => (
     <div style={redPinStyle}></div>
