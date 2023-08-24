@@ -75,7 +75,6 @@
 	  `payment` VARCHAR(45) NULL,
 	  `location` VARCHAR(45) NULL,
 	  `schedule` DATETIME NULL,
-	  `category` VARCHAR(45) NULL,
 	  `id_Employer` INT NULL,
 	  `id_Employees` INT NULL,
 	  PRIMARY KEY (`id_JOB_OFFERS`),
