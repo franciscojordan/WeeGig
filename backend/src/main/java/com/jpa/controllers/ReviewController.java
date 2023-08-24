@@ -43,7 +43,6 @@ public class ReviewController {
 
             Map<String, Object> reviewMap = new HashMap<>();
             reviewMap.put("id_REVIEWS", review.getIdReviews());
-            reviewMap.put("review_title", review.getReviewTitle());
             reviewMap.put("review_content", review.getReviewContent());
             reviewMap.put("rating", review.getRating());
             reviewMap.put("id_Reviewer", review.getIdReviewer());

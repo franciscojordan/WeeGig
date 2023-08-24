@@ -144,131 +144,143 @@ function ReviewsEmployer() {
   }, [cookies.user]);
 
   return (
-    <div>
-      <Typography variant="h4" gutterBottom>
-        Reseñas por realizar
-      </Typography>
-      <Grid container spacing={3}>
-        {/* {jobs.map((job) => ( */}
-        {jobs
-  .filter(job => job.acceptedApplications)
-  .filter(job => 
-    job.acceptedApplications.some(app => 
-      !successfulReviews[`${job.idJobOffers}-${app.userId}`] && 
-      !hasReviewBeenGiven(job.idJobOffers, app.userId)
-    )
-  )
-  .map((job) => (
-          <Grid item xs={12} key={job.idJobOffers}>
-            <Card>
-              <CardContent>
-                <Typography variant="h5" gutterBottom>
-                  {job.title}
-                </Typography>
-                <Typography color="textSecondary" gutterBottom>
-                  ID: {job.idJobOffers}
-                </Typography>
-                <Typography color="textSecondary" gutterBottom>
-                  Fecha: {job.schedule}
-                </Typography>
-                <Typography color="textSecondary" gutterBottom>
-                  Status: {job.status}
-                </Typography>
-
-                {job.acceptedApplications && (
-                  <div>
-                    <Typography variant="subtitle1" gutterBottom>
-                      Aceptados:
+    <div className="big-box">
+      <div className="small-box">
+        <Typography variant="h4" gutterBottom>
+          Reseñas por realizar
+        </Typography>
+        <h4>
+          Sólo puedes realizar reseñas después de 24 horas de haber culminado el
+          trabajo.
+        </h4>
+        <Grid container spacing={3}>
+          {/* {jobs.map((job) => ( */}
+          {jobs
+            .filter((job) => job.acceptedApplications)
+            .filter((job) =>
+              job.acceptedApplications.some(
+                (app) =>
+                  !successfulReviews[`${job.idJobOffers}-${app.userId}`] &&
+                  !hasReviewBeenGiven(job.idJobOffers, app.userId)
+              )
+            )
+            .map((job) => (
+              <Grid item xs={12} key={job.idJobOffers}>
+                <Card>
+                  <CardContent>
+                    <Typography variant="h5" gutterBottom>
+                      {job.title}
                     </Typography>
-                    {job.acceptedApplications.map((app) => {
-                      const key = `${job.idJobOffers}-${app.userId}`;
+                    <Typography color="textSecondary" gutterBottom>
+                      ID: {job.idJobOffers}
+                    </Typography>
+                    <Typography color="textSecondary" gutterBottom>
+                      Fecha: {job.schedule}
+                    </Typography>
+                    <Typography color="textSecondary" gutterBottom>
+                      Status: {job.status}
+                    </Typography>
 
-                      // Primero, verifica si la reseña ya fue enviada con éxito
-                      if (successfulReviews[key]) {
-                        return (
-                          <Typography key={`success-${key}`}>
-                            Reseña enviada correctamente
-                          </Typography>
-                        );
-                      }
+                    {job.acceptedApplications && (
+                      <div>
+                        <Typography variant="subtitle1" gutterBottom>
+                          Aceptados:
+                        </Typography>
+                        {job.acceptedApplications.map((app) => {
+                          const key = `${job.idJobOffers}-${app.userId}`;
 
-                      // Si no se ha enviado la reseña y no ha sido dada antes, mostrar opciones de reseña
-                      if (
-                        !sentReviews[key] &&
-                        !hasReviewBeenGiven(job.idJobOffers, app.userId)
-                      ) {
-                        return (
-                          <div key={app.userId}>
-                            <Avatar>{user.name.charAt(0)}</Avatar>
-                            <Chip
-                              label={app.userName}
-                              variant="outlined"
-                              style={{
-                                marginRight: "8px",
-                                marginBottom: "8px",
-                              }}
-                            />
-                            <Rating
-                              name={`rating-${job.idJobOffers}-${app.userId}`}
-                              value={ratings[key] || 1}
-                              onChange={(event, newValue) =>
-                                handleRatingChange(
-                                  job.idJobOffers,
-                                  app.userId,
-                                  newValue
-                                )
-                              }
-                            />
-                            <TextField
-                              label="Añadir reseña"
-                              variant="outlined"
-                              multiline
-                              rows={3}
-                              value={reviews[key] || ""}
-                              onChange={(event) =>
-                                handleReviewChange(
-                                  job.idJobOffers,
-                                  app.userId,
-                                  event
-                                )
-                              }
-                              error={reviews[key] && reviews[key].length < 10}
-                              helperText={
-                                reviews[key] && reviews[key].length < 10
-                                  ? "La reseña debe tener al menos 10 caracteres"
-                                  : ""
-                              }
-                              style={{
-                                marginTop: "8px",
-                                marginBottom: "8px",
-                                width: "100%",
-                              }}
-                            />
-                            <Button
-                              variant="contained"
-                              color="primary"
-                              disabled={
-                                !reviews[key] || reviews[key].length < 10
-                              }
-                              onClick={() =>
-                                handleSendReview(job.idJobOffers, app.userId)
-                              }
-                            >
-                              Enviar reseña
-                            </Button>
-                          </div>
-                        );
-                      }
+                          // Primero, verifica si la reseña ya fue enviada con éxito
+                          if (successfulReviews[key]) {
+                            return (
+                              <Typography key={`success-${key}`}>
+                                Reseña enviada correctamente
+                              </Typography>
+                            );
+                          }
 
-                      return null; // Si ninguna condición anterior se cumple, retornamos null.
-                    })}
-                  </div>
-                )}
-              </CardContent>
-            </Card>
-          </Grid>
-        ))}
-      </Grid>
+                          // Si no se ha enviado la reseña y no ha sido dada antes, mostrar opciones de reseña
+                          if (
+                            !sentReviews[key] &&
+                            !hasReviewBeenGiven(job.idJobOffers, app.userId)
+                          ) {
+                            return (
+                              <div key={app.userId}>
+                                <Avatar>{user.name.charAt(0)}</Avatar>
+                                <Chip
+                                  label={app.userName}
+                                  variant="outlined"
+                                  style={{
+                                    marginRight: "8px",
+                                    marginBottom: "8px",
+                                  }}
+                                />
+                                <Rating
+                                  name={`rating-${job.idJobOffers}-${app.userId}`}
+                                  value={ratings[key] || 1}
+                                  onChange={(event, newValue) =>
+                                    handleRatingChange(
+                                      job.idJobOffers,
+                                      app.userId,
+                                      newValue
+                                    )
+                                  }
+                                />
+                                <TextField
+                                  label="Añadir reseña"
+                                  variant="outlined"
+                                  multiline
+                                  rows={3}
+                                  value={reviews[key] || ""}
+                                  onChange={(event) =>
+                                    handleReviewChange(
+                                      job.idJobOffers,
+                                      app.userId,
+                                      event
+                                    )
+                                  }
+                                  error={
+                                    reviews[key] && reviews[key].length < 10
+                                  }
+                                  helperText={
+                                    reviews[key] && reviews[key].length < 10
+                                      ? "La reseña debe tener al menos 10 caracteres"
+                                      : ""
+                                  }
+                                  style={{
+                                    marginTop: "8px",
+                                    marginBottom: "8px",
+                                    width: "100%",
+                                  }}
+                                />
+                                <Button
+                                  variant="contained"
+                                  color="primary"
+                                  disabled={
+                                    !reviews[key] || reviews[key].length < 10
+                                  }
+                                  onClick={() =>
+                                    handleSendReview(
+                                      job.idJobOffers,
+                                      app.userId
+                                    )
+                                  }
+                                >
+                                  Enviar reseña
+                                </Button>
+                              </div>
+                            );
+                          }
+
+                          return null; // Si ninguna condición anterior se cumple, retornamos null.
+                        })}
+                      </div>
+                    )}
+                  </CardContent>
+                </Card>
+              </Grid>
+            ))}
+        </Grid>
+      </div>
     </div>
   );
 }
