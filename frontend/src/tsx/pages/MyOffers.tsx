@@ -100,7 +100,7 @@ function MyOfferts() {
               ))}
             </ul>
           ) : (
-            <p>No hay aplicaciones disponibles.</p>
+            <p>No te has inscrito a ninguna oferta.</p>
           )}
         </div>
       </div>
