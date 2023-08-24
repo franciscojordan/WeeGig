@@ -40,18 +40,19 @@ const Profile = () => {
     <div
       style={{
         display: "flex",
-        justifyContent: "space-between",
+        flexDirection: "column", // Cambiamos la dirección de los elementos a vertical
         width: "80%",
-        margin: "5vh auto", // Agregado margen superior e inferior
+        margin: "5vh auto",
       }}
     >
       <div
         style={{
-          width: "40%",
+          width: "100%", // Ocupa todo el ancho disponible
           padding: "20px",
           border: "1px solid #ccc",
           borderRadius: "10px",
           textAlign: "left",
+          marginBottom: "20px", // Agregado margen inferior
         }}
       >
         {userData ? (
@@ -83,7 +84,7 @@ const Profile = () => {
       </div>
       <div
         style={{
-          width: "40%",
+          width: "100%", // Ocupa todo el ancho disponible
           padding: "20px",
           border: "1px solid #ccc",
           borderRadius: "10px",
@@ -92,13 +93,15 @@ const Profile = () => {
       >
         <h3>Reseñas:</h3>
         {reviews ? (
-          reviews.map((review) => (
+          reviews.map((review, index) => (
             <div
               key={review.id}
               style={{
                 marginBottom: "20px",
-                borderBottom: "1px solid #ccc",
-                paddingBottom: "10px",
+                borderBottom:
+                  index !== reviews.length - 1 ? "1px solid #ccc" : "none",
+                paddingBottom:
+                  index !== reviews.length - 1 ? "10px" : "0",
               }}
             >
               <Rating name="read-only" value={review.rating} readOnly />
@@ -113,6 +116,8 @@ const Profile = () => {
     </div>
   </div>
 </div>
+
+
 
   );
   
