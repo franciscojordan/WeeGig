@@ -1,4 +1,6 @@
 import "../../css/pages/Home.css";
+import { useCookies } from "react-cookie";
+
 
 function Button(props) {
     let color;
