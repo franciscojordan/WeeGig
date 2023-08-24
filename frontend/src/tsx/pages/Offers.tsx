@@ -11,6 +11,7 @@ import { useCookies } from "react-cookie";
 import HourglassTopIcon from "@mui/icons-material/HourglassTop";
 import Chip from "@mui/material/Chip";
 
+
 function RecipeReviewCard({ title, schedule, description }) {
   return (
     <Box sx={{ maxWidth: 400 }}>
@@ -111,7 +112,7 @@ function Ofertas() {
               <Link to={`/jobs/${job.idJobOffers}`}>
                 <RecipeReviewCard
                   title={job.title}
-                  schedule={job.schedule}
+                  schedule={new Date(job.schedule).toLocaleString()}
                   description={job.description}
                 />
               </Link>
@@ -119,7 +120,7 @@ function Ofertas() {
                 {applications.some(
                   (app) =>
                     app.jobId === job.idJobOffers &&
-                    app.applicationStatus === "Applied"
+                    app.applicationStatus === "applied"
                 ) && (
                   <Chip
                     icon={<HourglassTopIcon />}

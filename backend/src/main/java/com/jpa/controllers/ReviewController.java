@@ -1,11 +1,8 @@
 package com.jpa.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import com.jpa.entities.Review;
 import com.jpa.repository.ReviewRepository;
@@ -45,27 +42,31 @@ public class ReviewController {
             String reviewerName = reviewer != null ? reviewer.getName() : "Desconocido";
 
             Map<String, Object> reviewMap = new HashMap<>();
-            reviewMap.put("id", review.getId());
-            reviewMap.put("reviewTitle", review.getReviewTitle());
-            reviewMap.put("reviewContent", review.getReviewContent());
+            reviewMap.put("id_REVIEWS", review.getIdReviews());
+            reviewMap.put("review_title", review.getReviewTitle());
+            reviewMap.put("review_content", review.getReviewContent());
             reviewMap.put("rating", review.getRating());
+            reviewMap.put("id_Reviewer", review.getIdReviewer());
             reviewMap.put("reviewerName", reviewerName); // Aquí está el nombre del revisor
-            reviewMap.put("idReviewed", review.getIdReviewed());
+            reviewMap.put("id_Reviewed", review.getIdReviewed());
+            reviewMap.put("id_Job", review.getIdJob());
+            reviewMap.put("review_date", review.getReviewDate());
 
             response.add(reviewMap);
         }
 
         return response;
     }
-    
-//    @CrossOrigin(origins = "http://localhost:5173")
-//    @GetMapping
-//    public List<Review> getReviewsByReviewedId(@RequestParam(name = "to", required = false) Integer id) {
-//        if (id != null) {
-//            return reviewRepository.findByIdReviewed(id);
-//        }
-//        return reviewRepository.findAll();
-//    }
-    
+
+    @CrossOrigin(origins = "http://localhost:5173")
+    @PostMapping("/save")
+    public ResponseEntity<?> addReview(@RequestBody Review review) {
+        try {
+            Review savedReview = reviewRepository.save(review);
+            return ResponseEntity.ok(savedReview);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("Error al guardar la reseña: " + e.getMessage());
+        }
+    }
 
 }

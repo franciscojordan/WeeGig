@@ -35,7 +35,7 @@
 
 	CREATE TABLE IF NOT EXISTS `WeeGigDB`.`USERS` (
 	  `id_USER` INT NOT NULL AUTO_INCREMENT,
-	  `username` VARCHAR(16) NOT NULL,
+	  `username` VARCHAR(45) NOT NULL,
 	  `email` VARCHAR(45) NOT NULL,
 	  `name` VARCHAR(45) NOT NULL,
 	  `surname` VARCHAR(45) NOT NULL,
@@ -117,29 +117,67 @@
 	-- -----------------------------------------------------
 	-- Table `WeeGigDB`.`REVIEWS`
 	-- -----------------------------------------------------
-	DROP TABLE IF EXISTS `WeeGigDB`.`REVIEWS` ;
+	-- DROP TABLE IF EXISTS `WeeGigDB`.`REVIEWS` ;
 
-	CREATE TABLE IF NOT EXISTS `WeeGigDB`.`REVIEWS` (
-	  `id_REVIEWS` INT NOT NULL AUTO_INCREMENT,
-	  `review_title` VARCHAR(45) NULL,
-	  `review_content` VARCHAR(256) NULL,
-	  `rating` INT NULL,
-	  `id_Reviewer` INT NOT NULL,
-	  `id_Reviewed` INT NOT NULL,
-	  PRIMARY KEY (`id_REVIEWS`),
-	  INDEX `id_Reviewer_idx` (`id_Reviewer` ASC) VISIBLE,
-	  INDEX `id_Reviewed_idx` (`id_Reviewed` ASC) VISIBLE,
-	  CONSTRAINT `id_Reviewer_1`
-		FOREIGN KEY (`id_Reviewer`)
-		REFERENCES `WeeGigDB`.`USERS` (`id_USER`)
-		ON DELETE NO ACTION
-		ON UPDATE NO ACTION,
-	  CONSTRAINT `id_Reviewed`
-		FOREIGN KEY (`id_Reviewed`)
-		REFERENCES `WeeGigDB`.`USERS` (`id_USER`)
-		ON DELETE NO ACTION
-		ON UPDATE NO ACTION)
-	ENGINE = InnoDB;
+-- 	CREATE TABLE IF NOT EXISTS `WeeGigDB`.`REVIEWS` (
+-- 	  `id_REVIEWS` INT NOT NULL AUTO_INCREMENT,
+-- 	  `review_title` VARCHAR(45) NULL,
+-- 	  `review_content` VARCHAR(256) NULL,
+-- 	  `rating` INT NULL,
+-- 	  `id_Reviewer` INT NOT NULL,
+-- 	  `id_Reviewed` INT NOT NULL,
+-- 	  PRIMARY KEY (`id_REVIEWS`),
+-- 	  INDEX `id_Reviewer_idx` (`id_Reviewer` ASC) VISIBLE,
+-- 	  INDEX `id_Reviewed_idx` (`id_Reviewed` ASC) VISIBLE,
+-- 	  CONSTRAINT `id_Reviewer_1`
+-- 		FOREIGN KEY (`id_Reviewer`)
+-- 		REFERENCES `WeeGigDB`.`USERS` (`id_USER`)
+-- 		ON DELETE NO ACTION
+-- 		ON UPDATE NO ACTION,
+-- 	  CONSTRAINT `id_Reviewed`
+-- 		FOREIGN KEY (`id_Reviewed`)
+-- 		REFERENCES `WeeGigDB`.`USERS` (`id_USER`)
+-- 		ON DELETE NO ACTION
+-- 		ON UPDATE NO ACTION)
+-- 	ENGINE = InnoDB;
+-- -----------------------------------------------------
+-- Table `WeeGigDB`.`REVIEWS`
+-- -----------------------------------------------------
+-- DROP TABLE IF EXISTS `WeeGigDB`.`REVIEWS`;
+
+CREATE TABLE IF NOT EXISTS `WeeGigDB`.`REVIEWS` (
+  `id_REVIEWS` INT NOT NULL AUTO_INCREMENT,
+  `review_title` VARCHAR(45) NULL,
+  `review_content` TEXT NULL,           -- Cambiado a TEXT para permitir más contenido
+  `rating` TINYINT NOT NULL CHECK (rating >= 1 AND rating <= 5),   -- Definición más estricta para el rating
+  `id_Reviewer` INT NOT NULL,
+  `id_Reviewed` INT NOT NULL,
+  `id_Job` INT NOT NULL,                -- ID del trabajo para el cual se hace la revisión
+  `review_date` DATE NOT NULL,          -- Fecha en la que se hizo la revisión
+  PRIMARY KEY (`id_REVIEWS`),
+  INDEX `id_Reviewer_idx` (`id_Reviewer` ASC) VISIBLE,
+  INDEX `id_Reviewed_idx` (`id_Reviewed` ASC) VISIBLE,
+  INDEX `id_Job_idx` (`id_Job` ASC) VISIBLE,
+  CONSTRAINT `id_Reviewer_fk`
+    FOREIGN KEY (`id_Reviewer`)
+    REFERENCES `WeeGigDB`.`USERS` (`id_USER`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `id_Reviewed_fk`
+    FOREIGN KEY (`id_Reviewed`)
+    REFERENCES `WeeGigDB`.`USERS` (`id_USER`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `id_Job_fk`
+    FOREIGN KEY (`id_Job`)
+    REFERENCES `WeeGigDB`.`JOB_OFFERS` (`id_JOB_OFFERS`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+-- Ahora que hemos combinado las tablas, podemos eliminar la antigua tabla REVIEW_DATE.
+-- DROP TABLE IF EXISTS `WeeGigDB`.`REVIEW_DATE`;
+
 
 
 	-- -----------------------------------------------------
@@ -221,6 +259,14 @@
 
 	-- Pruebas
 	SELECT * FROM WeeGigDB.JOB_APPLICATION;
+    SELECT * FROM WeeGigDB.JOB_OFFERS;
+    SELECT * FROM WeeGigDB.REVIEWS;
+    SELECT * FROM WeeGigDB.REVIEW_DATE;
+    SELECT * FROM WeeGigDB.USERS;
+    SELECT * FROM WeeGigDB.LOGIN;
+    -- DELETE FROM `WeeGigDB`.`job_application`;
+	-- DELETE FROM `WeeGigDB`.`LOGIN`;
+	-- DELETE FROM `WeeGigDB`.`USERS`;
 	-- DELETE * FROM WeeGigDB.JOB_APPLICATION;
 	-- SELECT * FROM WeeGigDB.USERS WHERE id_USER = 1;
     -- DROP DATABASE WeeGigDB;

@@ -23,7 +23,10 @@ import IconButton from "@mui/material/IconButton";
 import InputAdornment from "@mui/material/InputAdornment";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
-import Alert from '@mui/material/Alert';
+import Alert from "@mui/material/Alert";
+import DatePicker from 'react-datepicker'; // Import DatePicker
+import 'react-datepicker/dist/react-datepicker.css';
+import RegisterLocationAutocomplete from '../components/RegisterLocationAutocomplete';
 
 function Copyright(props: any) {
   return (
@@ -44,27 +47,12 @@ const theme = createTheme({
 export default function SignUp() {
   const [showPassword, setShowPassword] = useState(false);
   const [showVerPassword, setShowVerPassword] = useState(false);
+  const [registrationSuccess, setRegistrationSuccess] = useState(false);
+  
+  const [userPayload, setUserPayload] = useState(false);
+  const [selectedLocation, setSelectedLocation] = useState(null);
 
   const [emailError, setEmailError] = useState(false);
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-
-    const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-    if (!emailPattern.test(data.get("email"))) {
-      setEmailError(true);
-      return;
-    }
-
-    setEmailError(false);
-    console.log({
-      firstName: data.get("firstName"),
-      lastName: data.get("lastName"),
-      email: data.get("email"),
-      password: data.get("password"),
-    });
-    console.log(data);
-  };
 
   const [age, setAge] = React.useState("");
 
@@ -78,8 +66,90 @@ export default function SignUp() {
     setChecked(event.target.checked);
   };
 
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const data = new FormData(event.currentTarget);
+
+    const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    if (!emailPattern.test(data.get("email") as string)) {
+      setEmailError(true);
+      return;
+    }
+
+    setEmailError(false);
+    
+    console.log("Selected location in handleSubmit:", selectedLocation);
+
+    const userPayload = {
+      username: data.get("email"),
+      email: data.get("email"),
+      password: data.get("password"),
+      name: data.get("firstName"),
+      surname: data.get("lastName"),
+      docType: parseInt(data.get("tipeOfDocument") as string),
+      document: data.get("document"),
+      phoneNumber: data.get("phone"),
+      birthdate: selectedDate,
+      userType: checked ? "Employer" : "Employee",
+      companyName: data.get("nameOfCompany"),
+      companyNif: data.get("nif"),
+      address: selectedLocation,
+      companyPhoneNumber: data.get("numberOfCompany"),
+      website: data.get("website")
+    };
+
+    console.log(userPayload);
+
+    fetch("http://localhost:8080/api/register", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(userPayload),
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data.success) {
+        console.log("Usuario registrado con éxito!");
+        setRegistrationSuccess(true);
+        
+        // Redirigir después de 5 segundos
+        setTimeout(() => {
+            window.location.href = "/login/";
+        }, 2000);
+      } else {
+        console.error("Error al registrar:", data.message);
+        setRegistrationSuccess(false);
+      }
+    })
+    .catch(error => {
+      console.error("Error al enviar los datos:", error);
+      setRegistrationSuccess(false);
+    });
+  };
+
+  // ... (resto de tu código, como handleChange y el componente renderizado)
+  const [selectedDate, setSelectedDate] = useState<Date | null>(
+    new Date("2005-08-31")
+  );
+
+  const handleDateChange = (date: Date | null) => {
+    setSelectedDate(date); // Update the selectedDate state
+  };
+
+  const handleLocationSelect = (location) => {
+    console.log('Selected location:', location);
+    setSelectedLocation(location); // Update selectedLocation
+  };
+  
+  const handleLocationChange = (newLocation) => {
+    console.log('Location changed:', newLocation);
+    setSelectedLocation(newLocation); // Update selectedLocation
+  };
+  
+
   return (
-    <div className="box-contact">
+    <div className="big-box">
       <div className="contact-us">
         <ThemeProvider theme={theme}>
           <Container component="main" maxWidth="xs">
@@ -98,6 +168,7 @@ export default function SignUp() {
               <Typography component="h1" variant="h5">
                 Regístrate
               </Typography>
+              {registrationSuccess && <Alert severity="success">Registrado correctamente</Alert>}
               <Box
                 component="form"
                 noValidate
@@ -133,12 +204,12 @@ export default function SignUp() {
                         labelId="demo-simple-select-label"
                         id="demo-simple-select"
                         value={age}
-                        label="tipeOfDocument"
+                        name="tipeOfDocument"
                         onChange={handleChange}
                       >
-                        <MenuItem value={10}>DNI</MenuItem>
-                        <MenuItem value={20}>NIE</MenuItem>
-                        <MenuItem value={30}>Pasaporte</MenuItem>
+                        <MenuItem value={1}>DNI</MenuItem>
+                        <MenuItem value={2}>NIE</MenuItem>
+                        <MenuItem value={3}>Pasaporte</MenuItem>
                       </Select>
                     </FormControl>
                   </Grid>
@@ -157,17 +228,22 @@ export default function SignUp() {
                       name="phone"
                       fullWidth
                       id="phone"
-                      label="Numero"
+                      label="Número de teléfono"
                       autoFocus
                     />
                   </Grid>
                   <Grid item xs={12} sm={6}>
-                    <TextField
-                      fullWidth
-                      id="birthDate"
-                      label="Fecha de nacimiento"
-                      name="birthDate"
-                      autoComplete="family-name"
+                    <DatePicker
+                      selected={selectedDate}
+                      onChange={handleDateChange}
+                      timeIntervals={15}
+                      dateFormat="yyyy-MM-dd"
+                      customInput={<TextField label="Fecha de nacimiento" inputProps={{ readOnly: true }}/>}
+                      maxDate={new Date("2005-08-31")}
+                      showYearDropdown
+                      showMonthDropdown
+                      scrollableYearDropdown
+                      yearDropdownItemNumber={50}
                     />
                   </Grid>
                   <Grid item xs={12}>
@@ -254,18 +330,33 @@ export default function SignUp() {
                         <FormLabel id="demo-radio-buttons-group-label">
                           ¿Quieres ofrecer trabajo?
                         </FormLabel>
-                        <Switch
-                          checked={checked}
-                          onChange={handleChange2}
-                          inputProps={{ "aria-label": "controlled" }}
-                        />
+                        <div
+                          style={{
+                            display: "flex",
+                            justifyContent: "center",
+                            alignItems: "center",
+                            height: "30px",
+                          }}
+                        >
+                          <Switch
+                            checked={checked}
+                            onChange={handleChange2}
+                            inputProps={{ "aria-label": "controlled" }}
+                          />
+                        </div>
                       </RadioGroup>
                     </Grid>
                   </Grid>
                   {checked && (
                     <>
-                    <Alert severity="info">Este es un mensaje de alerta!</Alert>
-                      <Grid item xs={12} sm={6}>
+                      <Alert
+                        severity="info"
+                        style={{ margin: "0 auto", maxWidth: "600px" }}
+                      >
+                        Al ofrecer trabajo, te estas negando a poder aplicar a estos. Los campos de abajo no son obligatorios.
+                      </Alert>
+
+                      <Grid item xs={12}>
                         <TextField
                           autoComplete="given-name"
                           name="nameOfCompany"
@@ -286,24 +377,21 @@ export default function SignUp() {
                       </Grid>
                       <Grid item xs={12} sm={6}>
                         <TextField
-                          autoComplete="given-name"
-                          name="address"
-                          fullWidth
-                          id="address"
-                          label="Direccion"
-                          autoFocus
-                        />
-                      </Grid>
-                      <Grid item xs={12} sm={6}>
-                        <TextField
                           fullWidth
                           id="numberOfCompany"
-                          label="Numero de compañia"
+                          label="Número de teléfono"
                           name="numberOfCompany"
                           autoComplete="family-name"
                         />
                       </Grid>
-                      <Grid item xs={12} sm={6}>
+                      <Grid item xs={12}>
+                      <RegisterLocationAutocomplete
+                        onSelect={handleLocationSelect}
+                        onLocationChange={handleLocationChange}
+                        selectedLocation={selectedLocation}
+                      />
+                      </Grid>
+                      <Grid item xs={12}>
                         <TextField
                           autoComplete="given-name"
                           name="website"

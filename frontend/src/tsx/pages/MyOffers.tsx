@@ -18,12 +18,29 @@ function MyOfferts() {
     window.location.href = "/nueva-oferta";
   }
 
-  useEffect(() => {
-    fetch(`http://localhost:8080/job-applications/user/${user.idUser}`)
-      .then((response) => response.json())
-      .then((data) => setApplications(data))
-      .catch((error) => console.error("Hubo un error:", error));
-  }, []);
+useEffect(() => {
+  fetch(`http://localhost:8080/job-applications/user/${user.idUser}`)
+    .then((response) => response.json())
+    .then(async (data) => {
+      // Assuming that the job application data includes job offer IDs
+      // Fetch additional data related to job offers using the IDs
+      const jobOfferPromises = data.map(async (application) => {
+        const response = await fetch(`http://localhost:8080/jobs/${application.jobId}`);
+        const jobOfferData = await response.json();
+        return {
+          ...application,
+          jobOffer: jobOfferData,
+        };
+      });
+
+      // Resolve all promises and set the modified data
+      const updatedData = await Promise.all(jobOfferPromises);
+      setApplications(updatedData);
+    })
+    .catch((error) => console.error("Hubo un error:", error));
+}, []);
+
+    
 
   return (
     <div className="big-box">
@@ -35,21 +52,19 @@ function MyOfferts() {
               {applications.map((application, index) => (
                 <li key={index} style={{ background: "#f5f5f5", borderRadius: "10px", padding: "10px", border: "1px solid #ccc", flex: "0 1 calc(30% - 20px)", marginBottom: "20px", display: "flex", flexDirection: "column", textAlign: "left" }}>
                   <Link to={`/jobs/${application.jobId}`}>
-                    <p>{`Trabajo ID: ${application.jobId}`}</p>
-                    <p>{`Fecha de aplicación: ${application.applicationDate}`}</p>
-                    {application.applicationStatus === "Pending" && <Chip icon={<HourglassTopIcon />} label="En espera" variant="outlined" />}
+                    <p>{`Nombre del trabajo: ${application.jobOffer.title}`}</p>
+                    <p>{`Fecha de aplicación: ${new Date(application.applicationDate).toLocaleString()}`}</p>
+                    {application.applicationStatus === "applied" && <Chip icon={<HourglassTopIcon />} label="En espera" variant="outlined" />}
+                    {application.applicationStatus === "accepted" && <Chip icon={<HowToRegIcon />} label="Aceptado" variant="outlined" />}
+                    {application.applicationStatus === "rejected" && <Chip icon={<DoDisturbOffIcon />} label="Rechazado" variant="outlined" />}
+                    {application.applicationStatus === "done" && <Chip icon={<DoneIcon />} label="Trabajo realizado" variant="outlined" />}
+
                   </Link>
-                  <Stack direction="row" spacing={1} style={{ margin: "0 auto", textAlign: "center"  }}>
-                    <Chip icon={<HourglassTopIcon />} label="En espera" variant="outlined" />
-                    <Chip icon={<HowToRegIcon />} label="Aceptado" variant="outlined" />
-                    <Chip icon={<DoDisturbOffIcon />} label="Rechazado" variant="outlined" />
-                    <Chip icon={<DoneIcon />} label="Trabajo realizado" variant="outlined" />
-                  </Stack>
                 </li>
               ))}
             </ul>
           ) : (
-            <p>No hay aplicaciones disponibles.</p>
+            <p>No te has inscrito a ninguna oferta.</p>
           )}
         </div>
       </div>
