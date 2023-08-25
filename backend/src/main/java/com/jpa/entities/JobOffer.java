@@ -51,9 +51,6 @@ public class JobOffer {
     @Column(name = "schedule")
     private Date schedule;
 
-    @Column(name = "category", length = 45)
-    private String category;
-
     @Column(name = "id_Employer")
     private Integer idEmployer;
 

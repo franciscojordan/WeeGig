@@ -7,10 +7,10 @@ import { useCookies } from "react-cookie";
 import DatePicker from 'react-datepicker'; // Import DatePicker
 import 'react-datepicker/dist/react-datepicker.css';
 import { Autocomplete } from "@mui/material";
-import getGoogleMapsApiClient from "../../../../lib/googleApiClient";
+import getGoogleMapsApiClient from "../../../lib/googleApiClient";
 import { setHours, setMinutes, subHours } from 'date-fns';
 import { Google } from "@mui/icons-material";
-import LocationAutocomplete from '../components/LocationAutocomplete';
+// import LocationAutocomplete from '../components/LocationAutocomplete';
 import "../../css/components/customDatePickerWidth.css";
 
 const NewOffert: React.FC = () => {
@@ -188,7 +188,7 @@ const NewOffert: React.FC = () => {
                 marginTop: "10px",
               }}
             >
-              <LocationAutocomplete
+              {/* <LocationAutocomplete
                 onSelect={(newLocation) => {
                   console.log('onSelect:', newLocation);
                   handleLocationSelect(newLocation);
@@ -204,7 +204,7 @@ const NewOffert: React.FC = () => {
                     location: newLocation,
                   }));
                 }}
-              />
+              /> */}
             </div>  
             <div
               style={{

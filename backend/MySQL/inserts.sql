@@ -15,21 +15,21 @@
 	-- Obtén el ID del employer1
 	SELECT id_USER INTO @employerID FROM USERS WHERE username = 'employer1';
 
-	-- Creación de ofertas de trabajo por employer1
-	INSERT INTO JOB_OFFERS (title, status, description, payment_type, payment, location, schedule, category, id_employer)
-	VALUES
-	  ('Oferta 1', 'close', 'Descripción de la oferta 1', 'Tipo de pago 1', 'Pago 1', 'Ubicación 1', NOW(), 'Categoría 1', @employerID),
-	  ('Oferta 2', 'close', 'Descripción de la oferta 2', 'Tipo de pago 2', 'Pago 2', 'Ubicación 2', NOW(), 'Categoría 2', @employerID),
-	  ('Oferta 3', 'close', 'Descripción de la oferta 3', 'Tipo de pago 3', 'Pago 3', 'Ubicación 3', NOW(), 'Categoría 3', @employerID),
-      ('Oferta 4', 'close', 'Descripción de la oferta 4', 'Tipo de pago 4', 'Pago 4', 'Ubicación 4', NOW(), 'Categoría 4', @employerID),
-      ('Oferta 5', 'open', 'Descripción de la oferta 5', 'Tipo de pago 5', 'Pago 5', 'Ubicación 5', NOW(), 'Categoría 5', @employerID),
-      ('Oferta 6', 'open', 'Descripción de la oferta 6', 'Tipo de pago 6', 'Pago 6', 'Ubicación 6', NOW(), 'Categoría 6', @employerID),
-      ('Oferta 7', 'open', 'Descripción de la oferta 7', 'Tipo de pago 7', 'Pago 7', 'Ubicación 7', NOW(), 'Categoría 7', @employerID),
-      ('Oferta 8', 'open', 'Descripción de la oferta 8', 'Tipo de pago 8', 'Pago 8', 'Ubicación 8', NOW(), 'Categoría 8', @employerID),
-      ('Oferta 9', 'open', 'Descripción de la oferta 9', 'Tipo de pago 9', 'Pago 9', 'Ubicación 9', NOW(), 'Categoría 9', @employerID),
-      ('Oferta 10', 'open', 'Descripción de la oferta 10', 'Tipo de pago 10', 'Pago 10', 'Ubicación 10', NOW(), 'Categoría 10', @employerID),
-      ('Oferta 11', 'open', 'Descripción de la oferta 11', 'Tipo de pago 11', 'Pago 11', 'Ubicación 11', NOW(), 'Categoría 11', @employerID),
-      ('Oferta 12', 'open', 'Descripción de la oferta 12', 'Tipo de pago 12', 'Pago 12', 'Ubicación 12', NOW(), 'Categoría 12', @employerID);
+-- Creación de ofertas de trabajo por employer1
+INSERT INTO JOB_OFFERS (title, status, description, payment_type, payment, location, schedule, id_employer)
+VALUES
+  ('Jardinería Residencial', 'close', 'Se busca jardinero para mantenimiento general de jardín en residencia particular.', 'Hora', 'Pago 1', 'Ubicación 1', NOW(), @employerID),
+  ('Mudanza Pequeña', 'close', 'Necesitamos dos personas para ayudar con una mudanza. Pocos muebles, principalmente cajas.', 'Proyecto', 'Pago 2', 'Ubicación 2', NOW(), @employerID),
+  ('Limpieza Post-construcción', 'close', 'Buscamos equipo para limpieza post-construcción de apartamento.', 'Hora', 'Pago 3', 'Ubicación 3', NOW(), @employerID),
+  ('Pintura de Interiores', 'close', 'Necesitamos pintor con experiencia para pintar sala y comedor.', 'Hora', 'Pago 4', 'Ubicación 4', NOW(), @employerID),
+  ('Reparación de PC', 'open', 'Buscando técnico para solucionar problemas de software en PC de escritorio.', 'Proyecto', 'Pago 5', 'Ubicación 5', NOW(), @employerID),
+  ('Montaje de Muebles', 'open', 'Se busca persona para montar un conjunto de muebles de sala.', 'Proyecto', 'Pago 6', 'Ubicación 6', NOW(), @employerID),
+  ('Clases de Yoga', 'open', 'Buscamos instructor(a) de yoga para clases particulares en domicilio.', 'Hora', 'Pago 7', 'Ubicación 7', NOW(), @employerID),
+  ('Instalación de Estanterías', 'open', 'Se necesita carpintero o habilidoso para instalar estanterías en local comercial.', 'Proyecto', 'Pago 8', 'Ubicación 8', NOW(), @employerID),
+  ('Lavado y Detallado de Auto', 'open', 'Buscamos profesional en detallado de autos. Se requiere lavado interno y externo.', 'Hora', 'Pago 9', 'Ubicación 9', NOW(), @employerID),
+  ('Clases de Cocina', 'open', 'Se busca chef o cocinero(a) para impartir clases de cocina básica.', 'Hora', 'Pago 10', 'Ubicación 10', NOW(), @employerID),
+  ('Instalación de Software', 'open', 'Técnico en informática requerido para instalación de suite de programas en oficina.', 'Proyecto', 'Pago 11', 'Ubicación 11', NOW(), @employerID),
+  ('Mantenimiento de Piscina', 'open', 'Se busca profesional para limpieza y mantenimiento regular de piscina residencial.', 'Hora', 'Pago 12', 'Ubicación 12', NOW(), @employerID);
 
 
 	-- Aplicación a ofertas de trabajo
@@ -40,26 +40,36 @@
 	-- Insertar aplicaciones a ofertas
 	INSERT INTO JOB_APPLICATION (id_USER, id_JOB_OFFERS, application_date, application_status)
 	VALUES
-	  (@employeeID1, 1, NOW(), 'applied'),
-      (@employeeID1, 2, NOW(), 'applied'),
-      (@employeeID1, 3, NOW(), 'applied'),
-      (@employeeID1, 4, NOW(), 'applied'),
-	  (@employeeID2, 1, NOW(), 'applied'),
-      (@employeeID2, 2, NOW(), 'applied'),
-      (@employeeID2, 3, NOW(), 'applied'),
-      (@employeeID2, 4, NOW(), 'applied');
+	  (@employeeID1, 1, NOW(), 'accepted'),
+      (@employeeID1, 2, NOW(), 'accepted'),
+      (@employeeID1, 3, NOW(), 'accepted'),
+      (@employeeID1, 4, NOW(), 'accepted'),
+	  (@employeeID2, 1, NOW(), 'accepted'),
+      (@employeeID2, 2, NOW(), 'accepted'),
+      (@employeeID2, 3, NOW(), 'accepted'),
+      (@employeeID2, 4, NOW(), 'accepted');
 
+
+	
 	-- Creación de revisiones
 	-- Insertar revisiones
 	INSERT INTO REVIEWS (review_content, rating, id_reviewer, id_reviewed, id_job, review_date)
 	VALUES
 	  ('Trabajé en una oferta con este empleador y fue una experiencia positiva.', 4, 3, 1, 1, '2023-08-02'),
-      ('Todo bien, me gusto', 4, 3, 1, 1, '2023-08-02'),
-      ('Excelente trabajador, 10/10', 4, 3, 1, 1, '2023-08-02'),
-      ('Realmente me sorprendio, fue mejor de lo que pense', 4, 3, 1, 1, '2023-08-02'),
+      ('Todo bien, me gusto', 4, 3, 1, 2, '2023-08-02'),
+      ('Excelente trabajador, 10/10', 4, 3, 1, 3, '2023-08-02'),
+      ('Realmente me sorprendio, fue mejor de lo que pense', 4, 3, 1, 4, '2023-08-02'),
 	  ('Colaboré con este empleado en un proyecto y cumplió con las expectativas.', 5, 3, 2, 1, '2023-02-01'),
-      ('No me gusto mucho', 1, 3, 2, 1, '2023-08-02'),
-      ('NO RECOMENDADO, muy inpuntual', 2, 3, 2, 1, '2023-08-02'),
+      ('No me gusto mucho', 1, 3, 2, 2, '2023-08-02'),
+      ('NO RECOMENDADO, muy inpuntual', 2, 3, 2, 3, '2023-08-02'),
       ('Nada humilde, -10', 1, 3, 2, 1, '2023-08-02'),
       ('Un poco raro, pero trabajo bien', 4, 3, 2, 1, '2023-08-02');
+      
+	-- Insertar revisiones a employer
+	INSERT INTO REVIEWS (review_content, rating, id_reviewer, id_reviewed, id_job, review_date)
+	VALUES
+	  ('Buen empleador', 4, 1, 3, 1, '2023-08-02'),
+      ('Excelente, pero hubo mala comunicacion en un inicio', 4, 1, 3, 2, '2023-08-02'),
+      ('Normal', 2, 1, 3, 3, '2023-08-02'),
+      ('Buen trato, buena paga', 5, 1, 3, 4, '2023-08-02');
 

@@ -16,8 +16,7 @@ const MyProfile = () => {
           if (Array.isArray(data)) {
             setReviews(data);
           } else {
-            // console.error("Data is not an array:", data);
-            setReviews([]); // establece reviews a un array vacío o maneja este caso de error de manera diferente si lo prefieres
+            setReviews([]);
           }
         })
         .catch((error) => console.error(error));
