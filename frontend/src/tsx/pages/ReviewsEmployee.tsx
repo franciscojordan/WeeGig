@@ -18,14 +18,15 @@ function ReviewsEmployee() {
 
   useEffect(() => {
     fetch(`http://localhost:8080/reviews`)
-        .then((response) => response.json())
-        .then((allReviews) => {
-          // Filtramos para obtener solo las reseñas del usuario actual
-          const userReviews = allReviews.filter(review => review.id_Reviewer === user.idUser);
-          setExistingReviews(userReviews);
-        });
-}, []);
-
+      .then((response) => response.json())
+      .then((allReviews) => {
+        // Filtramos para obtener solo las reseñas del usuario actual
+        const userReviews = allReviews.filter(
+          (review) => review.id_Reviewer === user.idUser
+        );
+        setExistingReviews(userReviews);
+      });
+  }, []);
 
   useEffect(() => {
     if (user) {
@@ -122,109 +123,121 @@ function ReviewsEmployee() {
   };
 
   return (
-    <div className="big-box">
-        <div className="small-box">
-      <Typography variant="h4" gutterBottom>
-        Reseñas por realizar EMPLOYEE
-      </Typography>
-      <h4>
-        Sólo puedes realizar reseñas después de 24 horas de haber culminado el
-        trabajo.
-      </h4>
-      <Grid container spacing={3}>
-        {jobs
-          .filter((job) => {
-            const isClosed = job.status === "close";
-            const jobDate = new Date(job.schedule);
-            const currentDate = new Date();
-            const timeDifference = currentDate - jobDate;
-            const oneDayInMilliseconds = 24 * 60 * 60 * 1000;
-            const isMoreThan24Hours = timeDifference > oneDayInMilliseconds;
-            return isClosed && isMoreThan24Hours;
-          })
-          .filter((job) => {
-            // Agregamos esta verificación: si la reseña ha sido enviada exitosamente, no mostramos el contenido.
-            const key = `${job.idJobOffers}-${job.idEmployer}`;
-            return !successfulReviews[key];
-          })
-          .filter((job) => {
-            return !existingReviews.some(review => review.id_Job === job.idJobOffers);
-        })
-          .map((job) => (
-            <Grid item xs={12} key={job.idJobOffers}>
-              <Card>
-                <CardContent>
-                  <Typography variant="h5" gutterBottom>
-                    {job.title}
-                  </Typography>
-                  <Typography color="textSecondary" gutterBottom>
-                    ID: {job.idJobOffers}
-                  </Typography>
-                  <Typography color="textSecondary" gutterBottom>
-                    Fecha: {job.schedule}
-                  </Typography>
-                  <Typography color="textSecondary" gutterBottom>
-                    Status: {job.status}
-                  </Typography>
-                  <div key={job.idEmployer}>
-                    <Rating
-                      name={`rating-${job.idJobOffers}-${job.idEmployer}`}
-                      value={
-                        ratings[`${job.idJobOffers}-${job.idEmployer}`] || 1
-                      }
-                      onChange={(event, newValue) =>
-                        handleRatingChange(
-                          job.idJobOffers,
-                          job.idEmployer,
-                          newValue
-                        )
-                      }
-                    />
-                    <TextField
-                      label="Añadir reseña"
-                      variant="outlined"
-                      multiline
-                      rows={3}
-                      value={reviews[`${job.idJobOffers}-${job.idEmployer}`] || ""}
-                      onChange={(event) =>
-                        handleReviewChange(job.idJobOffers, job.idEmployer, event)
-                      }
-                      error={
-                        reviews[`${job.idJobOffers}-${job.idEmployer}`] &&
-                        reviews[`${job.idJobOffers}-${job.idEmployer}`].length < 10
-                      }
-                      helperText={
-                        reviews[`${job.idJobOffers}-${job.idEmployer}`] &&
-                        reviews[`${job.idJobOffers}-${job.idEmployer}`].length < 10
-                          ? "La reseña debe tener al menos 10 caracteres"
-                          : ""
-                      }
-                      style={{
-                        marginTop: "8px",
-                        marginBottom: "8px",
-                        width: "100%",
-                      }}
-                    />
-                    <Button
-                      variant="contained"
-                      color="primary"
-                      disabled={
-                        !reviews[`${job.idJobOffers}-${job.idEmployer}`] ||
-                        reviews[`${job.idJobOffers}-${job.idEmployer}`].length < 10
-                      }
-                      onClick={() =>
-                        handleSendReview(job.idJobOffers, job.idEmployer)
-                      }
-                    >
-                      Enviar reseña
-                    </Button>
-                  </div>
-                </CardContent>
-              </Card>
-            </Grid>
-          ))}
-      </Grid>
-    </div>
+    <div className="big-box" style={{ backgroundColor: "#fff9f9" }}>
+      <div className="small-box" style={{ padding: "5vh" }}>
+        <Typography variant="h4" gutterBottom>
+        Reseñas por realizar
+        </Typography>
+        <h4>
+          Sólo puedes realizar reseñas después de 24 horas de haber culminado el
+          trabajo.
+        </h4>
+        <Grid container spacing={3}>
+          {jobs
+            .filter((job) => {
+              const isClosed = job.status === "close";
+              const jobDate = new Date(job.schedule);
+              const currentDate = new Date();
+              const timeDifference = currentDate - jobDate;
+              const oneDayInMilliseconds = 24 * 60 * 60 * 1000;
+              const isMoreThan24Hours = timeDifference > oneDayInMilliseconds;
+              return isClosed && isMoreThan24Hours;
+            })
+            .filter((job) => {
+              // Agregamos esta verificación: si la reseña ha sido enviada exitosamente, no mostramos el contenido.
+              const key = `${job.idJobOffers}-${job.idEmployer}`;
+              return !successfulReviews[key];
+            })
+            .filter((job) => {
+              return !existingReviews.some(
+                (review) => review.id_Job === job.idJobOffers
+              );
+            })
+            .map((job) => (
+              <Grid item xs={12} key={job.idJobOffers}>
+                <Card>
+                  <CardContent>
+                    <Typography variant="h5" gutterBottom>
+                      {job.title}
+                    </Typography>
+                    <Typography color="textSecondary" gutterBottom>
+                      ID: {job.idJobOffers}
+                    </Typography>
+                    <Typography color="textSecondary" gutterBottom>
+                      Fecha: {job.schedule}
+                    </Typography>
+                    <Typography color="textSecondary" gutterBottom>
+                      Status: {job.status}
+                    </Typography>
+                    <div key={job.idEmployer}>
+                      <Rating
+                        name={`rating-${job.idJobOffers}-${job.idEmployer}`}
+                        value={
+                          ratings[`${job.idJobOffers}-${job.idEmployer}`] || 1
+                        }
+                        onChange={(event, newValue) =>
+                          handleRatingChange(
+                            job.idJobOffers,
+                            job.idEmployer,
+                            newValue
+                          )
+                        }
+                      />
+                      <TextField
+                        label="Añadir reseña"
+                        variant="outlined"
+                        multiline
+                        rows={3}
+                        value={
+                          reviews[`${job.idJobOffers}-${job.idEmployer}`] || ""
+                        }
+                        onChange={(event) =>
+                          handleReviewChange(
+                            job.idJobOffers,
+                            job.idEmployer,
+                            event
+                          )
+                        }
+                        error={
+                          reviews[`${job.idJobOffers}-${job.idEmployer}`] &&
+                          reviews[`${job.idJobOffers}-${job.idEmployer}`]
+                            .length < 10
+                        }
+                        helperText={
+                          reviews[`${job.idJobOffers}-${job.idEmployer}`] &&
+                          reviews[`${job.idJobOffers}-${job.idEmployer}`]
+                            .length < 10
+                            ? "La reseña debe tener al menos 10 caracteres"
+                            : ""
+                        }
+                        style={{
+                          marginTop: "8px",
+                          marginBottom: "8px",
+                          width: "100%",
+                        }}
+                      />
+                      <Button
+                        variant="contained"
+                        color="primary"
+                        disabled={
+                          !reviews[`${job.idJobOffers}-${job.idEmployer}`] ||
+                          reviews[`${job.idJobOffers}-${job.idEmployer}`]
+                            .length < 10
+                        }
+                        onClick={() =>
+                          handleSendReview(job.idJobOffers, job.idEmployer)
+                        }
+                        style={{ backgroundColor: "#A8A8A8", color: "white" }} // Cambia el color del fondo y el color del texto
+                      >
+                        Enviar reseña
+                      </Button>
+                    </div>
+                  </CardContent>
+                </Card>
+              </Grid>
+            ))}
+        </Grid>
+      </div>
     </div>
   );
 }

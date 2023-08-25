@@ -144,8 +144,8 @@ function ReviewsEmployer() {
   }, [cookies.user]);
 
   return (
-    <div className="big-box">
-      <div className="small-box">
+    <div className="big-box" style={{ backgroundColor: "#fff9f9" }}>
+      <div className="small-box" style={{ padding: "5vh" }}>
         <Typography variant="h4" gutterBottom>
           Reseñas por realizar
         </Typography>
@@ -264,6 +264,7 @@ function ReviewsEmployer() {
                                       app.userId
                                     )
                                   }
+                                  style={{ backgroundColor: "#A8A8A8", color: "white" }}
                                 >
                                   Enviar reseña
                                 </Button>
