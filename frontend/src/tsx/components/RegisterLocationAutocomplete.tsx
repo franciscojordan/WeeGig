@@ -21,15 +21,15 @@ const RegisterLocationAutocomplete: React.FC<RegisterLocationAutocompleteProps> 
 
     useEffect(() => {
         let active = true;
-
+    
         if (!inputValue || inputValue.trim().length <= 3) {
             return undefined;
         }
-
+    
         const fetchSuggestions = async () => {
-            const google = await loadGoogleMapsApiClient();
-
-            const autocompleteService = new google.maps.places.AutocompleteService();
+            const googleApiClient = await loadGoogleMapsApiClient(); // Load the Google Maps API client
+    
+            const autocompleteService = new googleApiClient.maps.places.AutocompleteService(); // Use the loaded API client
             autocompleteService.getPlacePredictions(
                 {
                     input: inputValue,
@@ -38,15 +38,15 @@ const RegisterLocationAutocomplete: React.FC<RegisterLocationAutocompleteProps> 
                     },
                 },
                 (predictions: google.maps.places.AutocompletePrediction[], status: google.maps.places.PlacesServiceStatus) => {
-                    if (status === google.maps.places.PlacesServiceStatus.OK && active) {
+                    if (status === 'OK' && active) {
                         setOptions(predictions.map((prediction) => prediction.description));
                     }
                 }
             );
         };
-
+    
         fetchSuggestions();
-
+    
         return () => {
             active = false;
         };
