@@ -41,7 +41,7 @@ function App() {
 				<Route path="/resenas-ofertas" element={<ReviewsEmployee />} />
 				<Route path="*"  element={<Error />} />
 			</Routes>
-      <Footer />
+    		<Footer />
 		</>
 	);
 }
