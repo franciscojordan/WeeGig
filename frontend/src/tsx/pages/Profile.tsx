@@ -60,9 +60,6 @@ const Profile = () => {
                   {userData.name} {userData.surname}
                 </h2>
                 <p>
-                  <strong>Usuario:</strong> {userData.username}
-                </p>
-                <p>
                   <strong>Email:</strong> {userData.email}
                 </p>
                 <p>
@@ -71,10 +68,11 @@ const Profile = () => {
                 <p>
                   <strong>Fecha de nacimiento:</strong> {userData.birthdate}
                 </p>
+                {userData.company_name &&
                 <p>
                   <strong>Nombre de compañía:</strong>{" "}
                   {userData.company_name || "N/A"}
-                </p>
+                </p>}
               </>
             ) : (
               <p>No eres un usuario...</p>

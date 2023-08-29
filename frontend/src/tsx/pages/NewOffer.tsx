@@ -4,12 +4,13 @@ import Button from "@mui/material/Button";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import "../../css/components/Boxs.css";
 import { useCookies } from "react-cookie";
-import DatePicker from 'react-datepicker'; // Import DatePicker
+import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { Autocomplete } from "@mui/material";
 import getGoogleMapsApiClient from "../../../lib/googleApiClient";
 import { setHours, setMinutes, subHours } from 'date-fns';
 import "../../css/components/customDatePickerWidth.css";
+import LocationAutocomplete from '../components/LocationAutocomplete';
 
 const NewOffert: React.FC = () => {
   const [cookies] = useCookies(["user"]);
@@ -186,7 +187,7 @@ const NewOffert: React.FC = () => {
                 marginTop: "10px",
               }}
             >
-              {/* <LocationAutocomplete
+              <LocationAutocomplete
                 onSelect={(newLocation) => {
                   console.log('onSelect:', newLocation);
                   handleLocationSelect(newLocation);
@@ -202,7 +203,7 @@ const NewOffert: React.FC = () => {
                     location: newLocation,
                   }));
                 }}
-              /> */}
+              />
             </div>  
             <div
               style={{

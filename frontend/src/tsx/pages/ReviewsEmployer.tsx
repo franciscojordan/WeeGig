@@ -100,7 +100,8 @@ function ReviewsEmployer() {
           const now = new Date();
           const validJobs = data.filter((job) => {
             const jobSchedule = new Date(job.schedule);
-            return now - jobSchedule >= 24 * 60 * 60 * 1000;
+            return now - jobSchedule >= 1;
+            // return now - jobSchedule >= 24 * 60 * 60 * 1000;
           });
 
           for (let job of validJobs) {

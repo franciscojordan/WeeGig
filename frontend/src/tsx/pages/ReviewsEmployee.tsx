@@ -131,6 +131,7 @@ function ReviewsEmployee() {
               const currentDate = new Date();
               const timeDifference = currentDate - jobDate;
               const oneDayInMilliseconds = 24 * 60 * 60 * 1000;
+              // const oneDayInMilliseconds = 100;
               const isMoreThan24Hours = timeDifference > oneDayInMilliseconds;
               return isClosed && isMoreThan24Hours;
             })

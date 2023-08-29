@@ -9,6 +9,8 @@ import Chip from "@mui/material/Chip";
 import DoDisturbOffIcon from "@mui/icons-material/DoDisturbOff";
 import HowToRegIcon from "@mui/icons-material/HowToReg";
 import Alert from "@mui/material/Alert";
+import { useSnackbar } from 'notistack';
+
 
 function JobDetail() {
   const [cookies] = useCookies(["user"]);

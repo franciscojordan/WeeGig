@@ -52,9 +52,6 @@ const MyProfile = () => {
                   {user.name} {user.surname}
                 </h2>
                 <p>
-                  <strong>Usuario:</strong> {user.username}
-                </p>
-                <p>
                   <strong>Email:</strong> {user.email}
                 </p>
                 <p>
