@@ -1,0 +1,12 @@
+.menuimg { 
+    width: 80px;
+    height: 80px;
+}
+.green{
+    background-color: #72B89C;
+}
+@media (max-width: 899.20px) {
+    .menuimg {
+        display: none;
+    }
+  }

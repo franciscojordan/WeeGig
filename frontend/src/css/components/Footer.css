@@ -1,0 +1,73 @@
+/* Estilos CSS para el Footer */
+.footer {
+    text-align: justify;
+    display: flex;
+    flex-direction: column;
+    color: #ffffff;
+}
+
+.box_1 {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;   
+    padding: 20px 5vw 20px 5vw;
+    background-color: #72B89C;
+}
+
+.box_3 {
+    text-align: center;
+    padding: 0px 00px 20px 0px;
+    background-color: #72B89C;
+}
+
+.socialmedia a {
+    text-decoration: none;
+    color: #ffffff;
+}
+
+.socialmedia a:hover {
+    color: #fff9f9;
+}
+
+.list {
+    display: flex;
+    align-items: center;
+}
+
+.list ul {
+    padding: 0;
+    list-style: none;
+    display: flex;
+    margin: 0;
+    justify-content: flex-end;
+}
+
+.list li {
+    padding: 0px 20px 0px 20px;
+}
+
+@media (max-width: 899.20px) {
+    .box_1 {
+        flex-direction: column;
+
+        align-items: center;
+    }
+    .list {
+        order: 0;
+        margin-top: 10px;
+    }
+}
+
+/* Estilos para cuando la media query ya no se cumple */
+@media (min-width: 899.21px) {
+    .box_1 {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+    }
+    .list {
+        order: initial;
+        margin-top: 0;
+    }
+}

@@ -1,0 +1,134 @@
+/*Container order*/
+.container {
+    display: flex;
+    margin-left: 5vw;
+    margin-right: 5vw;
+    text-align: left;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center
+}
+
+.leftimg {   
+    align-items: end;
+}
+
+.containers {
+    padding-bottom: 60px;
+    padding-top: 60px;
+    padding-left: 5vw;
+    padding-right: 5vw;
+    text-align: center;
+    background-color: #fff9f9;
+}
+
+.chart {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 50px;
+}
+
+.charts {
+    margin-bottom: 25px;
+}
+
+/*Text styles*/
+.big {
+    font-size: 60px;
+}
+
+.textmarg {
+    margin-top: 25px;
+}
+.maxw {
+    width: 700px;
+}
+
+/*Images*/
+.container img {
+    border-radius: 5px;
+    border: #333333 solid 1px;
+    margin-bottom: 120px;
+    margin-top: 120px;
+    width: 100%;
+}
+
+.chart img {
+    border-radius: 5px;
+    border: #333333 solid 1px;
+    width: 100%;
+}
+
+.charts img {
+    display: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/*Links*/
+a {
+    text-decoration: none;
+    color: #9CC3A8;
+}
+
+.enlace a:hover {
+    color: #72B89C;
+}
+
+.charts a {
+    font-size: 17px;
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+/*buttons*/
+.button-green {
+    width: 150px;
+    background-color: #9CC3A8;
+    border-radius: 10px;
+    padding: 10px 20px;
+    border: 1px solid #333333;
+    margin: 10px;
+}
+
+.button-green:hover {
+    background-color: #72B89C;
+    border: 1px solid #333333;
+}
+
+.button-green-line {
+    width: 150px;
+    background-color: #FFFFFF;
+    border-radius: 10px;
+    padding: 10px 20px;
+    border: 1px solid #333333;
+    margin: 10px;
+}
+
+.button-green-line:hover {
+    background-color: #fff9f9;
+    border: 1px solid #333333;
+}
+@media (max-width: 899.20px) {
+    .container img {
+        display: none;
+    }
+    .container{
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+    .containers{
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+    .chart {
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        display: grid;
+        grid-template-columns: 1fr;
+    }
+  }
+  
