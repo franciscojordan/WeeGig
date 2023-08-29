@@ -1,5 +1,3 @@
-import * as React from "react";
-
 import { useCookies } from "react-cookie";
 import { useState, useEffect } from "react";
 import { Card, CardContent, Typography, Chip, Grid } from "@mui/material";
@@ -40,13 +38,11 @@ function ReviewsEmployer() {
     );
   };
 
-  // Manejar la calificación para un usuario específico
   const handleRatingChange = (jobId, userId, newValue) => {
     const key = `${jobId}-${userId}`;
     setRatings((prevRatings) => ({ ...prevRatings, [key]: newValue }));
   };
 
-  // Manejar el cambio en el área de texto de reseña para un usuario específico
   const handleReviewChange = (jobId, userId, event) => {
     const key = `${jobId}-${userId}`;
     setReviews((prevReviews) => ({
@@ -55,19 +51,18 @@ function ReviewsEmployer() {
     }));
   };
 
-  // TODO: Implementar la función para enviar la reseña a tu API/backend
   const handleSendReview = (jobId, userId) => {
     const key = `${jobId}-${userId}`;
-    const rating = ratings[key] || 1; // Esto garantiza que si el rating es nulo o undefined, tomará el valor predeterminado 1
+    const rating = ratings[key] || 1;
 
     const review = reviews[key];
 
     const reviewData = {
-      idReviews: null, // Si tienes autoincremento en la base de datos
+      idReviews: null,
       reviewTitle: review,
       reviewContent: review,
       rating: rating,
-      idReviewer: user.idUser, // Suponiendo que la cookie `user` tiene un idUser
+      idReviewer: user.idUser,
       idReviewed: userId,
       idJob: jobId,
       reviewDate: new Date().toISOString().split("T")[0],
@@ -82,14 +77,11 @@ function ReviewsEmployer() {
     })
       .then((response) => {
         if (!response.ok) {
-          // Si hay un error, obtener el mensaje de error del cuerpo de la respuesta
           return response.text().then((text) => Promise.reject(text));
         }
-        return response.json(); // Si todo está bien, obtener el objeto Review
+        return response.json();
       })
       .then((data) => {
-        // Aquí puedes manejar el objeto Review que fue guardado
-        // Por ejemplo, mostrar un mensaje de éxito
         setSuccessfulReviews((prev) => ({
           ...prev,
           [`${jobId}-${userId}`]: true,
@@ -97,7 +89,6 @@ function ReviewsEmployer() {
       })
       .catch((error) => {
         console.error("Hubo un error al enviar la reseña:", error);
-        // Aquí puedes mostrar el mensaje de error en tu UI
       });
   };
 
@@ -127,7 +118,7 @@ function ReviewsEmployer() {
                   `http://localhost:8080/users/search?id=${acceptedApp.userId}`
                 );
                 const userDetails = await userResponse.json();
-                acceptedApp.userName = userDetails.name; // Suponiendo que el objeto de respuesta tiene una propiedad 'name'
+                acceptedApp.userName = userDetails.name;
               }
             }
           }
@@ -154,7 +145,6 @@ function ReviewsEmployer() {
           trabajo.
         </h4>
         <Grid container spacing={3}>
-          {/* {jobs.map((job) => ( */}
           {jobs
             .filter((job) => job.acceptedApplications)
             .filter((job) =>
@@ -189,7 +179,6 @@ function ReviewsEmployer() {
                         {job.acceptedApplications.map((app) => {
                           const key = `${job.idJobOffers}-${app.userId}`;
 
-                          // Primero, verifica si la reseña ya fue enviada con éxito
                           if (successfulReviews[key]) {
                             return (
                               <Typography key={`success-${key}`}>
@@ -197,8 +186,6 @@ function ReviewsEmployer() {
                               </Typography>
                             );
                           }
-
-                          // Si no se ha enviado la reseña y no ha sido dada antes, mostrar opciones de reseña
                           if (
                             !sentReviews[key] &&
                             !hasReviewBeenGiven(job.idJobOffers, app.userId)
@@ -264,7 +251,10 @@ function ReviewsEmployer() {
                                       app.userId
                                     )
                                   }
-                                  style={{ backgroundColor: "#A8A8A8", color: "white" }}
+                                  style={{
+                                    backgroundColor: "#A8A8A8",
+                                    color: "white",
+                                  }}
                                 >
                                   Enviar reseña
                                 </Button>
@@ -272,7 +262,7 @@ function ReviewsEmployer() {
                             );
                           }
 
-                          return null; // Si ninguna condición anterior se cumple, retornamos null.
+                          return null;
                         })}
                       </div>
                     )}

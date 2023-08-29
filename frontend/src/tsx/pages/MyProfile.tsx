@@ -58,15 +58,16 @@ const MyProfile = () => {
                   <strong>Email:</strong> {user.email}
                 </p>
                 <p>
-                  <strong>Número de teléfonos:</strong> {user.phone_number}
+                  <strong>Número de teléfonos:</strong> {user.phoneNumber}
                 </p>
                 <p>
                   <strong>Fecha de nacimiento:</strong> {user.birthdate}
                 </p>
+                {user.companyName &&
                 <p>
                   <strong>Nombre de compañía:</strong>{" "}
-                  {user.company_name || "N/A"}
-                </p>
+                  {user.companyName || "N/A"}
+                </p>}
               </div>
               <div
                 style={{
@@ -81,8 +82,8 @@ const MyProfile = () => {
                       key={review.id}
                       style={{
                         marginBottom: "20px",
-                        borderTop: index !== 0 ? "1px solid #ccc" : "none", // Aplicar el borde solo si no es la primera entrada
-                        paddingTop: index !== 0 ? "10px" : "0", // Añadir espaciado superior solo si no es la primera entrada
+                        borderTop: index !== 0 ? "1px solid #ccc" : "none",
+                        paddingTop: index !== 0 ? "10px" : "0",
                       }}
                     >
                       <Rating name="read-only" value={review.rating} readOnly />

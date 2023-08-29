@@ -20,7 +20,6 @@ function ReviewsEmployee() {
     fetch(`http://localhost:8080/reviews`)
       .then((response) => response.json())
       .then((allReviews) => {
-        // Filtramos para obtener solo las reseñas del usuario actual
         const userReviews = allReviews.filter(
           (review) => review.id_Reviewer === user.idUser
         );
@@ -33,14 +32,12 @@ function ReviewsEmployee() {
       fetch(`http://localhost:8080/job-applications/user/${user.idUser}`)
         .then((response) => response.json())
         .then(async (applications) => {
-          // 1. Mapea cada oferta de trabajo a una promesa de fetch
           const jobDetailsPromises = applications.map((application) =>
             fetch(`http://localhost:8080/jobs/${application.jobId}`).then(
               (resp) => resp.json()
             )
           );
 
-          // 2. Usa Promise.all para esperar a todas las promesas
           const jobDetails = await Promise.all(jobDetailsPromises);
           console.log("JOB DETAILS", jobDetails);
           setJobs(jobDetails);
@@ -54,14 +51,12 @@ function ReviewsEmployee() {
     }
   }, [user]);
 
-  // Manejar la calificación para un usuario específico
   const handleRatingChange = (jobId, userId, newValue) => {
     console.log("Inside handleRatingChange:", jobId, userId, newValue);
     const key = `${jobId}-${userId}`;
     setRatings((prevRatings) => ({ ...prevRatings, [key]: newValue }));
   };
 
-  // Manejar el cambio en el área de texto de reseña para un usuario específico
   const handleReviewChange = (jobId, userId, event) => {
     const key = `${jobId}-${userId}`;
     setReviews((prevReviews) => ({
@@ -75,16 +70,16 @@ function ReviewsEmployee() {
     console.log("Job ID:", jobId);
     console.log("User ID:", userId);
     const key = `${jobId}-${userId}`;
-    const rating = ratings[key] || 1; // Esto garantiza que si el rating es nulo o undefined, tomará el valor predeterminado 1
+    const rating = ratings[key] || 1;
 
     const review = reviews[key];
 
     const reviewData = {
-      idReviews: null, // Si tienes autoincremento en la base de datos
+      idReviews: null,
       reviewTitle: review,
       reviewContent: review,
       rating: rating,
-      idReviewer: user.idUser, // Suponiendo que la cookie `user` tiene un idUser
+      idReviewer: user.idUser,
       idReviewed: userId,
       idJob: jobId,
       reviewDate: new Date().toISOString().split("T")[0],
@@ -103,14 +98,11 @@ function ReviewsEmployee() {
     })
       .then((response) => {
         if (!response.ok) {
-          // Si hay un error, obtener el mensaje de error del cuerpo de la respuesta
           return response.text().then((text) => Promise.reject(text));
         }
-        return response.json(); // Si todo está bien, obtener el objeto Review
+        return response.json();
       })
       .then((data) => {
-        // Aquí puedes manejar el objeto Review que fue guardado
-        // Por ejemplo, mostrar un mensaje de éxito
         setSuccessfulReviews((prev) => ({
           ...prev,
           [`${jobId}-${userId}`]: true,
@@ -118,7 +110,6 @@ function ReviewsEmployee() {
       })
       .catch((error) => {
         console.error("Hubo un error al enviar la reseña:", error);
-        // Aquí puedes mostrar el mensaje de error en tu UI
       });
   };
 
@@ -126,7 +117,7 @@ function ReviewsEmployee() {
     <div className="big-box" style={{ backgroundColor: "#fff9f9" }}>
       <div className="small-box" style={{ padding: "5vh" }}>
         <Typography variant="h4" gutterBottom>
-        Reseñas por realizar
+          Reseñas por realizar
         </Typography>
         <h4>
           Sólo puedes realizar reseñas después de 24 horas de haber culminado el
@@ -144,7 +135,6 @@ function ReviewsEmployee() {
               return isClosed && isMoreThan24Hours;
             })
             .filter((job) => {
-              // Agregamos esta verificación: si la reseña ha sido enviada exitosamente, no mostramos el contenido.
               const key = `${job.idJobOffers}-${job.idEmployer}`;
               return !successfulReviews[key];
             })
@@ -227,7 +217,7 @@ function ReviewsEmployee() {
                         onClick={() =>
                           handleSendReview(job.idJobOffers, job.idEmployer)
                         }
-                        style={{ backgroundColor: "#A8A8A8", color: "white" }} // Cambia el color del fondo y el color del texto
+                        style={{ backgroundColor: "#A8A8A8", color: "white" }}
                       >
                         Enviar reseña
                       </Button>

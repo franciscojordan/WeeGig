@@ -24,7 +24,7 @@ import InputAdornment from "@mui/material/InputAdornment";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import Alert from "@mui/material/Alert";
-import DatePicker from 'react-datepicker'; // Import DatePicker
+import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import RegisterLocationAutocomplete from '../components/RegisterLocationAutocomplete';
 
@@ -128,23 +128,22 @@ export default function SignUp() {
     });
   };
 
-  // ... (resto de tu código, como handleChange y el componente renderizado)
   const [selectedDate, setSelectedDate] = useState<Date | null>(
     new Date("2005-08-31")
   );
 
   const handleDateChange = (date: Date | null) => {
-    setSelectedDate(date); // Update the selectedDate state
+    setSelectedDate(date);
   };
 
   const handleLocationSelect = (location) => {
     console.log('Selected location:', location);
-    setSelectedLocation(location); // Update selectedLocation
+    setSelectedLocation(location);
   };
   
   const handleLocationChange = (newLocation) => {
     console.log('Location changed:', newLocation);
-    setSelectedLocation(newLocation); // Update selectedLocation
+    setSelectedLocation(newLocation);
   };
   
 

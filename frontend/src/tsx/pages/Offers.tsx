@@ -10,6 +10,9 @@ import { Link } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import HourglassTopIcon from "@mui/icons-material/HourglassTop";
 import Chip from "@mui/material/Chip";
+import Alert from "@mui/material/Alert";
+import { SnackbarProvider, useSnackbar } from 'notistack';
+
 
 function RecipeReviewCard({ title, schedule, description }) {
   return (
@@ -35,9 +38,16 @@ function RecipeReviewCard({ title, schedule, description }) {
 function Ofertas() {
   const [jobs, setJobs] = useState([]);
   const [applications, setApplications] = useState([]);
-
   const [cookies] = useCookies(["user"]);
   const user = cookies.user;
+
+  const { enqueueSnackbar } = useSnackbar(); // <-- Añade esto
+
+  const handleJobClick = () => {
+    if (!user) {
+      enqueueSnackbar('¡Tienes que estar registrado para ver la oferta!', { variant: 'warning', anchorOrigin: { vertical: 'bottom', horizontal: 'left' } });
+    }
+  };
 
   useEffect(() => {
     async function fetchOfertas() {
@@ -81,6 +91,7 @@ function Ofertas() {
     >
       <div style={{ maxWidth: "1040px" }}>
         <h1 style={{ textAlign: "center" }}>Ofertas Component</h1>
+
         <div
           style={{
             display: "flex",
@@ -110,23 +121,45 @@ function Ofertas() {
                 e.currentTarget.style.backgroundColor = "#F2F2F2";
               }}
             >
-              <Link to={`/jobs/${job.idJobOffers}`}>
-                <RecipeReviewCard
-                  title={
-                    <span
-                      style={{
-                        color: "#1A1A1A",
-                        fontSize: "20px",
-                        fontWeight: "bold",
-                      }}
-                    >
-                      {job.title}
-                    </span>
-                  }
-                  schedule={job.schedule}
-                  description={job.description}
-                />
-              </Link>
+              {user && (
+                <Link to={`/jobs/${job.idJobOffers}`}>
+                  <RecipeReviewCard
+                    title={
+                      <span
+                        style={{
+                          color: "#1A1A1A",
+                          fontSize: "20px",
+                          fontWeight: "bold",
+                        }}
+                      >
+                        {job.title}
+                      </span>
+                    }
+                    schedule={job.schedule}
+                    description={job.description}
+                  />
+                </Link>
+              )}
+              {!user && (
+                <Link onClick={handleJobClick}>
+                  <RecipeReviewCard
+                    title={
+                      <span
+                        style={{
+                          color: "#1A1A1A",
+                          fontSize: "20px",
+                          fontWeight: "bold",
+                        }}
+                      >
+                        {job.title}
+                      </span>
+                    }
+                    schedule={job.schedule}
+                    description={job.description}
+                  />
+                </Link>
+              )}
+
               <div style={{ textAlign: "center" }}>
                 {applications.some(
                   (app) =>

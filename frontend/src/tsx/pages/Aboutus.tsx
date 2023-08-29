@@ -37,7 +37,7 @@ const AboutUs: React.FC = () => {
             transform: "translateX(-50%)",
             color: "white",
             textAlign: "center",
-            display: "none", // Ocultar por defecto
+            display: "none",
           }}
         >
           Nuestra empresa promueve el empleo sostenible a través de soluciones

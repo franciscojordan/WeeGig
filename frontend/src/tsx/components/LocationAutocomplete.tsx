@@ -14,7 +14,6 @@ const LocationAutocomplete: React.FC<LocationAutocompleteProps> = ({ onSelect, o
 
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>, newInputValue: string) => {
         setInputValue(newInputValue);
-        // Here, you can call the onLocationChange callback
         onLocationChange(newInputValue);
     };
 
@@ -33,7 +32,7 @@ const LocationAutocomplete: React.FC<LocationAutocompleteProps> = ({ onSelect, o
         {
             input: inputValue,
             componentRestrictions: {
-                country: 'es', // 'es' is the country code for Spain
+                country: 'es',
             },
         },
         (predictions: google.maps.places.AutocompletePrediction[], status: google.maps.places.PlacesServiceStatus) => {
@@ -61,7 +60,6 @@ const LocationAutocomplete: React.FC<LocationAutocompleteProps> = ({ onSelect, o
             onSelect={(event, newValue) => {
             if (newValue) {
                 onSelect(newValue);
-                // You don't need to set the formData location here
             }
             }}
             renderInput={(params) => 

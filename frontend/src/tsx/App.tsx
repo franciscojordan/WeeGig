@@ -18,10 +18,14 @@ import MyJobs from './pages/MyJobs';
 import Profile from './pages/Profile';
 import ReviewsEmployer from './pages/ReviewsEmployer';
 import ReviewsEmployee from './pages/ReviewsEmployee';
+import { SnackbarProvider } from 'notistack';
+
 
 function App() {
 	return (
 		<>
+		    <SnackbarProvider maxSnack={3} anchorOrigin={{ vertical: 'top', horizontal: 'left' }}>
+
 			<ResponsiveAppBar />
 			<Routes>
 				<Route path="/" element={<Home />} />
@@ -42,6 +46,8 @@ function App() {
 				<Route path="*"  element={<Error />} />
 			</Routes>
       <Footer />
+	  </SnackbarProvider>
+
 		</>
 	);
 }

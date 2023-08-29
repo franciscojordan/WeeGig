@@ -9,8 +9,6 @@ import 'react-datepicker/dist/react-datepicker.css';
 import { Autocomplete } from "@mui/material";
 import getGoogleMapsApiClient from "../../../lib/googleApiClient";
 import { setHours, setMinutes, subHours } from 'date-fns';
-import { Google } from "@mui/icons-material";
-// import LocationAutocomplete from '../components/LocationAutocomplete';
 import "../../css/components/customDatePickerWidth.css";
 
 const NewOffert: React.FC = () => {
