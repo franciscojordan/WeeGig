@@ -1,7 +1,7 @@
 import Image1 from "../../assets/img/fran.jpg";
 import Image2 from "../../assets/img/victor.jpg";
 import Image3 from "../../assets/img/alej.jpg";
-//import MapComponent from '../components/Map';
+import MapComponent from '../components/Map';
 
 const AboutUs: React.FC = () => {
   const mapCenter = { lat: 41.38837180727378, lng: 2.1799002828303 };

@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import GoogleMapReact from 'google-map-react';
 import credentials from '../../../credentials';
-import getGoogleMapsApiClient from '../../../lib/googleApiClient';
 
 interface MapProps {
     center: { lat: number; lng: number };
@@ -10,25 +9,6 @@ interface MapProps {
 }
 
 const MapComponent: React.FC<MapProps> = ({ center, zoom, markerPosition }) => {
-    const [googleApiLoaded, setGoogleApiLoaded] = useState(false);
-
-    useEffect(() => {
-        async function loadGoogleApi() {
-            try {
-                const loadGoogleMaps = getGoogleMapsApiClient();
-                setGoogleApiLoaded(true);
-            } catch (error) {
-                console.error('Error loading Google Maps API:', error);
-            }
-        }
-
-        loadGoogleApi();
-    }, []);
-
-    if (!googleApiLoaded) {
-        return <div>Loading Google Maps API...</div>;
-    }
-
     const redPinStyle: React.CSSProperties = {
         width: '32px',
         height: '32px',

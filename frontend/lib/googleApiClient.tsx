@@ -1,5 +1,5 @@
 import { Loader } from '@googlemaps/js-api-loader';
-import credentials from '../credentials.js';
+import credentials from '../credentials';
 
 let googleApiClient: any = null;
 
@@ -18,5 +18,4 @@ const loadGoogleMapsApiClient = async () => {
     return googleApiClient;
 };
 
-const getGoogleMapsApiClient = () => loadGoogleMapsApiClient;
-export default getGoogleMapsApiClient;
+export default loadGoogleMapsApiClient;
