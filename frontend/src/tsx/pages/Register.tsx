@@ -353,7 +353,7 @@ export default function SignUp() {
                         severity="info"
                         style={{ margin: "0 auto", maxWidth: "600px" }}
                       >
-                        Al ofrecer trabajo, te estas negando a poder aplicar a estos. Los campos de abajo no son obligatorios.
+                        Al ofrecer trabajo, te estas negando a poder aplicar a estos. Los campos de abajo no son obligatorios por ahora. Podríamos requerir más información en el futuro.
                       </Alert>
 
                       <Grid item xs={12}>

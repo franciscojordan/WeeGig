@@ -12,6 +12,7 @@ import HourglassTopIcon from "@mui/icons-material/HourglassTop";
 import Chip from "@mui/material/Chip";
 
 function RecipeReviewCard({ title, schedule, description }) {
+  const jobOfferDate = new Date(schedule); // Convert the schedule to a Date object
   return (
     <Box sx={{ maxWidth: 400 }}>
       <CardHeader
@@ -21,7 +22,7 @@ function RecipeReviewCard({ title, schedule, description }) {
           </Avatar>
         }
         title={title}
-        subheader={schedule}
+        subheader={jobOfferDate.toLocaleString()}
       />
       <CardContent>
         <Typography variant="body2" color="text.secondary">
@@ -35,6 +36,7 @@ function RecipeReviewCard({ title, schedule, description }) {
 function Ofertas() {
   const [jobs, setJobs] = useState([]);
   const [applications, setApplications] = useState([]);
+  
 
   const [cookies] = useCookies(["user"]);
   const user = cookies.user;
@@ -80,7 +82,7 @@ function Ofertas() {
       style={{ display: "flex", justifyContent: "center", minHeight: "80vh" }}
     >
       <div style={{ maxWidth: "1040px" }}>
-        <h1 style={{ textAlign: "center" }}>Ofertas Component</h1>
+        <h1 style={{ textAlign: "center" }}>Ofertas disponibles</h1>
         <div
           style={{
             display: "flex",
