@@ -11,7 +11,7 @@ const AboutUs: React.FC = () => {
     <div style={{ display: "flex", flexDirection: "column" }}>
       <div style={{ position: "relative", width: "100%" }}>
         <video autoPlay loop muted style={{ width: "100%", height: "auto" }}>
-          <source src="./src/assets/img/sexo.mp4" type="video/mp4" />
+          <source src="./src/assets/img/abautus.mp4" type="video/mp4" />
           Tu navegador no admite la etiqueta de video.
         </video>
         <div>
