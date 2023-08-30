@@ -24,7 +24,6 @@ function DivBox(props) {
 }
 
 function Home() {
-    // Simulando que el usuario está registrado (cambiar a true o false según corresponda)
     const [cookies] = useCookies(["userToken"]);
     const userIsRegistered = !!cookies.user;
 
@@ -34,8 +33,6 @@ function Home() {
                 <div className="maxw">
                     <h1 className="big">¡Bienvenidos a WEE GIG!</h1>
                     <p>En WEE GIG, nos enorgullece ser un puente entre individuos comprometidos y apasionados por hacer una diferencia en el mundo y oportunidades de trabajo en el ámbito de la beneficencia.</p>
-                    {/* Condición para mostrar o no los botones */}
-                    {/* Condición para mostrar o no los botones */}
                     {!userIsRegistered && (
                 <div>
                     <a href="/registrar"><Button value="Crear Cuenta" type="green" /></a>

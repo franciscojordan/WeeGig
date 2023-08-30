@@ -4,18 +4,25 @@ import Button from "@mui/material/Button";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import "../../css/components/Boxs.css";
 import { useCookies } from "react-cookie";
-import DatePicker from 'react-datepicker'; // Import DatePicker
+import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { Autocomplete } from "@mui/material";
 import getGoogleMapsApiClient from "../../../lib/googleApiClient";
 import { setHours, setMinutes, subHours } from 'date-fns';
-import { Google } from "@mui/icons-material";
-// import LocationAutocomplete from '../components/LocationAutocomplete';
 import "../../css/components/customDatePickerWidth.css";
+import LocationAutocomplete from '../components/LocationAutocomplete';
+import { useSnackbar } from 'notistack';
+import { useNavigate } from 'react-router-dom';
+import "../../css/Snackbar.css";
+
 
 const NewOffert: React.FC = () => {
+  const { enqueueSnackbar } = useSnackbar();
   const [cookies] = useCookies(["user"]);
   const user = cookies.user;
+
+  const navigate = useNavigate();
+
 
   console.log(user);
   if (user && user["userType"] === "Employee" || !user) {
@@ -68,8 +75,9 @@ const NewOffert: React.FC = () => {
       })
       .then((schedule) => {
         console.log(schedule);
-        alert("Oferta enviada con éxito!");
-      })
+        enqueueSnackbar('¡Oferta creada con éxito!', { variant: 'custom-success', anchorOrigin: { vertical: 'top', horizontal: 'center' } });
+        navigate('/ofertas');  // Redirige a las ofertas
+    })
       .catch((error) => {
         console.error("Hubo un error al enviar la oferta:", error);
         alert("Hubo un error enviando la oferta. Inténtalo de nuevo.");
@@ -188,7 +196,7 @@ const NewOffert: React.FC = () => {
                 marginTop: "10px",
               }}
             >
-              {/* <LocationAutocomplete
+              <LocationAutocomplete
                 onSelect={(newLocation) => {
                   console.log('onSelect:', newLocation);
                   handleLocationSelect(newLocation);
@@ -204,7 +212,7 @@ const NewOffert: React.FC = () => {
                     location: newLocation,
                   }));
                 }}
-              /> */}
+              />
             </div>  
             <div
               style={{

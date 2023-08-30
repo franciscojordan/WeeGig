@@ -15,7 +15,6 @@ const RegisterLocationAutocomplete: React.FC<RegisterLocationAutocompleteProps> 
 
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>, newInputValue: string) => {
         setInputValue(newInputValue);
-        // Here, you can call the onLocationChange callback
         onLocationChange(newInputValue);
     };
 
@@ -27,14 +26,14 @@ const RegisterLocationAutocomplete: React.FC<RegisterLocationAutocompleteProps> 
         }
     
         const fetchSuggestions = async () => {
-            const googleApiClient = await loadGoogleMapsApiClient(); // Load the Google Maps API client
+            const googleApiClient = await loadGoogleMapsApiClient();
     
-            const autocompleteService = new googleApiClient.maps.places.AutocompleteService(); // Use the loaded API client
+            const autocompleteService = new googleApiClient.maps.places.AutocompleteService();
             autocompleteService.getPlacePredictions(
                 {
                     input: inputValue,
                     componentRestrictions: {
-                        country: 'es', // 'es' is the country code for Spain
+                        country: 'es',
                     },
                 },
                 (predictions: google.maps.places.AutocompletePrediction[], status: google.maps.places.PlacesServiceStatus) => {
@@ -63,7 +62,6 @@ const RegisterLocationAutocomplete: React.FC<RegisterLocationAutocompleteProps> 
                 if (newValue) {
                     onSelect(newValue);
                     onLocationChange(newValue);
-                    // You don't need to set the formData location here
                 }
             }}
             renderInput={(params) => 

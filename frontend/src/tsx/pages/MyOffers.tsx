@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import Chip from "@mui/material/Chip";
-import Stack from "@mui/material/Stack";
 import DoneIcon from "@mui/icons-material/Done";
 import HourglassTopIcon from "@mui/icons-material/HourglassTop";
 import DoDisturbOffIcon from "@mui/icons-material/DoDisturbOff";
@@ -10,6 +9,8 @@ import HowToRegIcon from "@mui/icons-material/HowToReg";
 
 function MyOfferts() {
   const [applications, setApplications] = useState([]);
+  const [jobTitles, setJobTitles] = useState({});
+
 
   const [cookies] = useCookies(["user"]);
   const user = cookies.user;
@@ -21,9 +22,22 @@ function MyOfferts() {
   useEffect(() => {
     fetch(`http://localhost:8080/job-applications/user/${user.idUser}`)
       .then((response) => response.json())
-      .then((data) => setApplications(data))
+      .then((data) => {
+        setApplications(data);
+        data.forEach(application => {
+          fetch(`http://localhost:8080/jobs/${application.jobId}`)
+            .then(response => response.json())
+            .then(jobData => {
+              setJobTitles(prevTitles => ({
+                ...prevTitles,
+                [application.jobId]: jobData.title
+              }));
+            });
+        });
+      })
       .catch((error) => console.error("Hubo un error:", error));
   }, []);
+
 
   return (
     <div className="big-box">
@@ -63,7 +77,8 @@ function MyOfferts() {
                         fontSize: "16px",
                         fontWeight: "bold",
                       }}
-                    >{`Trabajo ID: ${application.jobId}`}</p>
+                    >{`${jobTitles[application.jobId]}`}</p>
+
                     <p
                       style={{ color: "black" }}
                     >{`Fecha de aplicación: ${application.applicationDate}`}</p>

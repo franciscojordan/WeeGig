@@ -29,24 +29,23 @@ const AboutUs: React.FC = () => {
           >
             Sobre Nosotros
           </h1>
-          <p
-            className="manky"
-            style={{
-              fontSize: "24px",
-              position: "absolute",
-              top: "205px",
-              left: "50%",
-              transform: "translateX(-50%)",
-              color: "white",
-              textAlign: "center",
-              display: "none", // Ocultar por defecto
-            }}
-          >
-            Nuestra empresa promueve el empleo sostenible a través de soluciones
-            tecnológicas avanzadas. Nos dedicamos a brindar servicios y
-            productos de alta calidad que impulsan tanto a nuestros clientes
-            como al desarrollo laboral sostenible.
-          </p>
+          <p className="manky"
+          style={{
+            fontSize: "24px",
+            position: "absolute",
+            top: "205px",
+            left: "50%",
+            transform: "translateX(-50%)",
+            color: "white",
+            textAlign: "center",
+            display: "none",
+          }}
+        >
+          Nuestra empresa promueve el empleo sostenible a través de soluciones
+          tecnológicas avanzadas. Nos dedicamos a brindar servicios y productos
+          de alta calidad que impulsan tanto a nuestros clientes como al
+          desarrollo laboral sostenible.
+        </p>
         </div>
       </div>
       <div style={{ padding: "20px", textAlign: "center" }}>

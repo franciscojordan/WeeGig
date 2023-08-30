@@ -13,7 +13,6 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import "../../css/components/Menu.css";
 import { Link } from "react-router-dom";
-import Cookies from "js-cookie";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useCookies } from "react-cookie";
 
@@ -157,7 +156,7 @@ const Bar = ({ user }) => {
       <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
         {pages.map(
           (
-            page // Enlaces del menu
+            page
           ) => (
             <Link to={pageLinks[page]} key={page}>
               <Button
@@ -183,7 +182,6 @@ const Bar = ({ user }) => {
         <Box sx={{ flexGrow: 0 }}>
           <Tooltip title="Open settings">
             <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-              {/* <Avatar alt="Vemy Sharp" src="/static/images/avatar/2.jpg" /> */}
               <Avatar>{user.name.charAt(0)}</Avatar>
             </IconButton>
           </Tooltip>

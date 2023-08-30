@@ -5,8 +5,14 @@ import Avatar from "@mui/material/Avatar";
 
 const MyProfile = () => {
   const [cookies] = useCookies(["user"]);
-  const [reviews, setReviews] = useState(null);
+  const [reviews, setReviews] = useState([]);
   const user = cookies.user;
+
+  console.log(user);
+  const formatDate = (birthdate) => {
+    const date = new Date(birthdate);
+    return date.toLocaleDateString(); // Change the format as needed
+  };
 
   useEffect(() => {
     if (user) {
@@ -52,21 +58,20 @@ const MyProfile = () => {
                   {user.name} {user.surname}
                 </h2>
                 <p>
-                  <strong>Usuario:</strong> {user.username}
-                </p>
-                <p>
                   <strong>Email:</strong> {user.email}
                 </p>
                 <p>
-                  <strong>Número de teléfonos:</strong> {user.phone_number}
+                  <strong>Número de teléfono:</strong> {user.phoneNumber}
                 </p>
                 <p>
-                  <strong>Fecha de nacimiento:</strong> {user.birthdate}
+                  <strong>Fecha de nacimiento:</strong>{" "}
+                  {formatDate(user.birthdate)}
                 </p>
+                {user.companyName &&
                 <p>
                   <strong>Nombre de compañía:</strong>{" "}
-                  {user.company_name || "N/A"}
-                </p>
+                  {user.companyName || "N/A"}
+                </p>}
               </div>
               <div
                 style={{
@@ -75,14 +80,14 @@ const MyProfile = () => {
                 }}
               >
                 <h3>Reseñas:</h3>
-                {reviews ? (
+                {reviews.length > 0 ? (
                   reviews.map((review, index) => (
                     <div
                       key={review.id}
                       style={{
                         marginBottom: "20px",
-                        borderTop: index !== 0 ? "1px solid #ccc" : "none", // Aplicar el borde solo si no es la primera entrada
-                        paddingTop: index !== 0 ? "10px" : "0", // Añadir espaciado superior solo si no es la primera entrada
+                        borderTop: index !== 0 ? "1px solid #ccc" : "none",
+                        paddingTop: index !== 0 ? "10px" : "0",
                       }}
                     >
                       <Rating name="read-only" value={review.rating} readOnly />
@@ -91,7 +96,7 @@ const MyProfile = () => {
                     </div>
                   ))
                 ) : (
-                  <p>Cargando reseñas...</p>
+                  <p>No tienes reseñas...</p>
                 )}
               </div>
             </>

@@ -24,9 +24,12 @@ import InputAdornment from "@mui/material/InputAdornment";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import Alert from "@mui/material/Alert";
-import DatePicker from 'react-datepicker'; // Import DatePicker
+import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import RegisterLocationAutocomplete from '../components/RegisterLocationAutocomplete';
+import { useSnackbar } from 'notistack';
+import "../../css/Snackbar.css";
+
 
 function Copyright(props: any) {
   return (
@@ -48,6 +51,8 @@ export default function SignUp() {
   const [showPassword, setShowPassword] = useState(false);
   const [showVerPassword, setShowVerPassword] = useState(false);
   const [registrationSuccess, setRegistrationSuccess] = useState(false);
+  const { enqueueSnackbar } = useSnackbar();
+
   
   const [userPayload, setUserPayload] = useState(false);
   const [selectedLocation, setSelectedLocation] = useState(null);
@@ -86,7 +91,8 @@ export default function SignUp() {
       password: data.get("password"),
       name: data.get("firstName"),
       surname: data.get("lastName"),
-      docType: parseInt(data.get("tipeOfDocument") as string),
+      // docType: parseInt(data.get("demo-simple-select") as string),
+      docType: 1,
       document: data.get("document"),
       phoneNumber: data.get("phone"),
       birthdate: selectedDate,
@@ -111,42 +117,51 @@ export default function SignUp() {
     .then(data => {
       if (data.success) {
         console.log("Usuario registrado con éxito!");
-        setRegistrationSuccess(true);
-        
+        // setRegistrationSuccess(true);
+        enqueueSnackbar('¡Registrado correctamente!', { variant: 'custom-success', anchorOrigin: { vertical: 'top', horizontal: 'center' } });
+
         // Redirigir después de 5 segundos
         setTimeout(() => {
             window.location.href = "/login/";
         }, 2000);
       } else {
         console.error("Error al registrar:", data.message);
-        setRegistrationSuccess(false);
+        // setRegistrationSuccess(false);
+        enqueueSnackbar('Error al registrar', { variant: 'custom-success', anchorOrigin: { vertical: 'top', horizontal: 'center' } });
+
       }
     })
     .catch(error => {
       console.error("Error al enviar los datos:", error);
-      setRegistrationSuccess(false);
+      // setRegistrationSuccess(false);
+      enqueueSnackbar('Error al enviar los datos', { variant: 'custom-success', anchorOrigin: { vertical: 'top', horizontal: 'center' } });
+
     });
   };
 
-  // ... (resto de tu código, como handleChange y el componente renderizado)
   const [selectedDate, setSelectedDate] = useState<Date | null>(
     new Date("2005-08-31")
   );
 
   const handleDateChange = (date: Date | null) => {
-    setSelectedDate(date); // Update the selectedDate state
+    setSelectedDate(date);
   };
 
   const handleLocationSelect = (location) => {
     console.log('Selected location:', location);
-    setSelectedLocation(location); // Update selectedLocation
+    setSelectedLocation(location);
   };
   
   const handleLocationChange = (newLocation) => {
     console.log('Location changed:', newLocation);
-    setSelectedLocation(newLocation); // Update selectedLocation
+    setSelectedLocation(newLocation);
   };
   
+  const [documentType, setDocumentType] = useState(""); // Initialize the state
+
+  const handleDocumentTypeChange = (event) => {
+    setDocumentType(event.target.value); // Update the state when the value changes
+  };
 
   return (
     <div className="big-box">
@@ -196,22 +211,19 @@ export default function SignUp() {
                     />
                   </Grid>
                   <Grid item xs={12} sm={6}>
-                    <FormControl fullWidth>
-                      <InputLabel id="demo-simple-select-label">
-                        Tipo de documento
-                      </InputLabel>
-                      <Select
-                        labelId="demo-simple-select-label"
-                        id="demo-simple-select"
-                        value={age}
-                        name="tipeOfDocument"
-                        onChange={handleChange}
-                      >
-                        <MenuItem value={1}>DNI</MenuItem>
-                        <MenuItem value={2}>NIE</MenuItem>
-                        <MenuItem value={3}>Pasaporte</MenuItem>
-                      </Select>
-                    </FormControl>
+                    <TextField
+                      select
+                      InputLabelProps={{ shrink: documentType ? true : false }}
+                      value={documentType}
+                      onChange={handleDocumentTypeChange}
+                      fullWidth
+                      id="demo-simple-select"
+                      label="Tipo de documento"
+                    >
+                      <MenuItem value={1}>DNI</MenuItem>
+                      <MenuItem value={2}>NIE</MenuItem>
+                      <MenuItem value={3}>Pasaporte</MenuItem>
+                    </TextField>
                   </Grid>
                   <Grid item xs={12} sm={6}>
                     <TextField
@@ -353,7 +365,7 @@ export default function SignUp() {
                         severity="info"
                         style={{ margin: "0 auto", maxWidth: "600px" }}
                       >
-                        Al ofrecer trabajo, te estas negando a poder aplicar a estos. Los campos de abajo no son obligatorios.
+                        Al ofrecer trabajo, te estas negando a poder aplicar a estos. Los campos de abajo no son obligatorios por ahora. Podríamos requerir más información en el futuro. 
                       </Alert>
 
                       <Grid item xs={12}>

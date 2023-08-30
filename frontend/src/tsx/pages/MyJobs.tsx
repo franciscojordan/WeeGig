@@ -2,7 +2,6 @@ import React from "react";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useCookies } from "react-cookie";
-import Divider from "@mui/material/Divider";
 import Chip from "@mui/material/Chip";
 
 const MyJobs: React.FC = () => {
@@ -55,7 +54,7 @@ const MyJobs: React.FC = () => {
                   borderRadius: "10px",
                   padding: "10px",
                   border: "1px solid #ccc",
-                  flex: "0 1 calc(30% - 20px)", // Ajustamos el valor de flex
+                  flex: "0 1 calc(30% - 20px)",
                   marginBottom: "20px",
                   display: "flex",
                   flexDirection: "column",

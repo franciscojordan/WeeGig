@@ -19,6 +19,9 @@ import IconButton from "@mui/material/IconButton";
 import InputAdornment from "@mui/material/InputAdornment";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import { SnackbarProvider, useSnackbar } from 'notistack';
+import "../../css/Snackbar.css";
+
 
 function Copyright(props: any) {
   return (
@@ -46,6 +49,10 @@ export default function SignIn() {
   const [showPassword, setShowPassword] = useState(false);
   const [emailError, setEmailError] = useState(false);
   const [showAlert, setShowAlertErrorEmail] = React.useState(false);
+  const [showSuccessAlert, setShowSuccessAlert] = useState(false);
+
+  const { enqueueSnackbar } = useSnackbar();
+
 
   const navigate = useNavigate();
   const username = Cookies.get("username");
@@ -85,11 +92,15 @@ export default function SignIn() {
       });
       const result = await response.json();
       if (result["status"] == "success") {
+        console.log("Mostrando notificación...");
+        enqueueSnackbar('¡Inicio de sesión exitoso!', { variant: 'custom-success', anchorOrigin: { vertical: 'top', horizontal: 'center' } });
         Cookies.set("user", JSON.stringify(result["user"]), {
           expires: rememberMe ? 30 : undefined,
         });
         setShowAlertErrorEmail(false);
-        window.location.href = "/ofertas";
+        setTimeout(() => {
+          window.location.href = "/ofertas";
+      }, 1000);
       } else {
         setShowAlertErrorEmail(true);
       }
@@ -195,3 +206,4 @@ export default function SignIn() {
     </div>
   );
 }
+
