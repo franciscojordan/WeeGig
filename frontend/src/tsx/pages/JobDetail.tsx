@@ -199,9 +199,6 @@ function JobDetail() {
                   {new Date(jobOffer.schedule).toLocaleString()}
                 </p>
                 <p>
-                  <strong>Categoría:</strong> {jobOffer.category}
-                </p>
-                <p>
                   <strong>ID del Empleador:</strong> {jobOffer.idEmployer}
                 </p>
                 {user && user["userType"] === "Employee" && !hasApplied && (

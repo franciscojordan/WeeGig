@@ -8,6 +8,7 @@ const MyProfile = () => {
   const [reviews, setReviews] = useState([]);
   const user = cookies.user;
 
+  console.log(user);
   const formatDate = (birthdate) => {
     const date = new Date(birthdate);
     return date.toLocaleDateString(); // Change the format as needed
@@ -60,7 +61,7 @@ const MyProfile = () => {
                   <strong>Email:</strong> {user.email}
                 </p>
                 <p>
-                  <strong>Número de teléfono:</strong> {user.phone_number}
+                  <strong>Número de teléfono:</strong> {user.phoneNumber}
                 </p>
                 <p>
                   <strong>Fecha de nacimiento:</strong>{" "}

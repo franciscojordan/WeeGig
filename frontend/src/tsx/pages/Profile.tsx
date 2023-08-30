@@ -75,7 +75,7 @@ const Profile = () => {
                   <strong>Email:</strong> {userData.email}
                 </p>
                 <p>
-                  <strong>Número de teléfono:</strong> {userData.phone_number}
+                  <strong>Número de teléfono:</strong> {userData.phoneNumber}
                 </p>
                 <p>
                   <strong>Fecha de nacimiento:</strong>
