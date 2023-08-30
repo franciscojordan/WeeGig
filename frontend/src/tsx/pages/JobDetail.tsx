@@ -140,6 +140,7 @@ function JobDetail() {
         .then((response) => response.json())
         .then((data) => {
           enqueueSnackbar("¡Haz aplicado correctamente!", {
+            
             variant: "success",
             anchorOrigin: { vertical: "bottom", horizontal: "left" },
           });

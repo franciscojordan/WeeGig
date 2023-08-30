@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useCookies } from "react-cookie";
 import Rating from "@mui/material/Rating";
 import Avatar from "@mui/material/Avatar";
@@ -31,6 +31,18 @@ const Profile = () => {
         .catch((error) => console.error(error));
     }
   }, [id, cookies.user]);
+
+  // Function to format the date in 'YYYY-MM-DD' format
+  const formatDate = (dateString) => {
+    console.log("formatDate is being executed"); // Debugging output
+    const date = new Date(dateString);
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const day = String(date.getDate()).padStart(2, "0");
+    return `${year}-${month}-${day}`;
+  };
+
+  console.log("userData:", userData); // Debugging output
 
   return (
     <div className="big-box">
@@ -66,7 +78,8 @@ const Profile = () => {
                   <strong>Número de teléfono:</strong> {userData.phone_number}
                 </p>
                 <p>
-                  <strong>Fecha de nacimiento:</strong> {userData.birthdate}
+                  <strong>Fecha de nacimiento:</strong>
+                  {userData.birthdate ? formatDate(userData.birthdate) : "N/A"}
                 </p>
                 {userData.company_name &&
                 <p>

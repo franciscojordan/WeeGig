@@ -5,8 +5,13 @@ import Avatar from "@mui/material/Avatar";
 
 const MyProfile = () => {
   const [cookies] = useCookies(["user"]);
-  const [reviews, setReviews] = useState(null);
+  const [reviews, setReviews] = useState([]);
   const user = cookies.user;
+
+  const formatDate = (birthdate) => {
+    const date = new Date(birthdate);
+    return date.toLocaleDateString(); // Change the format as needed
+  };
 
   useEffect(() => {
     if (user) {
@@ -55,10 +60,11 @@ const MyProfile = () => {
                   <strong>Email:</strong> {user.email}
                 </p>
                 <p>
-                  <strong>Número de teléfonos:</strong> {user.phoneNumber}
+                  <strong>Número de teléfono:</strong> {user.phone_number}
                 </p>
                 <p>
-                  <strong>Fecha de nacimiento:</strong> {user.birthdate}
+                  <strong>Fecha de nacimiento:</strong>{" "}
+                  {formatDate(user.birthdate)}
                 </p>
                 {user.companyName &&
                 <p>
@@ -73,7 +79,7 @@ const MyProfile = () => {
                 }}
               >
                 <h3>Reseñas:</h3>
-                {reviews ? (
+                {reviews.length > 0 ? (
                   reviews.map((review, index) => (
                     <div
                       key={review.id}
@@ -89,7 +95,7 @@ const MyProfile = () => {
                     </div>
                   ))
                 ) : (
-                  <p>Cargando reseñas...</p>
+                  <p>No tienes reseñas...</p>
                 )}
               </div>
             </>

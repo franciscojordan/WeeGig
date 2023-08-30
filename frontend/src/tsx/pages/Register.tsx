@@ -146,6 +146,11 @@ export default function SignUp() {
     setSelectedLocation(newLocation);
   };
   
+  const [documentType, setDocumentType] = useState(""); // Initialize the state
+
+  const handleDocumentTypeChange = (event) => {
+    setDocumentType(event.target.value); // Update the state when the value changes
+  };
 
   return (
     <div className="big-box">
@@ -195,22 +200,19 @@ export default function SignUp() {
                     />
                   </Grid>
                   <Grid item xs={12} sm={6}>
-                    <FormControl fullWidth>
-                      <InputLabel id="demo-simple-select-label">
-                        Tipo de documento
-                      </InputLabel>
-                      <Select
-                        labelId="demo-simple-select-label"
-                        id="demo-simple-select"
-                        value={age}
-                        name="tipeOfDocument"
-                        onChange={handleChange}
-                      >
-                        <MenuItem value={1}>DNI</MenuItem>
-                        <MenuItem value={2}>NIE</MenuItem>
-                        <MenuItem value={3}>Pasaporte</MenuItem>
-                      </Select>
-                    </FormControl>
+                    <TextField
+                      select
+                      InputLabelProps={{ shrink: documentType ? true : false }}
+                      value={documentType}
+                      onChange={handleDocumentTypeChange}
+                      fullWidth
+                      id="demo-simple-select"
+                      label="Tipo de documento"
+                    >
+                      <MenuItem value={1}>DNI</MenuItem>
+                      <MenuItem value={2}>NIE</MenuItem>
+                      <MenuItem value={3}>Pasaporte</MenuItem>
+                    </TextField>
                   </Grid>
                   <Grid item xs={12} sm={6}>
                     <TextField
@@ -352,7 +354,7 @@ export default function SignUp() {
                         severity="info"
                         style={{ margin: "0 auto", maxWidth: "600px" }}
                       >
-                        Al ofrecer trabajo, te estas negando a poder aplicar a estos. Los campos de abajo no son obligatorios.
+                        Al ofrecer trabajo, te estas negando a poder aplicar a estos. Los campos de abajo no son obligatorios por ahora. Podríamos requerir más información en el futuro. 
                       </Alert>
 
                       <Grid item xs={12}>
