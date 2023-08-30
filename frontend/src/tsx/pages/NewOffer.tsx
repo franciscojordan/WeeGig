@@ -13,8 +13,7 @@ import "../../css/components/customDatePickerWidth.css";
 import LocationAutocomplete from '../components/LocationAutocomplete';
 import { useSnackbar } from 'notistack';
 import { useNavigate } from 'react-router-dom';
-
-
+import "../../css/Snackbar.css";
 
 
 const NewOffert: React.FC = () => {
@@ -76,7 +75,7 @@ const NewOffert: React.FC = () => {
       })
       .then((schedule) => {
         console.log(schedule);
-        enqueueSnackbar('¡Oferta enviada con éxito!', { variant: 'success', anchorOrigin: { vertical: 'bottom', horizontal: 'left' } });
+        enqueueSnackbar('¡Oferta creada con éxito!', { variant: 'custom-success', anchorOrigin: { vertical: 'top', horizontal: 'center' } });
         navigate('/ofertas');  // Redirige a las ofertas
     })
       .catch((error) => {

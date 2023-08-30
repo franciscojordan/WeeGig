@@ -1,0 +1,9 @@
+.custom-success {
+  background-color: #333333;
+  color: white;
+}
+
+.custom-error {
+  background-color: red;
+  color: white;
+}

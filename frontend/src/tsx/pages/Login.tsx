@@ -20,6 +20,7 @@ import InputAdornment from "@mui/material/InputAdornment";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import { SnackbarProvider, useSnackbar } from 'notistack';
+import "../../css/Snackbar.css";
 
 
 function Copyright(props: any) {
@@ -92,7 +93,7 @@ export default function SignIn() {
       const result = await response.json();
       if (result["status"] == "success") {
         console.log("Mostrando notificación...");
-        enqueueSnackbar('¡Inicio de sesión exitoso!', { variant: 'success', anchorOrigin: { vertical: 'bottom', horizontal: 'left' } });
+        enqueueSnackbar('¡Inicio de sesión exitoso!', { variant: 'custom-success', anchorOrigin: { vertical: 'top', horizontal: 'center' } });
         Cookies.set("user", JSON.stringify(result["user"]), {
           expires: rememberMe ? 30 : undefined,
         });
