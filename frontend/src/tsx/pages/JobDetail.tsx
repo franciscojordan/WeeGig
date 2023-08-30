@@ -10,7 +10,7 @@ import DoDisturbOffIcon from "@mui/icons-material/DoDisturbOff";
 import HowToRegIcon from "@mui/icons-material/HowToReg";
 import Alert from "@mui/material/Alert";
 import { useSnackbar } from 'notistack';
-
+import "../../css/Snackbar.css";
 
 function JobDetail() {
   const [cookies] = useCookies(["user"]);
@@ -141,8 +141,7 @@ function JobDetail() {
         .then((data) => {
           enqueueSnackbar("¡Haz aplicado correctamente!", {
             
-            variant: "success",
-            anchorOrigin: { vertical: "bottom", horizontal: "left" },
+            variant: 'custom-success', anchorOrigin: { vertical: 'top', horizontal: 'center' },
           });
           setHasApplied(true);
         })
