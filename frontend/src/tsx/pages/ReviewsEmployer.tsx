@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { Card, CardContent, Typography, Chip, Grid } from "@mui/material";
 import { TextField, Button } from "@mui/material";
 import Avatar from "@mui/material/Avatar";
+import { useSnackbar } from 'notistack';
 
 import Rating from "@mui/material/Rating";
 
@@ -13,6 +14,8 @@ function ReviewsEmployer() {
   const [reviews, setReviews] = useState({});
   const [sentReviews, setSentReviews] = useState({});
   const [successfulReviews, setSuccessfulReviews] = useState({});
+  const { enqueueSnackbar } = useSnackbar();
+
 
   const user = cookies.user;
 
@@ -86,6 +89,7 @@ function ReviewsEmployer() {
           ...prev,
           [`${jobId}-${userId}`]: true,
         }));
+        enqueueSnackbar('¡Reseña enviada con éxito!', { variant: 'success', anchorOrigin: { vertical: 'bottom', horizontal: 'left' } });
       })
       .catch((error) => {
         console.error("Hubo un error al enviar la reseña:", error);
@@ -161,9 +165,6 @@ function ReviewsEmployer() {
                   <CardContent>
                     <Typography variant="h5" gutterBottom>
                       {job.title}
-                    </Typography>
-                    <Typography color="textSecondary" gutterBottom>
-                      ID: {job.idJobOffers}
                     </Typography>
                     <Typography color="textSecondary" gutterBottom>
                       Fecha: {job.schedule}
