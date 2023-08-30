@@ -2,15 +2,19 @@
 
 	-- Creación de usuarios y empleador
 	INSERT INTO LOGIN (email, password) VALUES
-	  ('employee1@example.com', 'employee1password'),
-	  ('employee2@example.com', 'employee2password'),
-	  ('employer1@example.com', 'employer1password');
+	  ('juan@gmail.com', '1234'),
+      ('beatriz@gmail.com', '1234'),
+      ('lourdes@gmail.com', '1234'),
+	  ('victor@gmail.com', '1234'),
+	  ('alejandro@gmail.com', '1234');
 
 	INSERT INTO USERS (username, email, name, surname, doc_type, document, phone_number, birthdate, user_type, company_name, company_NIF, address, company_phone_number, website)
 	VALUES
-	  ('employee1', 'employee1@example.com', 'Employee One', 'Last Name', 1, '12345678A', '1234567890', '1990-01-01', 'Employee', NULL, NULL, NULL, NULL, NULL),
-	  ('employee2', 'employee2@example.com', 'Employee Two', 'Last Name', 1, '23456789B', '9876543210', '1995-05-15', 'Employee', NULL, NULL, NULL, NULL, NULL),
-	  ('employer1', 'employer1@example.com', 'Employer One', 'Company', 2, '34567890C', '5555555555', '1985-08-20', 'Employer', 'My Company', '123456789', '123 Street', '555-555-5555', 'www.mycompany.com');
+	  ('employee1', 'juan@gmail.com', 'Juan', 'Miguel', 1, '12345678A', '58345890', '2000-11-10', 'Employee', NULL, NULL, NULL, NULL, NULL),
+      ('employee2', 'beatriz@gmail.com', 'Beatriz', 'Ruiz', 1, '12345678A', '67895750', '1998-02-02', 'Employee', NULL, NULL, NULL, NULL, NULL),
+      ('employee3', 'lourdes@gmail.com', 'Lourdes', 'de la Fuente', 1, '12345678A', '1234567890', '1990-01-01', 'Employee', NULL, NULL, NULL, NULL, NULL),
+	  ('employee4', 'victor@gmail.com', 'Victor', 'Aguilar', 1, '23456789B', '9876543210', '1995-05-15', 'Employee', NULL, NULL, NULL, NULL, NULL),
+	  ('employer1', 'alejandro@gmail.com', 'Alejandro', 'Tomé', 2, '34567890C', '5555555555', '1985-08-20', 'Employer', 'My Company', '123456789', '123 Street', '555-555-5555', 'www.mycompany.com');
 
 	-- Obtén el ID del employer1
 	SELECT id_USER INTO @employerID FROM USERS WHERE username = 'employer1';
