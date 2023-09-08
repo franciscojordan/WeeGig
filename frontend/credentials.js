@@ -1,7 +1,7 @@
 // credentials.js
 const credentials = {
     apiKey: '',
-    // Add more credentials or configuration here
+    // Add your own googleMapsApi credentials, so it works
 };
 
 export default credentials;
